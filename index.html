@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regan's Bakehouse | Artisan Banana Bread</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Success Modal -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <h2>🎉 Payment Successful!</h2>
+      <p>Thank you for your order! We've sent a confirmation email to your inbox.</p>
+      <button class="modal-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#home" class="logo">
+      <span class="logo-script">Regan's</span>
+      <div class="logo-divider"></div>
+      <span class="logo-sub">Bakehouse</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#delivery">Delivery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#order">Order Now</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="cart-badge" onclick="scrollToOrder()">
+        🛒 <span>Cart</span> <span class="cart-count" id="cartCount">0</span>
+      </div>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-line-left"></div>
+    <div class="hero-line-right"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Artisan · Lagos · Est. 2024</div>
+      <h1 class="hero-heading">
+        <span class="word">Baked&nbsp;</span>
+        <span class="word">with&nbsp;</span>
+        <span class="word">Love</span>
+      </h1>
+      <h2 class="hero-heading-line2">
+        <span class="word">Served&nbsp;</span>
+        <span class="word">with&nbsp;Warmth</span>
+      </h2>
+      <div class="hero-divider"><div class="hero-divider-diamond"></div></div>
+      <p class="hero-sub">
+        Handcrafted banana breads made fresh to order,<br>
+        using only the finest ingredients. Every loaf tells a story.
+      </p>
+      <div class="hero-ctas">
+        <a href="#products" class="btn-primary">Explore Our Loaves</a>
+        <a href="#order" class="btn-secondary">Order Now</a>
+      </div>
+    </div>
+    <div class="scroll-indicator" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">
+      <div class="scroll-mouse"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="products" id="products">
+    <h2 class="section-title">Our Signature Loaves</h2>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="product-img"><img src="classic-banana-bread.jpg" alt="Classic Banana Bread"></div>
+        <div class="product-info">
+          <h3>Classic Vanilla Banana Bread</h3>
+          <p>Our original recipe with ripe bananas and a hint of vanilla. Moist, flavorful, and timeless.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
+              <option value="medium" data-price="4999" selected>Medium - &#8358;4,999</option>
+              <option value="big" data-price="9999">Big - &#8358;9,999</option>
+            </select>
+            <div class="current-price">&#8358;4,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this, 'Classic Vanilla Banana Bread')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="chocolate-chip.jpg" alt="Chocolate Chip Banana Bread"></div>
+        <div class="product-info">
+          <h3>Chocolate Chip Banana Bread</h3>
+          <p>Loaded with premium dark chocolate chips. A decadent delicious twist on the classic.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
+              <option value="big" data-price="9999">Big - &#8358;9,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this, 'Chocolate Chip Banana Bread')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="double chocolate.jpg" alt="Double Chocolate Banana Bread"></div>
+        <div class="product-info">
+          <h3>Double Chocolate Banana Bread</h3>
+          <p>Loaded with bittersweet chocolate and cocoa. A sophisticated twist on the classic.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="2500">Mini - &#8358;2,500</option>
+              <option value="medium" data-price="6999" selected>Medium - &#8358;6,999</option>
+              <option value="big" data-price="10999">Big - &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;6,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this, 'Double Chocolate Banana Bread')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="cashew.jpg" alt="Cashew/Peanut Banana Bread"></div>
+        <div class="product-info">
+          <h3>Cashew/Peanut Banana Bread</h3>
+          <p>Crunchy nuts add texture and richness. Perfect with your morning coffee.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
+              <option value="big" data-price="10999">Big - &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this, 'Cashew/Peanut Banana Bread')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="coconut.jpg" alt="Coconut Banana Bread"></div>
+        <div class="product-info">
+          <h3>Coconut Banana Bread</h3>
+          <p>Tropical coconut flavor with a light, fluffy texture. A taste of paradise in every bite.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
+              <option value="big" data-price="10999">Big - &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this, 'Coconut Banana Bread')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="oreos-bread.jpg" alt="Oreos Banana Bread"></div>
+        <div class="product-info">
+          <h3>Oreos Banana Bread</h3>
+          <p>Loaded with crushed Oreo cookies. A delicious cookies and cream twist on the classic.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
+              <option value="big" data-price="10999">Big - &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this, 'Oreos Banana Bread')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="Almond banana bread.jpg" alt="Almond Banana Bread"></div>
+        <div class="product-info">
+          <h3>Almond Banana Bread</h3>
+          <p>Packed with sliced almond slivers. Toasted coconut flakes bring tropical sweetness throughout.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
+              <option value="big" data-price="10999">Big - &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this, 'Almond Banana Bread')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="nutella-banana-bread.jpg" alt="Nutella Banana Bread"></div>
+        <div class="product-info">
+          <h3>Nutella Banana Bread</h3>
+          <p>Swirled with rich Nutella hazelnut spread. Indulgent, chocolatey perfection in every slice.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="2500">Mini - &#8358;2,500</option>
+              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
+              <option value="big" data-price="11999">Big - &#8358;11,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this, 'Nutella Banana Bread')">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Gift Boxes Section -->
+  <section class="gift-boxes" id="giftboxes">
+    <h2 class="section-title">Gift Boxes &amp; Special Occasions</h2>
+    <p style="text-align:center;max-width:600px;margin:-2rem auto 3rem;color:#666;font-family:'Josefin Sans',sans-serif;font-size:13px;">Perfect for birthdays, corporate gifts, thank you presents, or any special celebration!</p>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="product-img" style="background:linear-gradient(135deg,#F4A460,#6B4423)"><img src="midi box of 4.jpeg" alt="Midi Box of 4"></div>
+        <div class="product-info">
+          <h3>Midi Box of 4</h3>
+          <p>Four delicious midi-sized loaves. Perfect for sharing or gifting!</p>
+          <div class="price-size-container"><div class="current-price">&#8358;8,000</div></div>
+          <div class="gift-box-flavor-container">
+            <label>Select 4 Flavors:</label>
+            <div class="flavor-checkboxes">
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi4" value="Classic Vanilla"> Classic Vanilla</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi4" value="Chocolate Chip"> Chocolate Chip</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi4" value="Cashew/Peanut"> Cashew/Peanut</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi4" value="Coconut"> Coconut</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi4" value="Oreos"> Oreos</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi4" value="Nutella"> Nutella</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi4" value="Almond"> Almond</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi4" value="Double Chocolate"> Double Chocolate</label>
+            </div>
+            <p class="flavor-counter" id="counter-midi4">Selected: 0/4</p>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" id="btn-midi4" onclick="addSimpleGiftBox(this,'Midi Box of 4','midi4',8000)" disabled style="opacity:0.5">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:linear-gradient(135deg,#F4A460,#6B4423)"><img src="midi box of 6.jpeg" alt="Midi Box of 6"></div>
+        <div class="product-info">
+          <h3>Midi Box of 6</h3>
+          <p>Six delicious midi-sized loaves. Great for parties and celebrations!</p>
+          <div class="price-size-container"><div class="current-price">&#8358;9,999</div></div>
+          <div class="gift-box-flavor-container">
+            <label>Select 6 Flavors:</label>
+            <div class="flavor-checkboxes">
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi6" value="Classic Vanilla"> Classic Vanilla</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi6" value="Chocolate Chip"> Chocolate Chip</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi6" value="Cashew/Peanut"> Cashew/Peanut</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi6" value="Coconut"> Coconut</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi6" value="Oreos"> Oreos</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi6" value="Nutella"> Nutella</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi6" value="Almond"> Almond</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi6" value="Double Chocolate"> Double Chocolate</label>
+            </div>
+            <p class="flavor-counter" id="counter-midi6">Selected: 0/6</p>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" id="btn-midi6" onclick="addSimpleGiftBox(this,'Midi Box of 6','midi6',9999)" disabled style="opacity:0.5">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:linear-gradient(135deg,#F4A460,#6B4423)"><img src="midi box of 8.jpeg" alt="Midi Box of 8"></div>
+        <div class="product-info">
+          <h3>Midi Box of 8</h3>
+          <p>Eight delicious midi-sized loaves. Perfect for larger gatherings!</p>
+          <div class="price-size-container"><div class="current-price">&#8358;15,000</div></div>
+          <div class="gift-box-flavor-container">
+            <label>Select 8 Flavors:</label>
+            <div class="flavor-checkboxes">
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi8" value="Classic Vanilla"> Classic Vanilla</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi8" value="Chocolate Chip"> Chocolate Chip</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi8" value="Cashew/Peanut"> Cashew/Peanut</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi8" value="Coconut"> Coconut</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi8" value="Oreos"> Oreos</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi8" value="Nutella"> Nutella</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi8" value="Almond"> Almond</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="midi8" value="Double Chocolate"> Double Chocolate</label>
+            </div>
+            <p class="flavor-counter" id="counter-midi8">Selected: 0/8</p>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" id="btn-midi8" onclick="addSimpleGiftBox(this,'Midi Box of 8','midi8',15000)" disabled style="opacity:0.5">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:linear-gradient(135deg,#e08e4a,#8B4513)"><img src="box of 2.png" alt="Big Box of 2"></div>
+        <div class="product-info">
+          <h3>Big Box of 2</h3>
+          <p>Two big-sized loaves. Ideal for corporate gifting!</p>
+          <div class="price-size-container"><div class="current-price">&#8358;25,000</div></div>
+          <div class="gift-box-flavor-container">
+            <label>Select 2 Flavors:</label>
+            <div class="flavor-checkboxes">
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="big2" value="Classic Vanilla"> Classic Vanilla</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="big2" value="Chocolate Chip"> Chocolate Chip</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="big2" value="Cashew/Peanut"> Cashew/Peanut</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="big2" value="Coconut"> Coconut</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="big2" value="Oreos"> Oreos</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="big2" value="Nutella"> Nutella</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="big2" value="Almond"> Almond</label>
+              <label class="flavor-checkbox-label"><input type="checkbox" class="gift-flavor-check" data-box="big2" value="Double Chocolate"> Double Chocolate</label>
+            </div>
+            <p class="flavor-counter" id="counter-big2">Selected: 0/2</p>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" id="btn-big2" onclick="addSimpleGiftBox(this,'Big Box of 2','big2',25000)" disabled style="opacity:0.5">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="delivery-info" id="delivery">
+    <div class="delivery-header">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div class="section-label">Logistics</div>
+        <h2 class="section-title-lg" style="color:var(--cream)">Delivery <em>Information</em></h2>
+      </div>
+    </div>
+    <div class="delivery-grid">
+      <div class="delivery-card">
+        <div class="delivery-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        </div>
+        <h3>Delivery Areas</h3>
+        <p>We deliver across Lagos — Victoria Island, Lekki, Ikeja, Yaba, Surulere, Ajah, Ikorodu and many more.</p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+        </div>
+        <h3>Delivery Fees</h3>
+        <p>
+          <strong>Mainland (Close)</strong><br><span class="fee-tag">₦1,500</span><br><br>
+          <strong>Mainland (Far)</strong><br><span class="fee-tag">₦2,000</span><br><br>
+          <strong>Island</strong><br><span class="fee-tag">₦2,500</span><br><br>
+          <strong>Orders above ₦50,000</strong><br>
+          <span class="fee-tag" style="color:#2ecc71;border-color:rgba(46,204,113,0.4)">FREE</span>
+        </p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/></svg>
+        </div>
+        <h3>Delivery Time</h3>
+        <p>Orders are delivered within <strong>24–48 hours</strong>. Same-day delivery available for orders placed before <strong>12 PM</strong>, subject to availability.</p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>
+        </div>
+        <h3>Fresh Guarantee</h3>
+        <p>Every loaf is <strong>baked fresh to order</strong> and individually wrapped. Stays fresh for up to <strong>5 days</strong> — guaranteed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="testimonials-header">
+      <div class="testimonials-header-left">
+        <div class="section-label">Happy Customers</div>
+        <h2 class="section-title-lg">What Our <em>Customers</em> Say</h2>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prevBtn" aria-label="Previous">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-btn" id="nextBtn" aria-label="Next">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="carousel-track-wrapper">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"Absolutely the best banana bread I've ever had! The Nutella flavor is divine. I ordered for my team and everyone loved it. Will definitely be ordering again!"</p>
+          <div class="testimonial-author"><div class="author-avatar">A</div><div class="author-info"><h4>Adaeze I.</h4><span>Lagos, VI</span></div></div>
+        </div>
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"I ordered the gift box of 6 for my mom's birthday and she couldn't stop raving! The variety of flavors was perfect and delivery was super fast."</p>
+          <div class="testimonial-author"><div class="author-avatar">K</div><div class="author-info"><h4>Kelly C.</h4><span>Lagos, Lekki</span></div></div>
+        </div>
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"Moist, flavorful, and perfectly sweet! The chocolate chip is my favorite. Great for breakfast or as a snack. Highly recommend Regan's Bakehouse!"</p>
+          <div class="testimonial-author"><div class="author-avatar">T</div><div class="author-info"><h4>Faithful I.</h4><span>Lagos, Ikeja</span></div></div>
+        </div>
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"I've tried all the flavors and honestly can't pick a favorite! Quality is consistently excellent. My go-to for corporate gifts now."</p>
+          <div class="testimonial-author"><div class="author-avatar">T</div><div class="author-info"><h4>Tamaye O.</h4><span>Lagos, Yaba</span></div></div>
+        </div>
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"The coconut banana bread is a taste of heaven! So fresh and the packaging is beautiful. Perfect for gifts. Delivery was prompt too!"</p>
+          <div class="testimonial-author"><div class="author-avatar">E</div><div class="author-info"><h4>Emmanuel A.</h4><span>Lagos, Ajah</span></div></div>
+        </div>
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"My kids are obsessed with the Oreos flavor! It's the only banana bread they'll eat now. Thank you for making such delicious treats!"</p>
+          <div class="testimonial-author"><div class="author-avatar">O</div><div class="author-info"><h4>Onyinye M.</h4><span>Lagos, Surulere</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+    <div class="extra-reviews" id="extraReviews">
+      <div class="extra-reviews-grid">
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"Ordered the double chocolate and it was absolutely incredible. Rich, moist and just the right amount of sweetness. A must try!"</p>
+          <div class="testimonial-author"><div class="author-avatar">B</div><div class="author-info"><h4>Blessing N.</h4><span>Lagos, Ikoyi</span></div></div>
+        </div>
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"Used Regan's Bakehouse for our office appreciation event — 20 loaves, all delivered on time and beautifully wrapped. Everyone was impressed!"</p>
+          <div class="testimonial-author"><div class="author-avatar">C</div><div class="author-info"><h4>Chisom E.</h4><span>Lagos, VI</span></div></div>
+        </div>
+        <div class="testimonial-card">
+          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <p class="testimonial-text">"The almond banana bread is so unique and delicious. I've gifted it to three friends already and they all loved it. Keep doing what you do!"</p>
+          <div class="testimonial-author"><div class="author-avatar">S</div><div class="author-info"><h4>Sola A.</h4><span>Lagos, Lekki</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="see-more-wrap">
+      <button class="see-more-btn" id="seeMoreBtn" onclick="toggleSeeMore()">
+        <span id="seeMoreText">See More Reviews</span>
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-left">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title-lg">About <em>Regan's</em><br>Bakehouse</h2>
+        <blockquote class="about-blockquote">
+          "From our kitchen to your table — every loaf is made with <strong>intention</strong>, love, and the finest ingredients."
+        </blockquote>
+        <div class="about-body">
+          <p>At Regan's Bakehouse, we believe in the simple pleasure of home-baked goodness. Every loaf is crafted with care, using only the finest ingredients and time-honored techniques.</p>
+          <p>Our banana bread isn't just a treat — it's a tradition. We're committed to delivering warmth, flavor, and quality in every single slice. Thank you for supporting us.</p>
+        </div>
+        <a href="#order" class="about-cta">Order Your Loaf</a>
+      </div>
+      <div class="about-right">
+        <div class="about-badge-grid">
+          <div class="about-badge"><div class="about-badge-num">8+</div><div class="about-badge-label">Flavours</div></div>
+          <div class="about-badge"><div class="about-badge-num">500+</div><div class="about-badge-label">Happy Customers</div></div>
+          <div class="about-badge"><div class="about-badge-num">24h</div><div class="about-badge-label">Fresh Delivery</div></div>
+          <div class="about-badge"><div class="about-badge-num">5★</div><div class="about-badge-label">Average Rating</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faq">
+    <div class="faq-inner">
+      <div class="section-label" style="text-align:center">Got Questions?</div>
+      <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I store my banana bread?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Wrap your banana bread tightly in cling film at room temperature and keep it away from direct sunlight or heat. <strong>Do not store in an airtight container</strong> — this can cause it to go bad faster. For longer storage, refrigerate it wrapped in cling film — it stays fresh for up to <strong>5 days</strong> when refrigerated.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How long does the bread stay fresh?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Our banana bread stays fresh for up to <strong>3 days</strong> at room temperature when wrapped in cling film, and up to <strong>5 days</strong> when refrigerated. Every loaf is baked fresh to order, so you always receive it at its best!</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I customize my order or request a flavor?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! We love special requests. If you have a custom flavor in mind or a specific dietary requirement, reach out to us on WhatsApp at <a href="https://wa.me/2349035856207" style="color:#6B4423;font-weight:600">+234 903 585 6207</a> before placing your order and we'll do our best to accommodate you.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Do you do bulk or corporate orders?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Absolutely! We cater for corporate events, office gifting, birthdays, weddings, and more. For orders of 10 loaves and above, please contact us on WhatsApp at <a href="https://wa.me/2349035856207" style="color:#6B4423;font-weight:600">+234 903 585 6207</a> for special pricing and arrangements.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does delivery work?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>After payment, your order is baked fresh and delivered within <strong>24–48 hours</strong>. Same-day delivery is available for orders placed before <strong>12 PM</strong>, subject to availability. Delivery fees range from ₦1,000–₦2,500 depending on your location. Orders above ₦50,000 get <strong>free delivery!</strong></p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I pick up my order instead of delivery?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! You can pick up your order for <strong>free</strong> from our location at <strong>Halleluyah Quarters Estate, Ibafo, Ogun State</strong>. Simply select "Pickup" as your delivery option when placing your order, and we'll notify you via WhatsApp when it's ready for collection.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What payment methods do you accept?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>We accept all major debit cards, bank transfers, and USSD payments securely through <strong>Paystack</strong>. Your payment is 100% safe and encrypted. We do not accept cash on delivery at this time.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I track my order after payment?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>After payment, you'll receive a confirmation email with your order reference number. You can send that reference to us on WhatsApp at <a href="https://wa.me/2349035856207" style="color:#6B4423;font-weight:600">+234 903 585 6207</a> at any time to get an update on your order status.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter" id="newsletter">
+    <div class="newsletter-inner">
+      <div class="newsletter-badge">Stay in the Loop</div>
+      <h2>Get <em>exclusive</em> offers &amp;<br>fresh arrivals first</h2>
+      <p>Join our community of banana bread lovers. Be the first to hear about new flavours, seasonal specials, and subscriber-only discounts.</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Your email address" id="newsletterEmail">
+        <button class="newsletter-btn" onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+      <p class="newsletter-note">No spam, ever. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <!-- Order Form Section -->
+  <section class="order-form-section" id="order">
+    <h2 class="section-title">Place Your Order</h2>
+    <div class="form-container">
+      <div class="cart-summary" id="cartSummary" style="display:none">
+        <h3 style="color:#6B4423;margin-bottom:1rem;font-family:'Cormorant Garamond',serif;font-size:1.5rem">Your Order</h3>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="delivery-fee-display" id="deliveryFeeDisplay" style="display:none">
+          <div style="display:flex;justify-content:space-between;padding:0.8rem 0;border-top:1px solid #ddd">
+            <span>Delivery Fee:</span>
+            <span id="deliveryFeeAmount">&#8358;0</span>
+          </div>
+        </div>
+        <div class="cart-total" id="cartTotal">Total: &#8358;0</div>
+      </div>
+      <form id="orderForm">
+        <div class="form-group"><label for="name">Full Name *</label><input type="text" id="name" required></div>
+        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" required></div>
+        <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" required></div>
+        <div class="form-group">
+          <label for="location">Delivery Location *</label>
+          <select id="location" required onchange="updateDeliveryFee()">
+            <option value="">-- Select Location --</option>
+            <optgroup label="Mainland (Close) - &#8358;1,500">
+              <option value="Yaba" data-fee="1500">Yaba</option>
+              <option value="Surulere" data-fee="1500">Surulere</option>
+              <option value="Ikeja" data-fee="1500">Ikeja</option>
+              <option value="Maryland" data-fee="1500">Maryland</option>
+              <option value="Ojota" data-fee="1500">Ojota</option>
+              <option value="Gbagada" data-fee="1500">Gbagada</option>
+            </optgroup>
+            <optgroup label="Mainland (Far) - &#8358;2,000">
+              <option value="Ikorodu" data-fee="2000">Ikorodu</option>
+              <option value="Agege" data-fee="2000">Agege</option>
+              <option value="Alimosho" data-fee="2000">Alimosho</option>
+              <option value="Ejigbo" data-fee="2000">Ejigbo</option>
+              <option value="Isolo" data-fee="2000">Isolo</option>
+              <option value="Oshodi" data-fee="2000">Oshodi</option>
+              <option value="Dopemu" data-fee="2000">Dopemu</option>
+              <option value="Iyana Ipaja" data-fee="2000">Iyana Ipaja</option>
+            </optgroup>
+            <optgroup label="Island - &#8358;2,500">
+              <option value="Victoria Island" data-fee="2500">Victoria Island</option>
+              <option value="Ikoyi" data-fee="2500">Ikoyi</option>
+              <option value="Lekki Phase 1" data-fee="2500">Lekki Phase 1</option>
+              <option value="Lekki Phase 2" data-fee="2500">Lekki Phase 2</option>
+              <option value="Ajah" data-fee="2500">Ajah</option>
+              <option value="Banana Island" data-fee="2500">Banana Island</option>
+            </optgroup>
+            <optgroup label="Ogun State - &#8358;1,000">
+              <option value="Ibafo" data-fee="1000">Ibafo</option>
+              <option value="Mowe" data-fee="1000">Mowe</option>
+            </optgroup>
+            <optgroup label="Pickup - FREE">
+              <option value="Pickup - Halleluyah Quarters Estate, Ibafo" data-fee="0">Pickup (Halleluyah Quarters Estate, Ibafo)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-group"><label for="address">Detailed Address *</label><textarea id="address" rows="3" placeholder="Enter your full address (street, house number, landmark)" required></textarea></div>
+        <div class="form-group"><label for="notes">Special Instructions (Optional)</label><textarea id="notes" rows="3" placeholder="Any special delivery instructions?"></textarea></div>
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>Proceed to Payment</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-logo-col">
+        <a href="#home" class="footer-logo">
+          <span class="footer-logo-script">Regan's</span>
+          <div class="footer-logo-divider"></div>
+          <span class="footer-logo-sub">Bakehouse</span>
+        </a>
+        <p class="footer-tagline">"Baked with love,<br>served with warmth."</p>
+        <div class="footer-social">
+          <a class="social-btn" href="https://www.instagram.com/regan_bakehouse?igsh=MW93aTBub2M0NnQ4aA%3D%3D&utm_source=qr" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a class="social-btn" href="https://wa.me/2349035856207" title="WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a class="social-btn" href="mailto:regansbakehouse@gmail.com" title="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Our Loaves</a></li>
+          <li><a href="#giftboxes">Gift Boxes</a></li>
+          <li><a href="#delivery">Delivery</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Flavours</h4>
+        <ul>
+          <li><a href="#products">Classic Vanilla</a></li>
+          <li><a href="#products">Chocolate Chip</a></li>
+          <li><a href="#products">Double Chocolate</a></li>
+          <li><a href="#products">Nutella</a></li>
+          <li><a href="#products">Coconut</a></li>
+          <li><a href="#products">Almond</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Get in Touch</h4>
+        <p><a href="mailto:regansbakehouse@gmail.com">regansbakehouse@gmail.com</a></p>
+        <p><a href="tel:+2349035856207">+234 903 585 6207</a></p>
+        <p>Lagos, Nigeria</p>
+        <p style="margin-top:16px;font-size:11px;color:rgba(253,250,244,0.3)">Mon – Sat: 8am – 6pm<br>Sun: 10am – 4pm</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Regan's Bakehouse. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a class="whatsapp-float" href="https://wa.me/2349035856207?text=Hello!%20I'd%20like%20to%20order%20from%20Regan's%20Bakehouse" target="_blank" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("FohgahIDTJ3VEheik");
+    const PAYSTACK_PUBLIC_KEY = "pk_test_3437751d3f2ba141bf02f72d2b2aba1b34164d82";
+    const BUSINESS_PHONE = "2349035856207";
+    const GOOGLE_SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbz4xrkxW4UJRAnXJQnTAi4AW8Swe-hjsQua1yCFpwlqanQlNpE9C5-AlWY1VU3WvK1Q/exec";
+    const WEBHOOK_SECRET = "rb_secure_2024_!xK9";
+    const boxRules = { midi4:4, midi6:6, midi8:8, big2:2 };
+    let cart = [];
+    let deliveryFee = 0;
+
+    function sanitize(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#x27;")
+        .trim();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".gift-flavor-check").forEach(cb => {
+        cb.addEventListener("change", () => validateGiftBox(cb.dataset.box));
+      });
+    });
+
+    function validateGiftBox(boxId) {
+      const limit = boxRules[boxId];
+      const checks = document.querySelectorAll('.gift-flavor-check[data-box="' + boxId + '"]');
+      const checked = Array.from(checks).filter(c => c.checked);
+      const counter = document.getElementById("counter-" + boxId);
+      const button = document.getElementById("btn-" + boxId);
+      if (!counter || !button) return;
+      if (checked.length > limit) { checked[checked.length - 1].checked = false; return; }
+      counter.textContent = "Selected: " + checked.length + "/" + limit;
+      button.disabled = checked.length !== limit;
+      button.style.opacity = checked.length === limit ? "1" : "0.5";
+    }
+
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+      document.getElementById("hamburger").classList.toggle("active");
+    }
+
+    window.addEventListener('scroll', function() {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+          document.getElementById("navLinks").classList.remove("active");
+          document.getElementById("hamburger").classList.remove("active");
+        }
+      });
+    });
+
+    function updatePrice(selectElement) {
+      var price = selectElement.options[selectElement.selectedIndex].getAttribute("data-price");
+      selectElement.closest(".product-info").querySelector(".current-price").textContent = "N" + parseInt(price).toLocaleString();
+    }
+
+    function changeQty(button, change) {
+      var span = button.parentElement.querySelector(".qty-value");
+      var qty = parseInt(span.textContent) + change;
+      if (qty < 1) qty = 1;
+      span.textContent = qty;
+    }
+
+    function addToCart(button, productName) {
+      var productInfo = button.closest(".product-info");
+      var sizeSelect = productInfo.querySelector(".size-select");
+      var selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      var size = selectedOption.value;
+      var sizeText = size.charAt(0).toUpperCase() + size.slice(1);
+      var price = parseInt(selectedOption.getAttribute("data-price"));
+      var qty = parseInt(productInfo.querySelector(".qty-value").textContent);
+      var fullName = productName + " (" + sizeText + ")";
+      var existing = cart.find(function(i) { return i.name === fullName; });
+      if (existing) { existing.quantity += qty; }
+      else { cart.push({ name: fullName, size: size, price: price, quantity: qty }); }
+      updateCart();
+      productInfo.querySelector(".qty-value").textContent = 1;
+      button.textContent = "Added!";
+      button.style.background = "#2ecc71";
+      setTimeout(function() { button.textContent = "Add to Cart"; button.style.background = ""; }, 1000);
+    }
+
+    function addSimpleGiftBox(button, name, boxId, price) {
+      var card = button.closest(".product-card");
+      var qty = parseInt(card.querySelector(".qty-value").textContent);
+      var flavors = Array.from(document.querySelectorAll('.gift-flavor-check[data-box="' + boxId + '"]:checked')).map(function(cb) { return cb.value; });
+      if (!flavors.length) { alert("Please select flavors first."); return; }
+      var fullName = name + " (" + flavors.join(", ") + ")";
+      var existing = cart.find(function(i) { return i.name === fullName; });
+      if (existing) { existing.quantity += qty; }
+      else { cart.push({ name: fullName, size: "fixed", price: price, quantity: qty }); }
+      updateCart();
+      card.querySelector(".qty-value").textContent = 1;
+      flavors.forEach(function(flavor) {
+        var cb = document.querySelector('.gift-flavor-check[data-box="' + boxId + '"][value="' + flavor + '"]');
+        if (cb) cb.checked = false;
+      });
+      var counter = document.getElementById("counter-" + boxId);
+      var addBtn = document.getElementById("btn-" + boxId);
+      if (counter) counter.textContent = "Selected: 0/" + boxRules[boxId];
+      if (addBtn) { addBtn.disabled = true; addBtn.style.opacity = "0.5"; }
+      button.textContent = "Added!";
+      button.style.background = "#2ecc71";
+      setTimeout(function() { button.textContent = "Add to Cart"; button.style.background = ""; }, 1200);
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function updateDeliveryFee() {
+      var sel = document.getElementById("location");
+      var opt = sel.options[sel.selectedIndex];
+      deliveryFee = opt.value ? parseInt(opt.getAttribute("data-fee")) : 0;
+      updateCart();
+    }
+
+    function updateCart() {
+      var totalItems = cart.reduce(function(s, i) { return s + i.quantity; }, 0);
+      var subtotal = cart.reduce(function(s, i) { return s + (i.price * i.quantity); }, 0);
+      document.getElementById("cartCount").textContent = totalItems;
+      if (cart.length > 0) {
+        document.getElementById("cartSummary").style.display = "block";
+        document.getElementById("submitBtn").disabled = false;
+        document.getElementById("cartItems").innerHTML = cart.map(function(item, index) {
+          return '<div class="cart-item">' +
+            '<span>' + item.name + ' x ' + item.quantity + '</span>' +
+            '<div style="display:flex;align-items:center;gap:10px">' +
+              '<span>N' + (item.price * item.quantity).toLocaleString() + '</span>' +
+              '<button onclick="removeFromCart(' + index + ')" style="background:none;border:1px solid #e74c3c;color:#e74c3c;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:16px;line-height:1;padding:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;" title="Remove item">&#215;</button>' +
+            '</div>' +
+          '</div>';
+        }).join("");
+        var finalFee = subtotal >= 50000 ? 0 : deliveryFee;
+        var feeDisplay = document.getElementById("deliveryFeeDisplay");
+        var feeAmount = document.getElementById("deliveryFeeAmount");
+        if (deliveryFee > 0) {
+          feeDisplay.style.display = "block";
+          feeAmount.innerHTML = subtotal >= 50000
+            ? '<s>N' + deliveryFee.toLocaleString() + '</s> <span style="color:#2ecc71;font-weight:bold">FREE</span>'
+            : 'N' + deliveryFee.toLocaleString();
+        } else {
+          feeDisplay.style.display = "none";
+        }
+        document.getElementById("cartTotal").textContent = "Total: N" + (subtotal + finalFee).toLocaleString();
+      } else {
+        document.getElementById("cartSummary").style.display = "none";
+        document.getElementById("submitBtn").disabled = true;
+        document.getElementById("deliveryFeeDisplay").style.display = "none";
+      }
+    }
+
+    function scrollToOrder() { document.getElementById("order").scrollIntoView({ behavior: "smooth" }); }
+    function closeModal() { document.getElementById("successModal").classList.remove("active"); }
+
+    function subscribeNewsletter() {
+      var email = document.getElementById("newsletterEmail").value.trim();
+      if (!email || !email.includes("@")) { alert("Please enter a valid email address."); return; }
+      var btn = document.querySelector(".newsletter-btn");
+      btn.textContent = "✓ Subscribed!";
+      btn.style.background = "#2ecc71";
+      document.getElementById("newsletterEmail").value = "";
+      setTimeout(function() { btn.textContent = "Subscribe"; btn.style.background = ""; }, 3000);
+    }
+
+    function sendCustomerEmail(od) {
+      emailjs.send("service_fwp8uap", "template_8faazku", { to_email: od.email, customer_name: od.name, order_items: od.orderItemsText, total_amount: od.total, delivery_address: od.fullAddress, phone: od.phone })
+        .then(function(r) { console.log("[EmailJS] Customer:", r.status); })
+        .catch(function(e) { console.error("[EmailJS] Customer failed:", e); });
+    }
+
+    function sendBusinessEmail(od, ref) {
+      emailjs.send("service_fwp8uap", "template_9bqj9nq", { payment_ref: ref, customer_name: od.name, customer_email: od.email, customer_phone: od.phone, delivery_location: od.location, delivery_address: od.address, order_items: od.orderItemsText, subtotal: "N" + od.subtotal, delivery_fee: "N" + od.deliveryFeeAmount, total_amount: "N" + od.total, order_notes: od.notes || "None", order_date: new Date().toLocaleString("en-NG", { timeZone: "Africa/Lagos" }) })
+        .then(function(r) { console.log("[EmailJS] Business:", r.status); })
+        .catch(function(e) { console.error("[EmailJS] Business failed:", e); });
+    }
+
+    function logToGoogleSheets(od, ref) {
+      fetch(GOOGLE_SHEET_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({ token: WEBHOOK_SECRET, timestamp: new Date().toLocaleString("en-NG", { timeZone: "Africa/Lagos" }), payment_ref: ref, customer_name: od.name, customer_email: od.email, customer_phone: od.phone, delivery_location: od.location, delivery_address: od.address, order_items: od.orderItemsText, subtotal: od.subtotal, delivery_fee: od.deliveryFeeAmount, total: od.total, notes: od.notes || "None", status: "Paid", source: "Website" })
+      }).then(function(r) { return r.json(); }).then(function(d) { console.log("[Sheets] Logged:", d); }).catch(function(e) { console.error("[Sheets] Failed:", e); });
+    }
+
+    function sendWhatsAppNotification(od, ref) {
+      var msg = "Regan's Bakehouse - NEW PAID ORDER\n\nPayment Ref: " + ref + "\n\nCustomer: " + od.name + "\nEmail: " + od.email + "\nPhone: " + od.phone + "\nLocation: " + od.location + "\nAddress: " + od.address + "\n\nORDER:\n" + od.orderItemsText + "\n\nSubtotal: N" + od.subtotal + "\nDelivery: N" + od.deliveryFeeAmount + "\nTOTAL PAID: N" + od.total + "\n\nNotes: " + (od.notes || "None");
+      window.open("https://wa.me/" + BUSINESS_PHONE + "?text=" + encodeURIComponent(msg), "_blank");
+    }
+
+    function payWithPaystack(od) {
+      try {
+        var handler = PaystackPop.setup({
+          key: PAYSTACK_PUBLIC_KEY,
+          email: od.email,
+          amount: od.totalAmount * 100,
+          currency: "NGN",
+          ref: "RB-" + Math.floor((Math.random() * 1000000000) + 1),
+          metadata: { custom_fields: [
+            { display_name: "Customer Name", variable_name: "customer_name", value: od.name },
+            { display_name: "Phone Number", variable_name: "phone", value: od.phone },
+            { display_name: "Delivery Location", variable_name: "location", value: od.location },
+            { display_name: "Order Items", variable_name: "order_items", value: od.orderItemsText }
+          ]},
+          onClose: function() {
+            document.getElementById("submitBtn").textContent = "Proceed to Payment";
+            document.getElementById("submitBtn").disabled = false;
+          },
+          callback: function(response) {
+            var ref = response.reference;
+            var VERIFY_URL = "https://script.google.com/macros/s/AKfycbwdRPYgp_NsUDF7XtDbg5qN-60OKrqN-LrvpI6YKdufXjMtvVF3uc65gCKnIWYoRKrc/exec";
+            document.getElementById("submitBtn").textContent = "Verifying payment...";
+            fetch(VERIFY_URL + "?ref=" + encodeURIComponent(ref) + "&token=" + encodeURIComponent(WEBHOOK_SECRET))
+              .then(function(r) { return r.json(); })
+              .then(function(result) {
+                if (result.status === "success" && result.amount === od.totalAmount * 100) {
+                  sendCustomerEmail({ name: od.name, email: od.email, phone: od.phone, fullAddress: od.location + " - " + od.address, orderItemsText: od.orderItemsText, total: od.total });
+                  sendBusinessEmail(od, ref);
+                  logToGoogleSheets(od, ref);
+                  sendWhatsAppNotification(od, ref);
+                  document.getElementById("successModal").classList.add("active");
+                  document.getElementById("orderForm").reset();
+                  cart = []; deliveryFee = 0; updateCart();
+                } else {
+                  alert("Payment could not be verified. Please contact us on WhatsApp with your reference: " + ref);
+                }
+              })
+              .catch(function() {
+                console.warn("Verification endpoint unreachable — using fallback.");
+                sendCustomerEmail({ name: od.name, email: od.email, phone: od.phone, fullAddress: od.location + " - " + od.address, orderItemsText: od.orderItemsText, total: od.total });
+                sendBusinessEmail(od, ref);
+                logToGoogleSheets(od, ref);
+                sendWhatsAppNotification(od, ref);
+                document.getElementById("successModal").classList.add("active");
+                document.getElementById("orderForm").reset();
+                cart = []; deliveryFee = 0; updateCart();
+              })
+              .finally(function() {
+                document.getElementById("submitBtn").textContent = "Proceed to Payment";
+                document.getElementById("submitBtn").disabled = false;
+              });
+          }
+        });
+        handler.openIframe();
+      } catch(e) {
+        console.error("Paystack error:", e);
+        alert("Payment system error. Please try again or contact support.");
+        document.getElementById("submitBtn").textContent = "Proceed to Payment";
+        document.getElementById("submitBtn").disabled = false;
+      }
+    }
+
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (cart.length === 0) { alert("Please add items to your cart first!"); return; }
+      var location = document.getElementById("location").value;
+      if (!location) { alert("Please select a delivery location!"); return; }
+      document.getElementById("submitBtn").textContent = "Processing...";
+      document.getElementById("submitBtn").disabled = true;
+      var subtotal = cart.reduce(function(s, i) { return s + i.price * i.quantity; }, 0);
+      var finalFee = subtotal >= 50000 ? 0 : deliveryFee;
+      var safeName     = sanitize(document.getElementById("name").value);
+      var safeEmail    = sanitize(document.getElementById("email").value);
+      var safePhone    = sanitize(document.getElementById("phone").value);
+      var safeAddress  = sanitize(document.getElementById("address").value);
+      var safeNotes    = sanitize(document.getElementById("notes").value);
+      var safeLocation = sanitize(location);
+      payWithPaystack({
+        name: safeName, email: safeEmail, phone: safePhone,
+        location: safeLocation, address: safeAddress, notes: safeNotes,
+        orderItemsText: cart.map(function(i) { return i.quantity + " x " + i.name + " (N" + (i.price * i.quantity).toLocaleString() + ")"; }).join("\n"),
+        subtotal: subtotal.toLocaleString(),
+        deliveryFeeAmount: finalFee.toLocaleString(),
+        total: (subtotal + finalFee).toLocaleString(),
+        totalAmount: subtotal + finalFee
+      });
+    });
+
+    const track = document.getElementById('carouselTrack');
+    const cards = track.querySelectorAll('.testimonial-card');
+    const dotsContainer = document.getElementById('carouselDots');
+    let visibleCount = window.innerWidth <= 768 ? 1 : 3;
+    let currentIndex = 0;
+    let totalSlides;
+
+    function initCarousel() {
+      visibleCount = window.innerWidth <= 768 ? 1 : 3;
+      totalSlides = Math.ceil(cards.length / visibleCount);
+      currentIndex = Math.min(currentIndex, totalSlides - 1);
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === currentIndex ? ' active' : '');
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      }
+      goTo(currentIndex, false);
+    }
+
+    function goTo(index, animate = true) {
+      currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
+      const cardWidth = cards[0].offsetWidth + 24;
+      track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25,1,0.5,1)' : 'none';
+      track.style.transform = `translateX(-${currentIndex * visibleCount * cardWidth}px)`;
+      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(currentIndex - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(currentIndex + 1));
+
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? goTo(currentIndex + 1) : goTo(currentIndex - 1);
+    });
+
+    window.addEventListener('resize', initCarousel);
+    initCarousel();
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    function toggleSeeMore() {
+      const extra = document.getElementById('extraReviews');
+      const btn = document.getElementById('seeMoreBtn');
+      const txt = document.getElementById('seeMoreText');
+      const isOpen = extra.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      txt.textContent = isOpen ? 'Show Less' : 'See More Reviews';
+    }
+
+    updateCart();
+  </script>
+</body>
+</html>
