@@ -327,7 +327,8 @@ footer::before { content: ''; position: absolute; top: 0; left: 6%; right: 6%; h
   .footer-grid { grid-template-columns: 1fr; gap: 36px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
   .extra-reviews-grid { grid-template-columns: 1fr; }
-  .cart-badge span { display: none; }
+  .cart-badge span:first-of-type { display: none; }
+  .cart-count { display: inline-block !important; }
   .gift-boxes::before { font-size: 15rem; top: -5rem; right: -5rem; }
   .gift-boxes::after { font-size: 10rem; bottom: -3rem; left: -3rem; }
   .whatsapp-float { bottom: 20px; right: 20px; width: 48px; height: 48px; }
