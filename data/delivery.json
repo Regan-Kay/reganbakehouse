@@ -1,0 +1,29 @@
+{
+  "zones": [
+    {
+      "zone": "Mainland (Close) - ₦1,500",
+      "fee": 1500,
+      "locations": ["Yaba", "Surulere", "Ikeja", "Maryland", "Ojota", "Gbagada"]
+    },
+    {
+      "zone": "Mainland (Far) - ₦2,000",
+      "fee": 2000,
+      "locations": ["Ikorodu", "Agege", "Alimosho", "Ejigbo", "Isolo", "Oshodi", "Dopemu", "Iyana Ipaja"]
+    },
+    {
+      "zone": "Island - ₦2,500",
+      "fee": 2500,
+      "locations": ["Victoria Island", "Ikoyi", "Lekki Phase 1", "Lekki Phase 2", "Ajah", "Banana Island"]
+    },
+    {
+      "zone": "Ogun State - ₦1,000",
+      "fee": 1000,
+      "locations": ["Ibafo", "Mowe"]
+    },
+    {
+      "zone": "Pickup - FREE",
+      "fee": 0,
+      "locations": ["Pickup - Halleluyah Quarters Estate, Ibafo"]
+    }
+  ]
+}
