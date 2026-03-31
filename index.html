@@ -96,184 +96,8 @@
   <!-- Products Section -->
   <section class="products" id="products">
     <h2 class="section-title">Our Signature Loaves</h2>
-    <div class="product-grid">
-
-      <div class="product-card">
-        <div class="product-img"><img src="classic-banana-bread.jpg" alt="Classic Banana Bread"></div>
-        <div class="product-info">
-          <h3>Classic Vanilla Banana Bread</h3>
-          <p>Our original recipe with ripe bananas and a hint of vanilla. Moist, flavorful, and timeless.</p>
-          <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
-              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
-              <option value="medium" data-price="4999" selected>Medium - &#8358;4,999</option>
-              <option value="big" data-price="9999">Big - &#8358;9,999</option>
-            </select>
-            <div class="current-price">&#8358;4,999</div>
-          </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-          </div>
-          <button class="add-to-order" onclick="addToCart(this, 'Classic Vanilla Banana Bread')">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img"><img src="chocolate-chip.jpg" alt="Chocolate Chip Banana Bread"></div>
-        <div class="product-info">
-          <h3>Chocolate Chip Banana Bread</h3>
-          <p>Loaded with premium dark chocolate chips. A decadent delicious twist on the classic.</p>
-          <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
-              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
-              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
-              <option value="big" data-price="9999">Big - &#8358;9,999</option>
-            </select>
-            <div class="current-price">&#8358;5,999</div>
-          </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-          </div>
-          <button class="add-to-order" onclick="addToCart(this, 'Chocolate Chip Banana Bread')">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img"><img src="double chocolate.jpg" alt="Double Chocolate Banana Bread"></div>
-        <div class="product-info">
-          <h3>Double Chocolate Banana Bread</h3>
-          <p>Loaded with bittersweet chocolate and cocoa. A sophisticated twist on the classic.</p>
-          <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
-              <option value="mini" data-price="2500">Mini - &#8358;2,500</option>
-              <option value="medium" data-price="6999" selected>Medium - &#8358;6,999</option>
-              <option value="big" data-price="10999">Big - &#8358;10,999</option>
-            </select>
-            <div class="current-price">&#8358;6,999</div>
-          </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-          </div>
-          <button class="add-to-order" onclick="addToCart(this, 'Double Chocolate Banana Bread')">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img"><img src="cashew.jpg" alt="Cashew/Peanut Banana Bread"></div>
-        <div class="product-info">
-          <h3>Cashew/Peanut Banana Bread</h3>
-          <p>Crunchy nuts add texture and richness. Perfect with your morning coffee.</p>
-          <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
-              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
-              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
-              <option value="big" data-price="10999">Big - &#8358;10,999</option>
-            </select>
-            <div class="current-price">&#8358;5,999</div>
-          </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-          </div>
-          <button class="add-to-order" onclick="addToCart(this, 'Cashew/Peanut Banana Bread')">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img"><img src="coconut.jpg" alt="Coconut Banana Bread"></div>
-        <div class="product-info">
-          <h3>Coconut Banana Bread</h3>
-          <p>Tropical coconut flavor with a light, fluffy texture. A taste of paradise in every bite.</p>
-          <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
-              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
-              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
-              <option value="big" data-price="10999">Big - &#8358;10,999</option>
-            </select>
-            <div class="current-price">&#8358;5,999</div>
-          </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-          </div>
-          <button class="add-to-order" onclick="addToCart(this, 'Coconut Banana Bread')">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img"><img src="oreos-bread.jpg" alt="Oreos Banana Bread"></div>
-        <div class="product-info">
-          <h3>Oreos Banana Bread</h3>
-          <p>Loaded with crushed Oreo cookies. A delicious cookies and cream twist on the classic.</p>
-          <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
-              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
-              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
-              <option value="big" data-price="10999">Big - &#8358;10,999</option>
-            </select>
-            <div class="current-price">&#8358;5,999</div>
-          </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-          </div>
-          <button class="add-to-order" onclick="addToCart(this, 'Oreos Banana Bread')">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img"><img src="Almond banana bread.jpg" alt="Almond Banana Bread"></div>
-        <div class="product-info">
-          <h3>Almond Banana Bread</h3>
-          <p>Packed with sliced almond slivers. Toasted coconut flakes bring tropical sweetness throughout.</p>
-          <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
-              <option value="mini" data-price="1999">Mini - &#8358;1,999</option>
-              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
-              <option value="big" data-price="10999">Big - &#8358;10,999</option>
-            </select>
-            <div class="current-price">&#8358;5,999</div>
-          </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-          </div>
-          <button class="add-to-order" onclick="addToCart(this, 'Almond Banana Bread')">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img"><img src="nutella-banana-bread.jpg" alt="Nutella Banana Bread"></div>
-        <div class="product-info">
-          <h3>Nutella Banana Bread</h3>
-          <p>Swirled with rich Nutella hazelnut spread. Indulgent, chocolatey perfection in every slice.</p>
-          <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
-              <option value="mini" data-price="2500">Mini - &#8358;2,500</option>
-              <option value="medium" data-price="5999" selected>Medium - &#8358;5,999</option>
-              <option value="big" data-price="11999">Big - &#8358;11,999</option>
-            </select>
-            <div class="current-price">&#8358;5,999</div>
-          </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-          </div>
-          <button class="add-to-order" onclick="addToCart(this, 'Nutella Banana Bread')">Add to Cart</button>
-        </div>
-      </div>
-
+    <div class="product-grid" id="productGrid">
+      <!-- Products loaded dynamically from _data/products.json -->
     </div>
   </section>
 
@@ -677,39 +501,7 @@
           <label for="location">Delivery Location *</label>
           <select id="location" required onchange="updateDeliveryFee()">
             <option value="">-- Select Location --</option>
-            <optgroup label="Mainland (Close) - &#8358;1,500">
-              <option value="Yaba" data-fee="1500">Yaba</option>
-              <option value="Surulere" data-fee="1500">Surulere</option>
-              <option value="Ikeja" data-fee="1500">Ikeja</option>
-              <option value="Maryland" data-fee="1500">Maryland</option>
-              <option value="Ojota" data-fee="1500">Ojota</option>
-              <option value="Gbagada" data-fee="1500">Gbagada</option>
-            </optgroup>
-            <optgroup label="Mainland (Far) - &#8358;2,000">
-              <option value="Ikorodu" data-fee="2000">Ikorodu</option>
-              <option value="Agege" data-fee="2000">Agege</option>
-              <option value="Alimosho" data-fee="2000">Alimosho</option>
-              <option value="Ejigbo" data-fee="2000">Ejigbo</option>
-              <option value="Isolo" data-fee="2000">Isolo</option>
-              <option value="Oshodi" data-fee="2000">Oshodi</option>
-              <option value="Dopemu" data-fee="2000">Dopemu</option>
-              <option value="Iyana Ipaja" data-fee="2000">Iyana Ipaja</option>
-            </optgroup>
-            <optgroup label="Island - &#8358;2,500">
-              <option value="Victoria Island" data-fee="2500">Victoria Island</option>
-              <option value="Ikoyi" data-fee="2500">Ikoyi</option>
-              <option value="Lekki Phase 1" data-fee="2500">Lekki Phase 1</option>
-              <option value="Lekki Phase 2" data-fee="2500">Lekki Phase 2</option>
-              <option value="Ajah" data-fee="2500">Ajah</option>
-              <option value="Banana Island" data-fee="2500">Banana Island</option>
-            </optgroup>
-            <optgroup label="Ogun State - &#8358;1,000">
-              <option value="Ibafo" data-fee="1000">Ibafo</option>
-              <option value="Mowe" data-fee="1000">Mowe</option>
-            </optgroup>
-            <optgroup label="Pickup - FREE">
-              <option value="Pickup - Halleluyah Quarters Estate, Ibafo" data-fee="0">Pickup (Halleluyah Quarters Estate, Ibafo)</option>
-            </optgroup>
+            <!-- Locations loaded dynamically from _data/delivery.json -->
           </select>
         </div>
         <div class="form-group"><label for="address">Detailed Address *</label><textarea id="address" rows="3" placeholder="Enter your full address (street, house number, landmark)" required></textarea></div>
@@ -797,6 +589,76 @@
     const boxRules = { midi4:4, midi6:6, midi8:8, big2:2 };
     let cart = [];
     let deliveryFee = 0;
+    let deliveryData = [];
+    let freeDeliveryThreshold = 50000;
+
+    // ── LOAD DATA FROM JSON FILES ──
+    async function loadSiteData() {
+      try {
+        // Load products
+        const prodRes = await fetch('/data/products.json');
+        const prodData = await prodRes.json();
+        renderProducts(prodData.products);
+
+        // Load delivery zones
+        const delRes = await fetch('/data/delivery.json');
+        const delData = await delRes.json();
+        deliveryData = delData.zones;
+        renderDeliveryLocations(delData.zones);
+
+        // Load settings
+        const setRes = await fetch('/data/settings.json');
+        const setData = await setRes.json();
+        freeDeliveryThreshold = setData.free_delivery_threshold || 50000;
+
+      } catch(e) {
+        console.error("Failed to load data:", e);
+      }
+    }
+
+    function renderProducts(products) {
+      const grid = document.getElementById('productGrid');
+      if (!grid || !products) return;
+      grid.innerHTML = products.map(p => `
+        <div class="product-card">
+          <div class="product-img"><img src="${p.image}" alt="${p.name}"></div>
+          <div class="product-info">
+            <h3>${p.name}</h3>
+            <p>${p.description}</p>
+            <div class="price-size-container">
+              <select class="size-select" onchange="updatePrice(this)">
+                <option value="mini" data-price="${p.price_mini}">Mini - &#8358;${p.price_mini.toLocaleString()}</option>
+                <option value="medium" data-price="${p.price_medium}" selected>Medium - &#8358;${p.price_medium.toLocaleString()}</option>
+                <option value="big" data-price="${p.price_big}">Big - &#8358;${p.price_big.toLocaleString()}</option>
+              </select>
+              <div class="current-price">&#8358;${p.price_medium.toLocaleString()}</div>
+            </div>
+            <div class="quantity-control">
+              <button class="qty-btn" onclick="changeQty(this, -1)">&#8722;</button>
+              <span class="qty-value">1</span>
+              <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+            <button class="add-to-order" onclick="addToCart(this, '${p.name}')">Add to Cart</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderDeliveryLocations(zones) {
+      const select = document.getElementById('location');
+      if (!select || !zones) return;
+      const options = zones.map(zone => {
+        const locations = zone.locations.map(loc => {
+          const displayName = loc.startsWith('Pickup') ? `Pickup (${loc.replace('Pickup - ', '')})` : loc;
+          return `<option value="${loc}" data-fee="${zone.fee}">${displayName}</option>`;
+        }).join('');
+        return `<optgroup label="${zone.zone}">${locations}</optgroup>`;
+      }).join('');
+      select.innerHTML = '<option value="">-- Select Location --</option>' + options;
+    }
+
+    // Load data when page loads
+    loadSiteData();
 
     function sanitize(str) {
       if (!str) return "";
@@ -932,12 +794,12 @@
             '</div>' +
           '</div>';
         }).join("");
-        var finalFee = subtotal >= 50000 ? 0 : deliveryFee;
+        var finalFee = subtotal >= freeDeliveryThreshold ? 0 : deliveryFee;
         var feeDisplay = document.getElementById("deliveryFeeDisplay");
         var feeAmount = document.getElementById("deliveryFeeAmount");
         if (deliveryFee > 0) {
           feeDisplay.style.display = "block";
-          feeAmount.innerHTML = subtotal >= 50000
+          feeAmount.innerHTML = subtotal >= freeDeliveryThreshold
             ? '<s>N' + deliveryFee.toLocaleString() + '</s> <span style="color:#2ecc71;font-weight:bold">FREE</span>'
             : 'N' + deliveryFee.toLocaleString();
         } else {
@@ -1067,7 +929,7 @@
       document.getElementById("submitBtn").textContent = "Processing...";
       document.getElementById("submitBtn").disabled = true;
       var subtotal = cart.reduce(function(s, i) { return s + i.price * i.quantity; }, 0);
-      var finalFee = subtotal >= 50000 ? 0 : deliveryFee;
+      var finalFee = subtotal >= freeDeliveryThreshold ? 0 : deliveryFee;
       var safeName     = sanitize(document.getElementById("name").value);
       var safeEmail    = sanitize(document.getElementById("email").value);
       var safePhone    = sanitize(document.getElementById("phone").value);
