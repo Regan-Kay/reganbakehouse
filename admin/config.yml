@@ -1,0 +1,56 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "products"
+    label: "Products"
+    files:
+      - name: "products"
+        label: "All Products"
+        file: "_data/products.json"
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Mini Price (₦)", name: "price_mini", widget: "number" }
+              - { label: "Medium Price (₦)", name: "price_medium", widget: "number" }
+              - { label: "Big Price (₦)", name: "price_big", widget: "number" }
+
+  - name: "delivery"
+    label: "Delivery Fees"
+    files:
+      - name: "delivery"
+        label: "Delivery Zones"
+        file: "_data/delivery.json"
+        fields:
+          - label: "Delivery Zones"
+            name: "zones"
+            widget: "list"
+            fields:
+              - { label: "Zone Name", name: "zone", widget: "string" }
+              - { label: "Fee (₦)", name: "fee", widget: "number" }
+              - label: "Locations"
+                name: "locations"
+                widget: "list"
+                field: { label: "Location", name: "location", widget: "string" }
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "settings"
+        label: "General Settings"
+        file: "_data/settings.json"
+        fields:
+          - { label: "Business Phone", name: "phone", widget: "string" }
+          - { label: "Business Email", name: "email", widget: "string" }
+          - { label: "Instagram URL", name: "instagram", widget: "string" }
+          - { label: "Free Delivery Above (₦)", name: "free_delivery_threshold", widget: "number" }
+          - { label: "Pickup Address", name: "pickup_address", widget: "string" }
