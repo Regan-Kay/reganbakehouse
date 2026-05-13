@@ -60,11 +60,6 @@
     </div>
   </nav>
 
-  <!-- Urgency Bar -->
-  <div class="urgency-bar" id="urgencyBar">
-    <p>&#x26A1; <strong>Same-day delivery</strong> available &mdash; order before <strong>2:00 PM</strong> &nbsp;|&nbsp; Time remaining: <span class="countdown" id="countdown">--:--:--</span></p>
-  </div>
-
   <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-bg"></div>
@@ -101,8 +96,191 @@
   <!-- Products Section -->
   <section class="products" id="products">
     <h2 class="section-title">Our Signature Loaves</h2>
+
+    <!-- Urgency nudge inside products -->
+    <div class="product-urgency" id="productUrgency">
+      <span class="urgency-icon">&#x26A1;</span>
+      <p>Order in the next <strong id="productCountdown" style="color:var(--orange)">--:--:--</strong> for same-day delivery!</p>
+    </div>
+
     <div class="product-grid" id="productGrid">
-      <!-- Rendered by JS -->
+
+      <div class="product-card">
+        <div class="product-img"><img src="classic-banana-bread.jpg" alt="Classic Vanilla Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-info">
+          <h3>Classic Vanilla Banana Bread</h3>
+          <p>Our original recipe with ripe bananas and a hint of vanilla. Moist, flavorful, and timeless.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
+              <option value="medium" data-price="4999" selected>Medium &mdash; &#8358;4,999</option>
+              <option value="big" data-price="9999">Big &mdash; &#8358;9,999</option>
+            </select>
+            <div class="current-price">&#8358;4,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this,'Classic Vanilla Banana Bread','classic-banana-bread.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="chocolate-chip.jpg" alt="Chocolate Chip Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-info">
+          <h3>Chocolate Chip Banana Bread</h3>
+          <p>Loaded with premium dark chocolate chips. A decadent delicious twist on the classic.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
+              <option value="big" data-price="9999">Big &mdash; &#8358;9,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this,'Chocolate Chip Banana Bread','chocolate-chip.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="double chocolate.jpg" alt="Double Chocolate Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-info">
+          <h3>Double Chocolate Banana Bread</h3>
+          <p>Loaded with bittersweet chocolate and cocoa. A sophisticated twist on the classic.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="2500">Mini &mdash; &#8358;2,500</option>
+              <option value="medium" data-price="6999" selected>Medium &mdash; &#8358;6,999</option>
+              <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;6,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this,'Double Chocolate Banana Bread','double chocolate.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="cashew.jpg" alt="Cashew/Peanut Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-info">
+          <h3>Cashew/Peanut Banana Bread</h3>
+          <p>Crunchy nuts add texture and richness. Perfect with your morning coffee.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
+              <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this,'Cashew/Peanut Banana Bread','cashew.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="coconut.jpg" alt="Coconut Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-info">
+          <h3>Coconut Banana Bread</h3>
+          <p>Tropical coconut flavor with a light, fluffy texture. A taste of paradise in every bite.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
+              <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this,'Coconut Banana Bread','coconut.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="oreos-bread.jpg" alt="Oreos Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-info">
+          <h3>Oreos Banana Bread</h3>
+          <p>Loaded with crushed Oreo cookies. A delicious cookies and cream twist on the classic.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
+              <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this,'Oreos Banana Bread','oreos-bread.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="Almond banana bread.jpg" alt="Almond Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-info">
+          <h3>Almond Banana Bread</h3>
+          <p>Packed with sliced almond slivers. Perfectly nutty and indulgent in every bite.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
+              <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
+              <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this,'Almond Banana Bread','Almond banana bread.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="nutella-banana-bread.jpg" alt="Nutella Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-info">
+          <h3>Nutella Banana Bread</h3>
+          <p>Swirled with rich Nutella hazelnut spread. Indulgent, chocolatey perfection in every slice.</p>
+          <div class="price-size-container">
+            <select class="size-select" onchange="updatePrice(this)">
+              <option value="mini" data-price="2500">Mini &mdash; &#8358;2,500</option>
+              <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
+              <option value="big" data-price="11999">Big &mdash; &#8358;11,999</option>
+            </select>
+            <div class="current-price">&#8358;5,999</div>
+          </div>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="add-to-order" onclick="addToCart(this,'Nutella Banana Bread','nutella-banana-bread.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -740,7 +918,7 @@
     }
 
     // ── CART ──
-    function addToCart(button, productName) {
+    function addToCart(button, productName, productImage) {
       const productInfo = button.closest(".product-info");
       const sizeSelect = productInfo.querySelector(".size-select");
       const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
@@ -749,8 +927,9 @@
       const price = parseInt(selectedOption.getAttribute("data-price"));
       const qty = parseInt(productInfo.querySelector(".qty-value").textContent);
       const fullName = productName + " (" + sizeText + ")";
+      const img = productImage || '';
       const existing = cart.find(function(i) { return i.name === fullName; });
-      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:size, price:price, quantity:qty}); }
+      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:size, price:price, quantity:qty, image:img}); }
       updateCart();
       updateCartSidebar();
       productInfo.querySelector(".qty-value").textContent = 1;
@@ -855,8 +1034,11 @@
       }
       footerEl.style.display = 'block';
       itemsEl.innerHTML = cart.map(function(item, idx) {
+        const imgHtml = item.image
+          ? '<div class="cart-item-icon" style="padding:0;overflow:hidden;"><img src="' + item.image + '" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" onerror="this.parentElement.innerHTML='&#x1F35E;'"></div>'
+          : '<div class="cart-item-icon">&#x1F35E;</div>';
         return '<div class="cart-sidebar-item">' +
-          '<div class="cart-item-icon">&#x1F35E;</div>' +
+          imgHtml +
           '<div class="cart-item-details">' +
             '<div class="cart-item-name">' + item.name + '</div>' +
             '<div class="cart-item-price">&#8358;' + (item.price * item.quantity).toLocaleString() + '</div>' +
@@ -900,23 +1082,22 @@
 
     // ── COUNTDOWN (2PM Lagos) ──
     function updateCountdown() {
-      const countdown = document.getElementById('countdown');
-      const bar = document.getElementById('urgencyBar');
-      if (!countdown || !bar) return;
+      const productCountdown = document.getElementById('productCountdown');
+      const urgencyWrap = document.getElementById('productUrgency');
       const now = new Date();
       const lagos = new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 3600000);
       const cutoff = new Date(lagos);
       cutoff.setHours(14, 0, 0, 0);
       if (lagos.getHours() >= 14) {
-        bar.querySelector('p').innerHTML = '&#x1F550; Same-day delivery window closed. <strong>Order now</strong> for delivery <strong>tomorrow!</strong>';
-        countdown.style.display = 'none';
+        if (urgencyWrap) urgencyWrap.querySelector('p').innerHTML = 'Same-day delivery window is closed &mdash; <strong>order now</strong> for fresh delivery <strong>tomorrow!</strong>';
         return;
       }
       const diff = cutoff - lagos;
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-      countdown.textContent = (h<10?'0':'') + h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+      const timeStr = (h<10?'0':'') + h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+      if (productCountdown) productCountdown.textContent = timeStr;
     }
     updateCountdown();
     setInterval(updateCountdown, 1000);
