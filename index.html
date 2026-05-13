@@ -10,12 +10,12 @@
 </head>
 <body>
 
-  <!-- Verification Overlay -->
+  <!-- Verify Overlay -->
   <div id="verifyOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(26,15,7,0.92);z-index:3000;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;">
     <div style="background:#FDFAF4;border-radius:8px;padding:3rem 2.5rem;max-width:420px;width:100%;">
-      <div style="font-size:48px;margin-bottom:1rem;">⏳</div>
+      <div style="font-size:48px;margin-bottom:1rem;">&#x23F3;</div>
       <h2 style="font-family:'Cormorant Garamond',serif;color:#2C1A0E;font-size:1.8rem;margin-bottom:0.75rem;">Verifying Your Payment</h2>
-      <p style="font-family:'Josefin Sans',sans-serif;font-size:14px;color:#8B6F5E;line-height:1.8;margin-bottom:1.5rem;">Please <strong style="color:#C8724A">do not close this page.</strong> We're confirming your payment. This only takes a few seconds!</p>
+      <p style="font-family:'Josefin Sans',sans-serif;font-size:14px;color:#8B6F5E;line-height:1.8;margin-bottom:1.5rem;">Please <strong style="color:#C8724A">do not close this page.</strong> We're confirming your payment and preparing your order. This only takes a few seconds!</p>
       <div style="display:flex;justify-content:center;gap:8px;">
         <span style="width:10px;height:10px;background:#C8724A;border-radius:50%;display:inline-block;animation:bounce 0.8s infinite alternate;"></span>
         <span style="width:10px;height:10px;background:#C8724A;border-radius:50%;display:inline-block;animation:bounce 0.8s infinite alternate 0.2s;"></span>
@@ -28,40 +28,9 @@
   <!-- Success Modal -->
   <div class="modal" id="successModal">
     <div class="modal-content">
-      <div style="font-size:52px;margin-bottom:1rem;">🎉</div>
-      <h2>Order Confirmed!</h2>
-      <p>Thank you! We've sent a confirmation email and you'll receive a WhatsApp update once your loaf is being baked.</p>
-      <div class="modal-order-ref" id="modalOrderRef"></div>
+      <h2>&#x1F389; Payment Successful!</h2>
+      <p>Thank you for your order! We've sent a confirmation email to your inbox.</p>
       <button class="modal-btn" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-
-  <!-- Sticky Cart Sidebar -->
-  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-  <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-sidebar-header">
-      <h3>Your Cart <span class="cart-sidebar-count" id="cartSidebarCount">0</span></h3>
-      <button class="cart-close-btn" onclick="closeCart()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </div>
-    <div class="cart-sidebar-items" id="cartSidebarItems">
-      <div class="cart-empty-state" id="cartEmptyState">
-        <div style="font-size:48px;margin-bottom:1rem;">🧺</div>
-        <p>Your cart is empty</p>
-        <span>Add some delicious loaves!</span>
-      </div>
-    </div>
-    <div class="cart-sidebar-footer" id="cartSidebarFooter" style="display:none">
-      <div class="cart-sidebar-subtotal">
-        <span>Subtotal</span>
-        <span id="cartSidebarSubtotal">₦0</span>
-      </div>
-      <p class="cart-free-delivery-note" id="cartFreeNote"></p>
-      <button class="cart-checkout-btn" onclick="closeCart(); document.getElementById('order').scrollIntoView({behavior:'smooth'})">
-        Proceed to Checkout →
-      </button>
-      <button class="cart-continue-btn" onclick="closeCart()">Continue Shopping</button>
     </div>
   </div>
 
@@ -82,8 +51,8 @@
       <li><a href="#order">Order Now</a></li>
     </ul>
     <div class="nav-right">
-      <div class="cart-badge" onclick="openCart()">
-        🛒 <span>Cart</span> <span class="cart-count" id="cartCount">0</span>
+      <div class="cart-badge" id="cartBadge">
+        &#x1F6D2; <span>Cart</span> <span class="cart-count" id="cartCount">0</span>
       </div>
       <div class="hamburger" onclick="toggleMenu()" id="hamburger">
         <span></span><span></span><span></span>
@@ -91,10 +60,9 @@
     </div>
   </nav>
 
-
-  <!-- URGENCY BAR -->
+  <!-- Urgency Bar -->
   <div class="urgency-bar" id="urgencyBar">
-    <p>🔥 <strong>Same-day delivery</strong> available — order before <strong>12:00 PM</strong> &nbsp;|&nbsp; Time remaining: <span class="countdown" id="countdown">--:--:--</span></p>
+    <p>&#x26A1; <strong>Same-day delivery</strong> available &mdash; order before <strong>2:00 PM</strong> &nbsp;|&nbsp; Time remaining: <span class="countdown" id="countdown">--:--:--</span></p>
   </div>
 
   <!-- HERO -->
@@ -104,7 +72,7 @@
     <div class="hero-line-left"></div>
     <div class="hero-line-right"></div>
     <div class="hero-content">
-      <div class="hero-eyebrow">Artisan · Lagos · Est. 2024</div>
+      <div class="hero-eyebrow">Artisan &middot; Lagos &middot; Est. 2024</div>
       <h1 class="hero-heading">
         <span class="word">Baked&nbsp;</span>
         <span class="word">with&nbsp;</span>
@@ -133,12 +101,8 @@
   <!-- Products Section -->
   <section class="products" id="products">
     <h2 class="section-title">Our Signature Loaves</h2>
-    <div class="same-day-nudge" id="sameDayNudge">
-      <span>⚡</span>
-      <div id="sameDayText">Order before <strong>12 PM today</strong> for same-day delivery!</div>
-    </div>
     <div class="product-grid" id="productGrid">
-      <!-- Products loaded dynamically from _data/products.json -->
+      <!-- Rendered by JS -->
     </div>
   </section>
 
@@ -149,7 +113,6 @@
     <div class="product-grid">
 
       <div class="product-card">
-        <div class="popular-badge">⭐ Best Seller</div>
         <div class="product-img" style="background:linear-gradient(135deg,#F4A460,#6B4423)"><img src="midi box of 4.jpeg" alt="Midi Box of 4"></div>
         <div class="product-info">
           <h3>Midi Box of 4</h3>
@@ -268,6 +231,7 @@
     </div>
   </section>
 
+  <!-- Delivery -->
   <section class="delivery-info" id="delivery">
     <div class="delivery-header">
       <div style="display:flex;flex-direction:column;align-items:center">
@@ -281,7 +245,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
         </div>
         <h3>Delivery Areas</h3>
-        <p>We deliver across Lagos — Victoria Island, Lekki, Ikeja, Yaba, Surulere, Ajah, Ikorodu and many more.</p>
+        <p>We deliver across Lagos &mdash; Victoria Island, Lekki, Ikeja, Yaba, Surulere, Ajah, Ikorodu and many more.</p>
       </div>
       <div class="delivery-card">
         <div class="delivery-icon-wrap">
@@ -289,11 +253,10 @@
         </div>
         <h3>Delivery Fees</h3>
         <p>
-          <strong>Mainland (Close)</strong><br><span class="fee-tag">₦1,500</span><br><br>
-          <strong>Mainland (Far)</strong><br><span class="fee-tag">₦2,000</span><br><br>
-          <strong>Island</strong><br><span class="fee-tag">₦2,500</span><br><br>
-          <strong>Orders above ₦50,000</strong><br>
-          <span class="fee-tag" style="color:#2ecc71;border-color:rgba(46,204,113,0.4)">FREE</span>
+          <strong>Mainland (Close)</strong><br><span class="fee-tag">&#8358;1,500</span><br><br>
+          <strong>Mainland (Far)</strong><br><span class="fee-tag">&#8358;2,000</span><br><br>
+          <strong>Island</strong><br><span class="fee-tag">&#8358;2,500</span><br><br>
+          <strong>Orders above &#8358;50,000</strong><br><span class="fee-tag" style="color:#2ecc71;border-color:rgba(46,204,113,0.4)">FREE</span>
         </p>
       </div>
       <div class="delivery-card">
@@ -301,18 +264,19 @@
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/></svg>
         </div>
         <h3>Delivery Time</h3>
-        <p>Orders are delivered within <strong>24–48 hours</strong>. Same-day delivery available for orders placed before <strong>12 PM</strong>, subject to availability.</p>
+        <p>Orders delivered within <strong>24&ndash;48 hours</strong>. Same-day delivery for orders placed before <strong>2:00 PM</strong>, subject to availability.</p>
       </div>
       <div class="delivery-card">
         <div class="delivery-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>
         </div>
         <h3>Fresh Guarantee</h3>
-        <p>Every loaf is <strong>baked fresh to order</strong> and individually wrapped. Stays fresh for up to <strong>5 days</strong> — guaranteed.</p>
+        <p>Every loaf is <strong>baked fresh to order</strong> and individually wrapped. Stays fresh for up to <strong>5 days</strong> &mdash; guaranteed.</p>
       </div>
     </div>
   </section>
 
+  <!-- Testimonials -->
   <section class="testimonials" id="testimonials">
     <div class="testimonials-header">
       <div class="testimonials-header-left">
@@ -331,32 +295,32 @@
     <div class="carousel-track-wrapper">
       <div class="carousel-track" id="carouselTrack">
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           <p class="testimonial-text">"Absolutely the best banana bread I've ever had! The Nutella flavor is divine. I ordered for my team and everyone loved it. Will definitely be ordering again!"</p>
           <div class="testimonial-author"><div class="author-avatar">A</div><div class="author-info"><h4>Adaeze I.</h4><span>Lagos, VI</span></div></div>
         </div>
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           <p class="testimonial-text">"I ordered the gift box of 6 for my mom's birthday and she couldn't stop raving! The variety of flavors was perfect and delivery was super fast."</p>
           <div class="testimonial-author"><div class="author-avatar">K</div><div class="author-info"><h4>Kelly C.</h4><span>Lagos, Lekki</span></div></div>
         </div>
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           <p class="testimonial-text">"Moist, flavorful, and perfectly sweet! The chocolate chip is my favorite. Great for breakfast or as a snack. Highly recommend Regan's Bakehouse!"</p>
           <div class="testimonial-author"><div class="author-avatar">T</div><div class="author-info"><h4>Tunde A.</h4><span>Lagos, Ikeja</span></div></div>
         </div>
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           <p class="testimonial-text">"I've tried all the flavors and honestly can't pick a favorite! Quality is consistently excellent. My go-to for corporate gifts now."</p>
           <div class="testimonial-author"><div class="author-avatar">T</div><div class="author-info"><h4>Tamaye O.</h4><span>Lagos, Yaba</span></div></div>
         </div>
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           <p class="testimonial-text">"The coconut banana bread is a taste of heaven! So fresh and the packaging is beautiful. Perfect for gifts. Delivery was prompt too!"</p>
           <div class="testimonial-author"><div class="author-avatar">E</div><div class="author-info"><h4>Emmanuel A.</h4><span>Lagos, Ajah</span></div></div>
         </div>
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           <p class="testimonial-text">"My kids are obsessed with the Oreos flavor! It's the only banana bread they'll eat now. Thank you for making such delicious treats!"</p>
           <div class="testimonial-author"><div class="author-avatar">O</div><div class="author-info"><h4>Onyinye M.</h4><span>Lagos, Surulere</span></div></div>
         </div>
@@ -366,17 +330,17 @@
     <div class="extra-reviews" id="extraReviews">
       <div class="extra-reviews-grid">
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           <p class="testimonial-text">"Ordered the double chocolate and it was absolutely incredible. Rich, moist and just the right amount of sweetness. A must try!"</p>
           <div class="testimonial-author"><div class="author-avatar">B</div><div class="author-info"><h4>Blessing N.</h4><span>Lagos, Ikoyi</span></div></div>
         </div>
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
-          <p class="testimonial-text">"Used Regan's Bakehouse for our office appreciation event — 20 loaves, all delivered on time and beautifully wrapped. Everyone was impressed!"</p>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p class="testimonial-text">"Used Regan's Bakehouse for our office appreciation event &mdash; 20 loaves, all delivered on time and beautifully wrapped. Everyone was impressed!"</p>
           <div class="testimonial-author"><div class="author-avatar">C</div><div class="author-info"><h4>Chisom E.</h4><span>Lagos, VI</span></div></div>
         </div>
         <div class="testimonial-card">
-          <span class="quote-mark">"</span><span class="testimonial-stars">★★★★★</span>
+          <span class="quote-mark">"</span><span class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           <p class="testimonial-text">"The almond banana bread is so unique and delicious. I've gifted it to three friends already and they all loved it. Keep doing what you do!"</p>
           <div class="testimonial-author"><div class="author-avatar">S</div><div class="author-info"><h4>Sola A.</h4><span>Lagos, Lekki</span></div></div>
         </div>
@@ -390,17 +354,18 @@
     </div>
   </section>
 
+  <!-- About -->
   <section class="about" id="about">
     <div class="about-inner">
       <div class="about-left">
         <div class="section-label">Our Story</div>
         <h2 class="section-title-lg">About <em>Regan's</em><br>Bakehouse</h2>
         <blockquote class="about-blockquote">
-          "From our kitchen to your table — every loaf is made with <strong>intention</strong>, love, and the finest ingredients."
+          "From our kitchen to your table &mdash; every loaf is made with <strong>intention</strong>, love, and the finest ingredients."
         </blockquote>
         <div class="about-body">
           <p>At Regan's Bakehouse, we believe in the simple pleasure of home-baked goodness. Every loaf is crafted with care, using only the finest ingredients and time-honored techniques.</p>
-          <p>Our banana bread isn't just a treat — it's a tradition. We're committed to delivering warmth, flavor, and quality in every single slice. Thank you for supporting us.</p>
+          <p>Our banana bread isn't just a treat &mdash; it's a tradition. We're committed to delivering warmth, flavor, and quality in every single slice. Thank you for supporting us.</p>
         </div>
         <a href="#order" class="about-cta">Order Your Loaf</a>
       </div>
@@ -409,73 +374,49 @@
           <div class="about-badge"><div class="about-badge-num">8+</div><div class="about-badge-label">Flavours</div></div>
           <div class="about-badge"><div class="about-badge-num">500+</div><div class="about-badge-label">Happy Customers</div></div>
           <div class="about-badge"><div class="about-badge-num">24h</div><div class="about-badge-label">Fresh Delivery</div></div>
-          <div class="about-badge"><div class="about-badge-num">5★</div><div class="about-badge-label">Average Rating</div></div>
+          <div class="about-badge"><div class="about-badge-num">5&#9733;</div><div class="about-badge-label">Average Rating</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ Section -->
+  <!-- FAQ -->
   <section class="faq-section" id="faq">
     <div class="faq-inner">
       <div class="section-label" style="display:flex;justify-content:center">Got Questions?</div>
       <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>How do I store my banana bread?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><p>Wrap your banana bread tightly in cling film at room temperature and keep it away from direct sunlight or heat. <strong>Do not store in an airtight container</strong> — this can cause it to go bad faster. For longer storage, refrigerate it wrapped in cling film — it stays fresh for up to <strong>5 days</strong> when refrigerated.</p></div>
+          <button class="faq-question" onclick="toggleFaq(this)"><span>How do I store my banana bread?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Wrap your banana bread tightly in cling film at room temperature away from direct sunlight. <strong>Do not store in an airtight container</strong>. For longer storage, refrigerate wrapped in cling film &mdash; stays fresh up to <strong>5 days</strong>.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>How long does the bread stay fresh?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><p>Our banana bread stays fresh for up to <strong>3 days</strong> at room temperature when wrapped in cling film, and up to <strong>5 days</strong> when refrigerated. Every loaf is baked fresh to order, so you always receive it at its best!</p></div>
+          <button class="faq-question" onclick="toggleFaq(this)"><span>How long does the bread stay fresh?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Up to <strong>3 days</strong> at room temperature and up to <strong>5 days</strong> refrigerated. Every loaf is baked fresh to order!</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Can I customize my order or request a flavor?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><p>Yes! We love special requests. If you have a custom flavor in mind or a specific dietary requirement, reach out to us on WhatsApp at <a href="https://wa.me/2349035856207">+234 903 585 6207</a> before placing your order and we'll do our best to accommodate you.</p></div>
+          <button class="faq-question" onclick="toggleFaq(this)"><span>Can I customize my order or request a flavor?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes! Reach out on WhatsApp at <a href="https://wa.me/2349035856207" style="color:var(--brown);font-weight:600">+234 903 585 6207</a> before placing your order and we'll do our best to accommodate you.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Do you do bulk or corporate orders?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><p>Absolutely! We cater for corporate events, office gifting, birthdays, weddings, and more. For orders of 10 loaves and above, please contact us on WhatsApp at <a href="https://wa.me/2349035856207">+234 903 585 6207</a> for special pricing and arrangements.</p></div>
+          <button class="faq-question" onclick="toggleFaq(this)"><span>Do you do bulk or corporate orders?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Absolutely! For orders of 10 loaves and above, contact us on WhatsApp at <a href="https://wa.me/2349035856207" style="color:var(--brown);font-weight:600">+234 903 585 6207</a> for special pricing.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>How does delivery work?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><p>After payment, your order is baked fresh and delivered within <strong>24–48 hours</strong>. Same-day delivery is available for orders placed before <strong>12 PM</strong>, subject to availability. Delivery fees range from ₦1,500–₦2,500 depending on your location. Orders above ₦50,000 get <strong>free delivery!</strong></p></div>
+          <button class="faq-question" onclick="toggleFaq(this)"><span>How does delivery work?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Delivered within <strong>24&ndash;48 hours</strong> after payment. Same-day delivery for orders before <strong>2:00 PM</strong>. Fees from &#8358;1,500&ndash;&#8358;2,500. Orders above &#8358;50,000 get <strong>free delivery!</strong></p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Can I pick up my order instead of delivery?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><p>Yes! You can pick up your order for <strong>free</strong> from our location at <strong>Halleluyah Quarters Estate, Ibafo, Ogun State</strong>. Simply select "Pickup" as your delivery option when placing your order, and we'll notify you via WhatsApp when it's ready.</p></div>
+          <button class="faq-question" onclick="toggleFaq(this)"><span>Can I pick up my order instead of delivery?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes! Free pickup from <strong>Halleluyah Quarters Estate, Ibafo, Ogun State</strong>. Select "Pickup" at checkout and we'll notify you via WhatsApp when ready.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>What payment methods do you accept?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><p>We accept all major debit cards, bank transfers, and USSD payments securely through <strong>Paystack</strong>. Your payment is 100% safe and encrypted. We do not accept cash on delivery at this time.</p></div>
+          <button class="faq-question" onclick="toggleFaq(this)"><span>What payment methods do you accept?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>All major debit cards, bank transfers, and USSD payments securely through <strong>Paystack</strong>. 100% safe and encrypted.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>How do I track my order after payment?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><p>After payment, you'll receive a confirmation email with your order reference number. Send that reference to us on WhatsApp at <a href="https://wa.me/2349035856207">+234 903 585 6207</a> at any time to get an update on your order status.</p></div>
+          <button class="faq-question" onclick="toggleFaq(this)"><span>How do I track my order after payment?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>You'll receive a confirmation email with your order reference. Send it to us on WhatsApp at <a href="https://wa.me/2349035856207" style="color:var(--brown);font-weight:600">+234 903 585 6207</a> for status updates.</p></div>
         </div>
       </div>
     </div>
@@ -495,69 +436,44 @@
     </div>
   </section>
 
-  <!-- Order Form Section -->
+  <!-- Order Form -->
   <section class="order-form-section" id="order">
     <h2 class="section-title">Place Your Order</h2>
-
-    <!-- Order Progress Bar -->
-    <div class="order-progress" id="orderProgress">
-      <div class="progress-step active" id="step1">
-        <div class="progress-dot">1</div>
-        <div class="progress-label">Add Items</div>
-      </div>
-      <div class="progress-step" id="step2">
-        <div class="progress-dot">2</div>
-        <div class="progress-label">Your Details</div>
-      </div>
-      <div class="progress-step" id="step3">
-        <div class="progress-dot">3</div>
-        <div class="progress-label">Payment</div>
-      </div>
-    </div>
-
     <div class="form-container">
       <div class="cart-summary" id="cartSummary" style="display:none">
-        <div class="cart-summary-title">Your Order</div>
+        <h3 style="color:var(--brown);margin-bottom:1rem;font-family:'Cormorant Garamond',serif;font-size:1.5rem">Your Order</h3>
         <div class="cart-items" id="cartItems"></div>
         <div class="delivery-fee-display" id="deliveryFeeDisplay" style="display:none">
           <div style="display:flex;justify-content:space-between;padding:0.8rem 0;border-top:1px solid rgba(201,168,76,0.15)">
-            <span style="font-size:13px;font-family:'Josefin Sans',sans-serif;">Delivery Fee:</span>
+            <span>Delivery Fee:</span>
             <span id="deliveryFeeAmount">&#8358;0</span>
           </div>
         </div>
         <div class="cart-total" id="cartTotal">Total: &#8358;0</div>
       </div>
       <form id="orderForm">
-        <div class="form-group"><label for="name">Full Name *</label><input type="text" id="name" placeholder="e.g. Adaeze Johnson" required></div>
-        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" placeholder="your@email.com" required></div>
-        <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" placeholder="+234 800 000 0000" required></div>
+        <div class="form-group"><label for="name">Full Name *</label><input type="text" id="name" required></div>
+        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" required></div>
+        <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" required></div>
         <div class="form-group">
           <label for="location">Delivery Location *</label>
           <select id="location" required onchange="updateDeliveryFee()">
             <option value="">-- Select Location --</option>
-            <!-- Loaded dynamically from _data/delivery.json -->
           </select>
         </div>
-        <div class="form-group"><label for="address">Detailed Address *</label><textarea id="address" rows="3" placeholder="Street, house number, landmark..." required></textarea></div>
-
-        <!-- Delivery Date Picker -->
-        <div class="form-group">
-          <label for="deliveryDate">Preferred Delivery Date *</label>
-          <input type="date" id="deliveryDate" required onchange="checkDeliveryDate()">
-          <p class="date-helper" id="dateHelper">Orders placed before 12 PM qualify for same-day delivery.</p>
-        </div>
-
+        <div class="form-group"><label for="address">Detailed Address *</label><textarea id="address" rows="3" placeholder="Enter your full address (street, house number, landmark)" required></textarea></div>
         <div class="form-group date-picker-group">
           <label>Preferred Delivery Date *</label>
           <div class="date-options" id="dateOptions"></div>
           <input type="hidden" id="deliveryDate" required>
         </div>
-        <div class="form-group"><label for="notes">Special Instructions (Optional)</label><textarea id="notes" rows="3" placeholder="Any special delivery instructions or requests?"></textarea></div>
+        <div class="form-group"><label for="notes">Special Instructions (Optional)</label><textarea id="notes" rows="3" placeholder="Any special delivery instructions?"></textarea></div>
         <button type="submit" class="submit-btn" id="submitBtn" disabled>Proceed to Payment</button>
       </form>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-grid">
       <div class="footer-logo-col">
@@ -568,10 +484,10 @@
         </a>
         <p class="footer-tagline">"Baked with love,<br>served with warmth."</p>
         <div class="footer-social">
-          <a class="social-btn" href="https://www.instagram.com/regan_bakehouse?igsh=MW93aTBub2M0NnQ4aA%3D%3D&utm_source=qr" target="_blank" title="Instagram">
+          <a class="social-btn" href="https://www.instagram.com/regan_bakehouse" title="Instagram" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
           </a>
-          <a class="social-btn" href="https://wa.me/2349035856207" target="_blank" title="WhatsApp">
+          <a class="social-btn" href="https://wa.me/2349035856207" title="WhatsApp" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           </a>
           <a class="social-btn" href="mailto:reagannn100@gmail.com" title="Email">
@@ -606,11 +522,11 @@
         <p><a href="mailto:reagannn100@gmail.com">reagannn100@gmail.com</a></p>
         <p><a href="tel:+2349035856207">+234 903 585 6207</a></p>
         <p>Lagos, Nigeria</p>
-        <p style="margin-top:16px;font-size:11px;color:rgba(253,250,244,0.3)">Mon – Sat: 8am – 6pm<br>Sun: 10am – 4pm</p>
+        <p style="margin-top:16px;font-size:11px;color:rgba(253,250,244,0.3)">Mon &ndash; Sat: 8am &ndash; 6pm<br>Sun: 10am &ndash; 4pm</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Regan's Bakehouse. All rights reserved.</p>
+      <p>&copy; 2026 Regan's Bakehouse. All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -618,45 +534,42 @@
     </div>
   </footer>
 
-
-  <!-- CART OVERLAY -->
+  <!-- Cart Overlay -->
   <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 
-  <!-- CART SIDEBAR -->
+  <!-- Cart Sidebar -->
   <div class="cart-sidebar" id="cartSidebar">
     <div class="cart-sidebar-header">
-      <h3>🛒 Your Cart</h3>
+      <h3>&#x1F6D2; Your Cart</h3>
       <button class="cart-sidebar-close" onclick="closeCart()">&#215;</button>
     </div>
     <div class="cart-sidebar-items" id="cartSidebarItems">
-      <div class="cart-sidebar-empty" id="cartSidebarEmpty">
-        <span>🧺</span>
+      <div class="cart-sidebar-empty">
+        <span>&#x1F9FA;</span>
         <p>Your cart is empty</p>
       </div>
     </div>
     <div class="cart-sidebar-footer" id="cartSidebarFooter" style="display:none">
       <div class="cart-sidebar-subtotal">
         <span>Subtotal</span>
-        <span id="sidebarSubtotal">₦0</span>
+        <span id="sidebarSubtotal">&#8358;0</span>
       </div>
       <div class="cart-sidebar-subtotal" id="sidebarDeliveryRow" style="display:none">
         <span>Delivery</span>
-        <span id="sidebarDelivery">₦0</span>
+        <span id="sidebarDelivery">&#8358;0</span>
       </div>
       <div class="cart-sidebar-total">
         <span>Total</span>
-        <span class="cart-sidebar-total-price" id="sidebarTotal">₦0</span>
+        <span class="cart-sidebar-total-price" id="sidebarTotal">&#8358;0</span>
       </div>
-      <button class="cart-sidebar-checkout" onclick="closeCart(); document.getElementById('order').scrollIntoView({behavior:'smooth'})">
-        Proceed to Checkout
-      </button>
+      <button class="cart-sidebar-checkout" onclick="closeCart(); document.getElementById('order').scrollIntoView({behavior:'smooth'})">Proceed to Checkout</button>
       <button class="cart-sidebar-continue" onclick="closeCart()">Continue Shopping</button>
     </div>
   </div>
 
-  <!-- TOAST -->
+  <!-- Toast -->
   <div class="toast" id="toast">
-    <span class="toast-icon">✓</span>
+    <span class="toast-icon">&#10003;</span>
     <span id="toastMsg">Added to cart!</span>
   </div>
 
@@ -681,187 +594,114 @@
     let deliveryData = [];
     let freeDeliveryThreshold = 50000;
 
-    // ── LOAD DATA FROM JSON ──
-    async function loadSiteData() {
-      try {
-        const prodRes = await fetch('/_data/products.json');
-        const prodData = await prodRes.json();
-        renderProducts(prodData.products);
-        const delRes = await fetch('/_data/delivery.json');
-        const delData = await delRes.json();
-        deliveryData = delData.zones;
-        renderDeliveryLocations(delData.zones);
-        const setRes = await fetch('/_data/settings.json');
-        const setData = await setRes.json();
-        freeDeliveryThreshold = setData.free_delivery_threshold || 50000;
-      } catch(e) {
-        console.warn("Could not load JSON data:", e);
-      }
-    }
+    // ── FALLBACK DATA (used immediately and when JSON fetch fails) ──
+    const FALLBACK_PRODUCTS = [
+      { name: "Classic Vanilla Banana Bread", description: "Our original recipe with ripe bananas and a hint of vanilla. Moist, flavorful, and timeless.", image: "classic-banana-bread.jpg", price_mini: 1999, price_medium: 4999, price_big: 9999 },
+      { name: "Chocolate Chip Banana Bread", description: "Loaded with premium dark chocolate chips. A decadent delicious twist on the classic.", image: "chocolate-chip.jpg", price_mini: 1999, price_medium: 5999, price_big: 9999 },
+      { name: "Double Chocolate Banana Bread", description: "Loaded with bittersweet chocolate and cocoa. A sophisticated twist on the classic.", image: "double chocolate.jpg", price_mini: 2500, price_medium: 6999, price_big: 10999 },
+      { name: "Cashew/Peanut Banana Bread", description: "Crunchy nuts add texture and richness. Perfect with your morning coffee.", image: "cashew.jpg", price_mini: 1999, price_medium: 5999, price_big: 10999 },
+      { name: "Coconut Banana Bread", description: "Tropical coconut flavor with a light, fluffy texture. A taste of paradise in every bite.", image: "coconut.jpg", price_mini: 1999, price_medium: 5999, price_big: 10999 },
+      { name: "Oreos Banana Bread", description: "Loaded with crushed Oreo cookies. A delicious cookies and cream twist on the classic.", image: "oreos-bread.jpg", price_mini: 1999, price_medium: 5999, price_big: 10999 },
+      { name: "Almond Banana Bread", description: "Packed with sliced almond slivers. Perfectly nutty in every bite.", image: "Almond banana bread.jpg", price_mini: 1999, price_medium: 5999, price_big: 10999 },
+      { name: "Nutella Banana Bread", description: "Swirled with rich Nutella hazelnut spread. Indulgent, chocolatey perfection in every slice.", image: "nutella-banana-bread.jpg", price_mini: 2500, price_medium: 5999, price_big: 11999 }
+    ];
 
+    const FALLBACK_DELIVERY = [
+      { zone: "Mainland (Close) — &#8358;1,500", fee: 1500, locations: ["Yaba","Surulere","Ikeja","Maryland","Ojota","Gbagada"] },
+      { zone: "Mainland (Far) — &#8358;2,000", fee: 2000, locations: ["Ikorodu","Agege","Alimosho","Ejigbo","Isolo","Oshodi"] },
+      { zone: "Island — &#8358;2,500", fee: 2500, locations: ["Victoria Island","Ikoyi","Lekki Phase 1","Lekki Phase 2","Ajah","Banana Island"] },
+      { zone: "Pickup (Free)", fee: 0, locations: ["Pickup — Ibafo, Ogun State"] }
+    ];
+
+    // ── RENDER FUNCTIONS ──
     function renderProducts(products) {
       const grid = document.getElementById('productGrid');
       if (!grid || !products) return;
-      const popularNames = ['Nutella', 'Chocolate Chip'];
-      grid.innerHTML = products.map(p => `
-        <div class="product-card">
-          ${popularNames.some(n => p.name.includes(n)) ? '<div class="popular-badge">⭐ Popular</div>' : ''}
-          <div class="product-img"><img src="${p.image}" alt="${p.name}"></div>
-          <div class="product-info">
-            <h3>${p.name}</h3>
-            <p>${p.description}</p>
-            <div class="price-size-container">
-              <select class="size-select" onchange="updatePrice(this)">
-                <option value="mini" data-price="${p.price_mini}">Mini — ₦${p.price_mini.toLocaleString()}</option>
-                <option value="medium" data-price="${p.price_medium}" selected>Medium — ₦${p.price_medium.toLocaleString()}</option>
-                <option value="big" data-price="${p.price_big}">Big — ₦${p.price_big.toLocaleString()}</option>
-              </select>
-              <div class="current-price">₦${p.price_medium.toLocaleString()}</div>
-            </div>
-            <div class="quantity-control">
-              <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
-              <span class="qty-value">1</span>
-              <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-            </div>
-            <button class="add-to-order" onclick="addToCart(this,'${p.name}')">Add to Cart</button>
-          </div>
-        </div>
-      `).join('');
+      grid.innerHTML = products.map(function(p) {
+        return '<div class="product-card">' +
+          '<div class="product-img"><img src="' + p.image + '" alt="' + p.name + '"></div>' +
+          '<div class="product-info">' +
+            '<h3>' + p.name + '</h3>' +
+            '<p>' + p.description + '</p>' +
+            '<div class="price-size-container">' +
+              '<select class="size-select" onchange="updatePrice(this)">' +
+                '<option value="mini" data-price="' + p.price_mini + '">Mini &mdash; &#8358;' + p.price_mini.toLocaleString() + '</option>' +
+                '<option value="medium" data-price="' + p.price_medium + '" selected>Medium &mdash; &#8358;' + p.price_medium.toLocaleString() + '</option>' +
+                '<option value="big" data-price="' + p.price_big + '">Big &mdash; &#8358;' + p.price_big.toLocaleString() + '</option>' +
+              '</select>' +
+              '<div class="current-price">&#8358;' + p.price_medium.toLocaleString() + '</div>' +
+            '</div>' +
+            '<div class="quantity-control">' +
+              '<button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>' +
+              '<span class="qty-value">1</span>' +
+              '<button class="qty-btn" onclick="changeQty(this,1)">+</button>' +
+            '</div>' +
+            '<button class="add-to-order" onclick="addToCart(this,\'' + p.name.replace(/'/g, "\\'") + '\')">Add to Cart</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
     }
 
     function renderDeliveryLocations(zones) {
       const select = document.getElementById('location');
       if (!select || !zones) return;
-      select.innerHTML = '<option value="">-- Select Location --</option>' + zones.map(zone =>
-        `<optgroup label="${zone.zone} — ₦${zone.fee.toLocaleString()}">${
-          zone.locations.map(loc => `<option value="${loc}" data-fee="${zone.fee}">${loc}</option>`).join('')
-        }</optgroup>`
-      ).join('');
+      select.innerHTML = '<option value="">-- Select Location --</option>' +
+        zones.map(function(zone) {
+          return '<optgroup label="' + zone.zone + '">' +
+            zone.locations.map(function(loc) {
+              return '<option value="' + loc + '" data-fee="' + zone.fee + '">' + loc + '</option>';
+            }).join('') +
+          '</optgroup>';
+        }).join('');
     }
 
+    // ── RENDER IMMEDIATELY FROM FALLBACK ──
+    renderProducts(FALLBACK_PRODUCTS);
+    renderDeliveryLocations(FALLBACK_DELIVERY);
+    deliveryData = FALLBACK_DELIVERY;
+
+    // ── THEN TRY TO UPDATE FROM JSON (Netlify) ──
+    async function loadSiteData() {
+      try {
+        const r = await fetch('/_data/products.json');
+        if (!r.ok) throw new Error('no json');
+        const d = await r.json();
+        renderProducts(d.products);
+      } catch(e) { /* keep fallback */ }
+      try {
+        const r = await fetch('/_data/delivery.json');
+        if (!r.ok) throw new Error('no json');
+        const d = await r.json();
+        deliveryData = d.zones;
+        renderDeliveryLocations(d.zones);
+      } catch(e) { /* keep fallback */ }
+      try {
+        const r = await fetch('/_data/settings.json');
+        if (!r.ok) throw new Error('no json');
+        const d = await r.json();
+        freeDeliveryThreshold = d.free_delivery_threshold || 50000;
+      } catch(e) { freeDeliveryThreshold = 50000; }
+    }
     loadSiteData();
 
-    // ── SAME DAY NUDGE ──
-    function updateSameDayNudge() {
-      const now = new Date();
-      const hour = now.getHours();
-      const nudge = document.getElementById('sameDayText');
-      if (hour < 12) {
-        const hoursLeft = 12 - hour;
-        nudge.innerHTML = `Order in the next <strong>${hoursLeft} hour${hoursLeft > 1 ? 's' : ''}</strong> for same-day delivery!`;
-      } else {
-        nudge.innerHTML = `Order now and receive your loaf <strong>tomorrow</strong> — fresh from the oven!`;
-      }
-    }
-    updateSameDayNudge();
+    // ── GIFT BOX FLAVOR VALIDATION ──
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll(".gift-flavor-check").forEach(function(cb) {
+        cb.addEventListener("change", function() { validateGiftBox(cb.dataset.box); });
+      });
+    });
 
-    // ── DELIVERY DATE PICKER ──
-    function initDatePicker() {
-      const input = document.getElementById('deliveryDate');
-      const now = new Date();
-      const hour = now.getHours();
-      // Min date: today if before 12pm, else tomorrow
-      const minDate = new Date(now);
-      if (hour >= 12) minDate.setDate(minDate.getDate() + 1);
-      // Max date: 14 days from now
-      const maxDate = new Date(now);
-      maxDate.setDate(maxDate.getDate() + 14);
-      input.min = minDate.toISOString().split('T')[0];
-      input.max = maxDate.toISOString().split('T')[0];
-      input.value = minDate.toISOString().split('T')[0];
-      checkDeliveryDate();
-    }
-
-    function checkDeliveryDate() {
-      const input = document.getElementById('deliveryDate');
-      const helper = document.getElementById('dateHelper');
-      const selected = new Date(input.value);
-      const today = new Date();
-      today.setHours(0,0,0,0);
-      const isToday = selected.getTime() === today.getTime();
-      const hour = new Date().getHours();
-      if (isToday && hour < 12) {
-        helper.textContent = '✓ Same-day delivery available — order confirmed before 12 PM!';
-        helper.className = 'date-helper';
-        helper.style.color = '#2ecc71';
-      } else if (isToday && hour >= 12) {
-        helper.textContent = '⚠ Same-day cutoff has passed — your order will be delivered tomorrow.';
-        helper.className = 'date-helper warn';
-        helper.style.color = '';
-      } else {
-        helper.textContent = '✓ Delivery scheduled — we\'ll bake fresh on the day!';
-        helper.className = 'date-helper';
-        helper.style.color = 'var(--muted)';
-      }
-    }
-
-    // ── PROGRESS BAR ──
-    function updateProgress() {
-      const hasItems = cart.length > 0;
-      const form = document.getElementById('orderForm');
-      const nameVal = document.getElementById('name') ? document.getElementById('name').value.trim() : '';
-      const hasDetails = nameVal.length > 0;
-
-      document.getElementById('step1').className = 'progress-step ' + (hasItems ? 'done' : 'active');
-      document.getElementById('step2').className = 'progress-step ' + (!hasItems ? '' : hasDetails ? 'done' : 'active');
-      document.getElementById('step3').className = 'progress-step ' + (hasItems && hasDetails ? 'active' : '');
-    }
-
-    // ── CART SIDEBAR ──
-    function openCart() {
-      document.getElementById('cartSidebar').classList.add('open');
-      document.getElementById('cartOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeCart() {
-      document.getElementById('cartSidebar').classList.remove('open');
-      document.getElementById('cartOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function updateCartSidebar() {
-      const items = document.getElementById('cartSidebarItems');
-      const footer = document.getElementById('cartSidebarFooter');
-      const emptyState = document.getElementById('cartEmptyState');
-      const count = document.getElementById('cartSidebarCount');
-      const subtotalEl = document.getElementById('cartSidebarSubtotal');
-      const freeNote = document.getElementById('cartFreeNote');
-
-      const totalItems = cart.reduce((s,i) => s + i.quantity, 0);
-      const subtotal = cart.reduce((s,i) => s + i.price * i.quantity, 0);
-
-      count.textContent = totalItems;
-
-      if (cart.length === 0) {
-        emptyState.style.display = 'flex';
-        footer.style.display = 'none';
-        items.innerHTML = '';
-        items.appendChild(emptyState);
-      } else {
-        emptyState.style.display = 'none';
-        footer.style.display = 'block';
-        items.innerHTML = cart.map((item, i) => `
-          <div class="cart-sidebar-item">
-            <div>
-              <div class="cart-sidebar-item-name">${item.name}</div>
-              <div class="cart-sidebar-item-qty">Qty: ${item.quantity}</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <span class="cart-sidebar-item-price">₦${(item.price * item.quantity).toLocaleString()}</span>
-              <button class="cart-sidebar-remove" onclick="removeFromCart(${i})" title="Remove">×</button>
-            </div>
-          </div>
-        `).join('');
-        subtotalEl.textContent = '₦' + subtotal.toLocaleString();
-        const remaining = freeDeliveryThreshold - subtotal;
-        if (remaining > 0) {
-          freeNote.textContent = `Add ₦${remaining.toLocaleString()} more for FREE delivery!`;
-          freeNote.className = 'cart-free-delivery-note';
-        } else {
-          freeNote.textContent = '🎉 You qualify for FREE delivery!';
-          freeNote.className = 'cart-free-delivery-note highlight';
-        }
-      }
+    function validateGiftBox(boxId) {
+      const limit = boxRules[boxId];
+      const checks = document.querySelectorAll('.gift-flavor-check[data-box="' + boxId + '"]');
+      const checked = Array.from(checks).filter(function(c) { return c.checked; });
+      const counter = document.getElementById("counter-" + boxId);
+      const button = document.getElementById("btn-" + boxId);
+      if (!counter || !button) return;
+      if (checked.length > limit) { checked[checked.length-1].checked = false; return; }
+      counter.textContent = "Selected: " + checked.length + "/" + limit;
+      button.disabled = checked.length !== limit;
+      button.style.opacity = checked.length === limit ? "1" : "0.5";
     }
 
     function sanitize(str) {
@@ -869,60 +709,37 @@
       return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;").trim();
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      document.querySelectorAll(".gift-flavor-check").forEach(cb => {
-        cb.addEventListener("change", () => validateGiftBox(cb.dataset.box));
-      });
-      initDatePicker();
-      document.getElementById('name').addEventListener('input', updateProgress);
-    });
-
-    function validateGiftBox(boxId) {
-      const limit = boxRules[boxId];
-      const checks = document.querySelectorAll(`.gift-flavor-check[data-box="${boxId}"]`);
-      const checked = Array.from(checks).filter(c => c.checked);
-      const counter = document.getElementById("counter-" + boxId);
-      const button = document.getElementById("btn-" + boxId);
-      if (!counter || !button) return;
-      if (checked.length > limit) { checked[checked.length-1].checked = false; return; }
-      counter.textContent = `Selected: ${checked.length}/${limit}`;
-      button.disabled = checked.length !== limit;
-      button.style.opacity = checked.length === limit ? "1" : "0.5";
-    }
-
+    // ── NAV ──
     function toggleMenu() {
       document.getElementById("navLinks").classList.toggle("active");
       document.getElementById("hamburger").classList.toggle("active");
     }
-
     window.addEventListener('scroll', function() {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
     });
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
       anchor.addEventListener("click", function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth" });
-          document.getElementById("navLinks").classList.remove("active");
-          document.getElementById("hamburger").classList.remove("active");
-        }
+        if (target) { target.scrollIntoView({behavior:"smooth"}); }
+        document.getElementById("navLinks").classList.remove("active");
+        document.getElementById("hamburger").classList.remove("active");
       });
     });
 
-    function updatePrice(selectElement) {
-      const price = selectElement.options[selectElement.selectedIndex].getAttribute("data-price");
-      selectElement.closest(".product-info").querySelector(".current-price").textContent = "₦" + parseInt(price).toLocaleString();
+    // ── PRODUCTS ──
+    function updatePrice(el) {
+      const price = el.options[el.selectedIndex].getAttribute("data-price");
+      el.closest(".product-info").querySelector(".current-price").textContent = "&#8358;" + parseInt(price).toLocaleString();
     }
-
-    function changeQty(button, change) {
-      const span = button.parentElement.querySelector(".qty-value");
+    function changeQty(btn, change) {
+      const span = btn.parentElement.querySelector(".qty-value");
       let qty = parseInt(span.textContent) + change;
       if (qty < 1) qty = 1;
       span.textContent = qty;
     }
 
+    // ── CART ──
     function addToCart(button, productName) {
       const productInfo = button.closest(".product-info");
       const sizeSelect = productInfo.querySelector(".size-select");
@@ -931,40 +748,36 @@
       const sizeText = size.charAt(0).toUpperCase() + size.slice(1);
       const price = parseInt(selectedOption.getAttribute("data-price"));
       const qty = parseInt(productInfo.querySelector(".qty-value").textContent);
-      const fullName = `${productName} (${sizeText})`;
-      const existing = cart.find(i => i.name === fullName);
-      if (existing) { existing.quantity += qty; }
-      else { cart.push({ name: fullName, price, quantity: qty }); }
+      const fullName = productName + " (" + sizeText + ")";
+      const existing = cart.find(function(i) { return i.name === fullName; });
+      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:size, price:price, quantity:qty}); }
       updateCart();
+      updateCartSidebar();
       productInfo.querySelector(".qty-value").textContent = 1;
-      button.textContent = "✓ Added!";
-      button.style.background = "#2ecc71";
-      setTimeout(() => { button.textContent = "Add to Cart"; button.style.background = ""; }, 1200);
+      showToast(productName + " added to cart!");
       openCart();
     }
 
     function addSimpleGiftBox(button, name, boxId, price) {
       const card = button.closest(".product-card");
       const qty = parseInt(card.querySelector(".qty-value").textContent);
-      const flavors = Array.from(document.querySelectorAll(`.gift-flavor-check[data-box="${boxId}"]:checked`)).map(cb => cb.value);
+      const flavors = Array.from(document.querySelectorAll('.gift-flavor-check[data-box="' + boxId + '"]:checked')).map(function(cb) { return cb.value; });
       if (!flavors.length) { alert("Please select flavors first."); return; }
-      const fullName = `${name} (${flavors.join(", ")})`;
-      const existing = cart.find(i => i.name === fullName);
-      if (existing) { existing.quantity += qty; }
-      else { cart.push({ name: fullName, price, quantity: qty }); }
+      const fullName = name + " (" + flavors.join(", ") + ")";
+      const existing = cart.find(function(i) { return i.name === fullName; });
+      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:"fixed", price:price, quantity:qty}); }
       updateCart();
+      updateCartSidebar();
       card.querySelector(".qty-value").textContent = 1;
-      flavors.forEach(flavor => {
-        const cb = document.querySelector(`.gift-flavor-check[data-box="${boxId}"][value="${flavor}"]`);
+      flavors.forEach(function(flavor) {
+        const cb = document.querySelector('.gift-flavor-check[data-box="' + boxId + '"][value="' + flavor + '"]');
         if (cb) cb.checked = false;
       });
       const counter = document.getElementById("counter-" + boxId);
       const addBtn = document.getElementById("btn-" + boxId);
-      if (counter) counter.textContent = `Selected: 0/${boxRules[boxId]}`;
+      if (counter) counter.textContent = "Selected: 0/" + boxRules[boxId];
       if (addBtn) { addBtn.disabled = true; addBtn.style.opacity = "0.5"; }
-      button.textContent = "✓ Added!";
-      button.style.background = "#2ecc71";
-      setTimeout(() => { button.textContent = "Add to Cart"; button.style.background = ""; }, 1200);
+      showToast(name + " added to cart!");
       openCart();
     }
 
@@ -983,98 +796,206 @@
     }
 
     function updateCart() {
-      const totalItems = cart.reduce((s,i) => s + i.quantity, 0);
-      const subtotal = cart.reduce((s,i) => s + i.price * i.quantity, 0);
+      const totalItems = cart.reduce(function(s,i) { return s + i.quantity; }, 0);
+      const subtotal = cart.reduce(function(s,i) { return s + (i.price * i.quantity); }, 0);
       document.getElementById("cartCount").textContent = totalItems;
-
       if (cart.length > 0) {
         document.getElementById("cartSummary").style.display = "block";
         document.getElementById("submitBtn").disabled = false;
-        document.getElementById("cartItems").innerHTML = cart.map((item, index) =>
-          `<div class="cart-item">
-            <span>${item.name} × ${item.quantity}</span>
-            <div style="display:flex;align-items:center;gap:10px">
-              <span>₦${(item.price * item.quantity).toLocaleString()}</span>
-              <button class="cart-item-remove" onclick="removeFromCart(${index})" title="Remove">×</button>
-            </div>
-          </div>`
-        ).join("");
+        document.getElementById("cartItems").innerHTML = cart.map(function(item, index) {
+          return '<div class="cart-item">' +
+            '<span>' + item.name + ' x ' + item.quantity + '</span>' +
+            '<div style="display:flex;align-items:center;gap:10px">' +
+              '<span>&#8358;' + (item.price * item.quantity).toLocaleString() + '</span>' +
+              '<button onclick="removeFromCart(' + index + ')" style="background:none;border:1px solid #e74c3c;color:#e74c3c;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">&#215;</button>' +
+            '</div>' +
+          '</div>';
+        }).join("");
         const finalFee = subtotal >= freeDeliveryThreshold ? 0 : deliveryFee;
         const feeDisplay = document.getElementById("deliveryFeeDisplay");
         const feeAmount = document.getElementById("deliveryFeeAmount");
         if (deliveryFee > 0) {
           feeDisplay.style.display = "block";
           feeAmount.innerHTML = subtotal >= freeDeliveryThreshold
-            ? `<s>₦${deliveryFee.toLocaleString()}</s> <span style="color:#2ecc71;font-weight:bold">FREE</span>`
-            : `₦${deliveryFee.toLocaleString()}`;
-        } else {
-          feeDisplay.style.display = "none";
-        }
-        document.getElementById("cartTotal").textContent = `Total: ₦${(subtotal + finalFee).toLocaleString()}`;
+            ? '<s>&#8358;' + deliveryFee.toLocaleString() + '</s> <span style="color:#2ecc71;font-weight:bold">FREE</span>'
+            : '&#8358;' + deliveryFee.toLocaleString();
+        } else { feeDisplay.style.display = "none"; }
+        document.getElementById("cartTotal").textContent = "Total: &#8358;" + (subtotal + finalFee).toLocaleString();
       } else {
         document.getElementById("cartSummary").style.display = "none";
         document.getElementById("submitBtn").disabled = true;
         document.getElementById("deliveryFeeDisplay").style.display = "none";
       }
+    }
+
+    // ── CART SIDEBAR ──
+    function openCart() {
+      document.getElementById('cartSidebar').classList.add('open');
+      document.getElementById('cartOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+      document.getElementById('cartSidebar').classList.remove('open');
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('cartBadge').addEventListener('click', function(e) {
+      e.preventDefault(); openCart();
+    });
+
+    function updateCartSidebar() {
+      const itemsEl = document.getElementById('cartSidebarItems');
+      const footerEl = document.getElementById('cartSidebarFooter');
+      const subtotal = cart.reduce(function(s,i) { return s + i.price * i.quantity; }, 0);
+      const finalFee = subtotal >= freeDeliveryThreshold ? 0 : deliveryFee;
+      if (cart.length === 0) {
+        itemsEl.innerHTML = '<div class="cart-sidebar-empty"><span>&#x1F9FA;</span><p>Your cart is empty</p></div>';
+        footerEl.style.display = 'none';
+        return;
+      }
+      footerEl.style.display = 'block';
+      itemsEl.innerHTML = cart.map(function(item, idx) {
+        return '<div class="cart-sidebar-item">' +
+          '<div class="cart-item-icon">&#x1F35E;</div>' +
+          '<div class="cart-item-details">' +
+            '<div class="cart-item-name">' + item.name + '</div>' +
+            '<div class="cart-item-price">&#8358;' + (item.price * item.quantity).toLocaleString() + '</div>' +
+            '<div class="cart-item-controls">' +
+              '<button class="cart-item-qty-btn" onclick="sidebarChangeQty(' + idx + ',-1)">&#8722;</button>' +
+              '<span class="cart-item-qty">' + item.quantity + '</span>' +
+              '<button class="cart-item-qty-btn" onclick="sidebarChangeQty(' + idx + ',1)">+</button>' +
+              '<button class="cart-item-remove" onclick="removeFromCart(' + idx + ')">&#215;</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      document.getElementById('sidebarSubtotal').textContent = '&#8358;' + subtotal.toLocaleString();
+      const deliveryRow = document.getElementById('sidebarDeliveryRow');
+      if (deliveryFee > 0) {
+        deliveryRow.style.display = 'flex';
+        document.getElementById('sidebarDelivery').innerHTML = subtotal >= freeDeliveryThreshold
+          ? '<s>&#8358;' + deliveryFee.toLocaleString() + '</s> <span style="color:#2ecc71">FREE</span>'
+          : '&#8358;' + finalFee.toLocaleString();
+      } else { deliveryRow.style.display = 'none'; }
+      document.getElementById('sidebarTotal').textContent = '&#8358;' + (subtotal + finalFee).toLocaleString();
+    }
+
+    function sidebarChangeQty(idx, change) {
+      if (!cart[idx]) return;
+      cart[idx].quantity += change;
+      if (cart[idx].quantity < 1) { cart.splice(idx, 1); }
+      updateCart();
       updateCartSidebar();
-      updateProgress();
     }
 
-    function scrollToOrder() { document.getElementById("order").scrollIntoView({ behavior: "smooth" }); }
-
-    function closeModal() {
-      document.getElementById("successModal").classList.remove("active");
+    // ── TOAST ──
+    var toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 3000);
     }
 
+    // ── COUNTDOWN (2PM Lagos) ──
+    function updateCountdown() {
+      const countdown = document.getElementById('countdown');
+      const bar = document.getElementById('urgencyBar');
+      if (!countdown || !bar) return;
+      const now = new Date();
+      const lagos = new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 3600000);
+      const cutoff = new Date(lagos);
+      cutoff.setHours(14, 0, 0, 0);
+      if (lagos.getHours() >= 14) {
+        bar.querySelector('p').innerHTML = '&#x1F550; Same-day delivery window closed. <strong>Order now</strong> for delivery <strong>tomorrow!</strong>';
+        countdown.style.display = 'none';
+        return;
+      }
+      const diff = cutoff - lagos;
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      countdown.textContent = (h<10?'0':'') + h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ── DATE PICKER ──
+    function buildDatePicker() {
+      const container = document.getElementById('dateOptions');
+      if (!container) return;
+      const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const now = new Date();
+      const lagos = new Date(now.getTime() + now.getTimezoneOffset()*60000 + 3600000);
+      const options = [];
+      let offset = 0;
+      while (options.length < 6) {
+        const d = new Date(now);
+        d.setDate(now.getDate() + offset);
+        if (d.getDay() !== 0) { options.push(d); }
+        offset++;
+      }
+      container.innerHTML = options.map(function(d, i) {
+        const tag = (i === 0 && lagos.getHours() < 14) ? 'Same Day' : (i === 0 ? 'Tomorrow' : months[d.getMonth()]);
+        return '<div class="date-option' + (i===0?' selected':'') + '" onclick="selectDate(this,\'' + d.toISOString().split('T')[0] + '\')">' +
+          '<div class="day-name">' + days[d.getDay()] + '</div>' +
+          '<div class="day-num">' + d.getDate() + '</div>' +
+          '<div class="day-tag">' + tag + '</div>' +
+        '</div>';
+      }).join('');
+      if (options.length > 0) document.getElementById('deliveryDate').value = options[0].toISOString().split('T')[0];
+    }
+    function selectDate(el, dateStr) {
+      document.querySelectorAll('.date-option').forEach(function(d) { d.classList.remove('selected'); });
+      el.classList.add('selected');
+      document.getElementById('deliveryDate').value = dateStr;
+    }
+    buildDatePicker();
+
+    // ── MISC ──
+    function scrollToOrder() { document.getElementById("order").scrollIntoView({behavior:"smooth"}); }
+    function closeModal() { document.getElementById("successModal").classList.remove("active"); }
     function subscribeNewsletter() {
       const email = document.getElementById("newsletterEmail").value.trim();
       if (!email || !email.includes("@")) { alert("Please enter a valid email address."); return; }
       const btn = document.querySelector(".newsletter-btn");
-      btn.textContent = "✓ Subscribed!";
+      btn.textContent = "&#10003; Subscribed!";
       btn.style.background = "#2ecc71";
       document.getElementById("newsletterEmail").value = "";
-      setTimeout(() => { btn.textContent = "Subscribe"; btn.style.background = ""; }, 3000);
+      setTimeout(function() { btn.textContent = "Subscribe"; btn.style.background = ""; }, 3000);
     }
 
+    // ── EMAIL / SHEETS / WHATSAPP ──
     function sendCustomerEmail(od) {
-      emailjs.send("service_fwp8uap", "template_8faazku", { to_email: od.email, customer_name: od.name, order_items: od.orderItemsText, total_amount: od.total, delivery_address: od.fullAddress, phone: od.phone })
-        .then(r => console.log("[EmailJS] Customer:", r.status))
-        .catch(e => console.error("[EmailJS] Customer failed:", e));
+      emailjs.send("service_fwp8uap","template_8faazku",{to_email:od.email,customer_name:od.name,order_items:od.orderItemsText,total_amount:od.total,delivery_address:od.fullAddress,phone:od.phone})
+        .then(function(r){console.log("[EmailJS] Customer:",r.status);}).catch(function(e){console.error(e);});
     }
-
     function sendBusinessEmail(od, ref) {
-      emailjs.send("service_fwp8uap", "template_9bqj9nq", { payment_ref: ref, customer_name: od.name, customer_email: od.email, customer_phone: od.phone, delivery_location: od.location, delivery_address: od.address, order_items: od.orderItemsText, subtotal: "₦" + od.subtotal, delivery_fee: "₦" + od.deliveryFeeAmount, total_amount: "₦" + od.total, order_notes: od.notes || "None", delivery_date: od.deliveryDate || "Not specified", order_date: new Date().toLocaleString("en-NG", { timeZone: "Africa/Lagos" }) })
-        .then(r => console.log("[EmailJS] Business:", r.status))
-        .catch(e => console.error("[EmailJS] Business failed:", e));
+      emailjs.send("service_fwp8uap","template_9bqj9nq",{payment_ref:ref,customer_name:od.name,customer_email:od.email,customer_phone:od.phone,delivery_location:od.location,delivery_address:od.address,order_items:od.orderItemsText,subtotal:"N"+od.subtotal,delivery_fee:"N"+od.deliveryFeeAmount,total_amount:"N"+od.total,order_notes:od.notes||"None",order_date:new Date().toLocaleString("en-NG",{timeZone:"Africa/Lagos"})})
+        .then(function(r){console.log("[EmailJS] Business:",r.status);}).catch(function(e){console.error(e);});
     }
-
     function logToGoogleSheets(od, ref) {
-      fetch(GOOGLE_SHEET_WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({ token: WEBHOOK_SECRET, timestamp: new Date().toLocaleString("en-NG", { timeZone: "Africa/Lagos" }), payment_ref: ref, customer_name: od.name, customer_email: od.email, customer_phone: od.phone, delivery_location: od.location, delivery_address: od.address, order_items: od.orderItemsText, subtotal: od.subtotal, delivery_fee: od.deliveryFeeAmount, total: od.total, delivery_date: od.deliveryDate || "Not specified", notes: od.notes || "None", status: "Paid", source: "Website" })
-      }).then(r => r.json()).then(d => console.log("[Sheets] Logged:", d)).catch(e => console.error("[Sheets] Failed:", e));
+      fetch(GOOGLE_SHEET_WEBHOOK,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({token:WEBHOOK_SECRET,timestamp:new Date().toLocaleString("en-NG",{timeZone:"Africa/Lagos"}),payment_ref:ref,customer_name:od.name,customer_email:od.email,customer_phone:od.phone,delivery_location:od.location,delivery_address:od.address,delivery_date:od.deliveryDate||"Not specified",order_items:od.orderItemsText,subtotal:od.subtotal,delivery_fee:od.deliveryFeeAmount,total:od.total,notes:od.notes||"None",status:"Paid",source:"Website"})})
+        .then(function(r){return r.json();}).then(function(d){console.log("[Sheets]",d);}).catch(function(e){console.error(e);});
     }
-
     function sendWhatsAppNotification(od, ref) {
-      const msg = `Regan's Bakehouse - NEW PAID ORDER\n\nPayment Ref: ${ref}\n\nCustomer: ${od.name}\nEmail: ${od.email}\nPhone: ${od.phone}\nLocation: ${od.location}\nAddress: ${od.address}\nDelivery Date: ${od.deliveryDate || 'Not specified'}\n\nORDER:\n${od.orderItemsText}\n\nSubtotal: ₦${od.subtotal}\nDelivery: ₦${od.deliveryFeeAmount}\nTOTAL PAID: ₦${od.total}\n\nNotes: ${od.notes || "None"}`;
+      const msg = "Regan's Bakehouse - NEW PAID ORDER\n\nPayment Ref: " + ref + "\n\nCustomer: " + od.name + "\nEmail: " + od.email + "\nPhone: " + od.phone + "\nLocation: " + od.location + "\nAddress: " + od.address + "\nDelivery Date: " + (od.deliveryDate||"Not specified") + "\n\nORDER:\n" + od.orderItemsText + "\n\nSubtotal: N" + od.subtotal + "\nDelivery: N" + od.deliveryFeeAmount + "\nTOTAL PAID: N" + od.total + "\n\nNotes: " + (od.notes||"None");
       window.open("https://wa.me/" + BUSINESS_PHONE + "?text=" + encodeURIComponent(msg), "_blank");
     }
 
+    // ── PAYSTACK ──
     function payWithPaystack(od) {
       try {
         const handler = PaystackPop.setup({
-          key: PAYSTACK_PUBLIC_KEY,
-          email: od.email,
-          amount: od.totalAmount * 100,
-          currency: "NGN",
-          ref: "RB-" + Math.floor((Math.random() * 1000000000) + 1),
+          key: PAYSTACK_PUBLIC_KEY, email: od.email, amount: od.totalAmount * 100, currency: "NGN",
+          ref: "RB-" + Math.floor(Math.random() * 1000000000 + 1),
           metadata: { custom_fields: [
-            { display_name: "Customer Name", variable_name: "customer_name", value: od.name },
-            { display_name: "Phone Number", variable_name: "phone", value: od.phone },
-            { display_name: "Delivery Location", variable_name: "location", value: od.location },
-            { display_name: "Delivery Date", variable_name: "delivery_date", value: od.deliveryDate || "Not specified" },
-            { display_name: "Order Items", variable_name: "order_items", value: od.orderItemsText }
+            {display_name:"Customer Name",variable_name:"customer_name",value:od.name},
+            {display_name:"Phone",variable_name:"phone",value:od.phone},
+            {display_name:"Location",variable_name:"location",value:od.location},
+            {display_name:"Order",variable_name:"order_items",value:od.orderItemsText}
           ]},
           onClose: function() {
             document.getElementById("submitBtn").textContent = "Proceed to Payment";
@@ -1084,22 +1005,22 @@
             const ref = response.reference;
             const VERIFY_URL = "https://script.google.com/macros/s/AKfycbwdRPYgp_NsUDF7XtDbg5qN-60OKrqN-LrvpI6YKdufXjMtvVF3uc65gCKnIWYoRKrc/exec";
             document.getElementById("submitBtn").textContent = "Verifying payment...";
-            setTimeout(() => { document.getElementById("verifyOverlay").style.display = "flex"; }, 300);
+            setTimeout(function() { document.getElementById("verifyOverlay").style.display = "flex"; }, 300);
             fetch(VERIFY_URL + "?ref=" + encodeURIComponent(ref) + "&token=" + encodeURIComponent(WEBHOOK_SECRET))
-              .then(r => r.json())
-              .then(result => {
+              .then(function(r) { return r.json(); })
+              .then(function(result) {
                 document.getElementById("verifyOverlay").style.display = "none";
                 if (result.status === "success" && result.amount === od.totalAmount * 100) {
                   onPaymentSuccess(od, ref);
                 } else {
-                  alert("Payment could not be verified. Please contact us on WhatsApp with reference: " + ref);
+                  alert("Payment could not be verified. Contact us on WhatsApp with ref: " + ref);
                 }
               })
-              .catch(() => {
+              .catch(function() {
                 document.getElementById("verifyOverlay").style.display = "none";
                 onPaymentSuccess(od, ref);
               })
-              .finally(() => {
+              .finally(function() {
                 document.getElementById("submitBtn").textContent = "Proceed to Payment";
                 document.getElementById("submitBtn").disabled = false;
               });
@@ -1115,15 +1036,16 @@
     }
 
     function onPaymentSuccess(od, ref) {
-      sendCustomerEmail({ name: od.name, email: od.email, phone: od.phone, fullAddress: od.location + " - " + od.address, orderItemsText: od.orderItemsText, total: od.total });
+      sendCustomerEmail({name:od.name,email:od.email,phone:od.phone,fullAddress:od.location+" - "+od.address,orderItemsText:od.orderItemsText,total:od.total});
       sendBusinessEmail(od, ref);
       logToGoogleSheets(od, ref);
       sendWhatsAppNotification(od, ref);
-      document.getElementById("modalOrderRef").textContent = "Order Ref: " + ref;
       document.getElementById("successModal").classList.add("active");
       document.getElementById("orderForm").reset();
-      initDatePicker();
-      cart = []; deliveryFee = 0; updateCart();
+      cart = []; deliveryFee = 0;
+      updateCart();
+      updateCartSidebar();
+      buildDatePicker();
     }
 
     document.getElementById("orderForm").addEventListener("submit", function(e) {
@@ -1132,10 +1054,10 @@
       const location = document.getElementById("location").value;
       if (!location) { alert("Please select a delivery location!"); return; }
       const deliveryDate = document.getElementById("deliveryDate").value;
-      if (!deliveryDate) { alert("Please select a preferred delivery date!"); return; }
+      if (!deliveryDate) { alert("Please select a delivery date!"); return; }
       document.getElementById("submitBtn").textContent = "Processing...";
       document.getElementById("submitBtn").disabled = true;
-      const subtotal = cart.reduce((s,i) => s + i.price * i.quantity, 0);
+      const subtotal = cart.reduce(function(s,i) { return s + i.price * i.quantity; }, 0);
       const finalFee = subtotal >= freeDeliveryThreshold ? 0 : deliveryFee;
       payWithPaystack({
         name: sanitize(document.getElementById("name").value),
@@ -1145,7 +1067,7 @@
         address: sanitize(document.getElementById("address").value),
         notes: sanitize(document.getElementById("notes").value),
         deliveryDate: deliveryDate,
-        orderItemsText: cart.map(i => `${i.quantity} × ${i.name} (₦${(i.price * i.quantity).toLocaleString()})`).join("\n"),
+        orderItemsText: cart.map(function(i) { return i.quantity + " x " + i.name + " (N" + (i.price * i.quantity).toLocaleString() + ")"; }).join("\n"),
         subtotal: subtotal.toLocaleString(),
         deliveryFeeAmount: finalFee.toLocaleString(),
         total: (subtotal + finalFee).toLocaleString(),
@@ -1169,30 +1091,27 @@
       for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === currentIndex ? ' active' : '');
-        dot.addEventListener('click', () => goTo(i));
+        dot.addEventListener('click', function() { goTo(i); });
         dotsContainer.appendChild(dot);
       }
       goTo(currentIndex, false);
     }
-
-    function goTo(index, animate = true) {
+    function goTo(index, animate) {
+      if (animate === undefined) animate = true;
       currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
       const cardWidth = cards[0].offsetWidth + 24;
       track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25,1,0.5,1)' : 'none';
-      track.style.transform = `translateX(-${currentIndex * visibleCount * cardWidth}px)`;
-      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+      track.style.transform = 'translateX(-' + (currentIndex * visibleCount * cardWidth) + 'px)';
+      document.querySelectorAll('.dot').forEach(function(d, i) { d.classList.toggle('active', i === currentIndex); });
     }
-
-    document.getElementById('prevBtn').addEventListener('click', () => goTo(currentIndex - 1));
-    document.getElementById('nextBtn').addEventListener('click', () => goTo(currentIndex + 1));
-
+    document.getElementById('prevBtn').addEventListener('click', function() { goTo(currentIndex - 1); });
+    document.getElementById('nextBtn').addEventListener('click', function() { goTo(currentIndex + 1); });
     let startX = 0;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend', e => {
+    track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, {passive:true});
+    track.addEventListener('touchend', function(e) {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) diff > 0 ? goTo(currentIndex + 1) : goTo(currentIndex - 1);
     });
-
     window.addEventListener('resize', initCarousel);
     initCarousel();
 
@@ -1200,7 +1119,7 @@
     function toggleFaq(btn) {
       const item = btn.closest('.faq-item');
       const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
       if (!isOpen) item.classList.add('open');
     }
 
@@ -1214,146 +1133,16 @@
       txt.textContent = isOpen ? 'Show Less' : 'See More Reviews';
     }
 
-    // CART SIDEBAR
-    function openCart() {
-      document.getElementById('cartSidebar').classList.add('open');
-      document.getElementById('cartOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeCart() {
-      document.getElementById('cartSidebar').classList.remove('open');
-      document.getElementById('cartOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function updateCartSidebar() {
-      var itemsEl = document.getElementById('cartSidebarItems');
-      var footerEl = document.getElementById('cartSidebarFooter');
-      var subtotal = cart.reduce(function(s,i){ return s + i.price * i.quantity; }, 0);
-      var finalFee = subtotal >= freeDeliveryThreshold ? 0 : deliveryFee;
-      if (cart.length === 0) {
-        itemsEl.innerHTML = '<div class="cart-sidebar-empty"><span>&#x1F9FA;</span><p>Your cart is empty</p></div>';
-        footerEl.style.display = 'none';
-        return;
-      }
-      footerEl.style.display = 'block';
-      itemsEl.innerHTML = cart.map(function(item, idx) {
-        return '<div class="cart-sidebar-item">' +
-          '<div class="cart-item-icon">&#x1F35E;</div>' +
-          '<div class="cart-item-details">' +
-            '<div class="cart-item-name">' + item.name + '</div>' +
-            '<div class="cart-item-price">&#8358;' + (item.price * item.quantity).toLocaleString() + '</div>' +
-            '<div class="cart-item-controls">' +
-              '<button class="cart-item-qty-btn" onclick="sidebarChangeQty(' + idx + ',-1)">&#8722;</button>' +
-              '<span class="cart-item-qty">' + item.quantity + '</span>' +
-              '<button class="cart-item-qty-btn" onclick="sidebarChangeQty(' + idx + ',1)">+</button>' +
-              '<button class="cart-item-remove" onclick="removeFromCart(' + idx + ')" title="Remove">&#215;</button>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-      document.getElementById('sidebarSubtotal').textContent = '&#8358;' + subtotal.toLocaleString();
-      var deliveryRow = document.getElementById('sidebarDeliveryRow');
-      if (deliveryFee > 0) {
-        deliveryRow.style.display = 'flex';
-        document.getElementById('sidebarDelivery').innerHTML = subtotal >= freeDeliveryThreshold
-          ? '<s>&#8358;' + deliveryFee.toLocaleString() + '</s> <span style="color:#2ecc71">FREE</span>'
-          : '&#8358;' + finalFee.toLocaleString();
-      } else { deliveryRow.style.display = 'none'; }
-      document.getElementById('sidebarTotal').textContent = '&#8358;' + (subtotal + finalFee).toLocaleString();
-    }
-
-    function sidebarChangeQty(idx, change) {
-      if (!cart[idx]) return;
-      cart[idx].quantity += change;
-      if (cart[idx].quantity < 1) { cart.splice(idx, 1); }
-      updateCart();
-      updateCartSidebar();
-    }
-
-    document.querySelector('.cart-badge').addEventListener('click', function(e) {
-      e.preventDefault(); openCart();
-    });
-
-    // TOAST
-    var toastTimer;
-    function showToast(msg) {
-      var toast = document.getElementById('toast');
-      document.getElementById('toastMsg').textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 3000);
-    }
-
-    // COUNTDOWN
-    function updateCountdown() {
-      var countdown = document.getElementById('countdown');
-      var bar = document.getElementById('urgencyBar');
-      if (!countdown || !bar) return;
-      var now = new Date();
-      var utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      var lagos = new Date(utc + 3600000);
-      var cutoff = new Date(lagos);
-      cutoff.setHours(12, 0, 0, 0);
-      if (lagos.getHours() >= 12) {
-        bar.querySelector('p').innerHTML = 'Same-day delivery window closed. <strong>Order now</strong> for delivery <strong>tomorrow!</strong>';
-        countdown.style.display = 'none';
-        return;
-      }
-      var diff = cutoff - lagos;
-      var h = Math.floor(diff / 3600000);
-      var m = Math.floor((diff % 3600000) / 60000);
-      var s = Math.floor((diff % 60000) / 1000);
-      countdown.textContent = (h<10?'0':'') + h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // DATE PICKER
-    function buildDatePicker() {
-      var container = document.getElementById('dateOptions');
-      if (!container) return;
-      var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      var now = new Date();
-      var utc = now.getTime() + now.getTimezoneOffset()*60000;
-      var lagos = new Date(utc + 3600000);
-      var options = [];
-      var offset = 0;
-      while (options.length < 6) {
-        var d = new Date(now);
-        d.setDate(now.getDate() + offset);
-        if (d.getDay() !== 0) { options.push(d); }
-        offset++;
-      }
-      container.innerHTML = options.map(function(d, i) {
-        var tag = (i === 0 && lagos.getHours() < 12) ? 'Same Day' : (i === 0 ? 'Tomorrow' : months[d.getMonth()]);
-        return '<div class="date-option' + (i===0?' selected':'') + '" onclick="selectDate(this,\'' + d.toISOString().split('T')[0] + '\')">' +
-          '<div class="day-name">' + days[d.getDay()] + '</div>' +
-          '<div class="day-num">' + d.getDate() + '</div>' +
-          '<div class="day-tag">' + tag + '</div>' +
-        '</div>';
-      }).join('');
-      if (options.length > 0) document.getElementById('deliveryDate').value = options[0].toISOString().split('T')[0];
-    }
-
-    function selectDate(el, dateStr) {
-      document.querySelectorAll('.date-option').forEach(function(d){ d.classList.remove('selected'); });
-      el.classList.add('selected');
-      document.getElementById('deliveryDate').value = dateStr;
-    }
-
-    buildDatePicker();
-
-
     updateCart();
   </script>
 
   <script>
     if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
+      window.netlifyIdentity.on("init", function(user) {
         if (!user) {
-          window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+          window.netlifyIdentity.on("login", function() {
+            document.location.href = "/admin/";
+          });
         }
       });
     }
