@@ -96,17 +96,14 @@
   <!-- Products Section -->
   <section class="products" id="products">
     <h2 class="section-title">Our Signature Loaves</h2>
-
-    <!-- Urgency nudge inside products -->
-    <div class="product-urgency" id="productUrgency">
-      <span class="urgency-icon">&#x26A1;</span>
-      <p>Order in the next <strong id="productCountdown" style="color:var(--orange)">--:--:--</strong> for same-day delivery!</p>
+    <div class="same-day-notice" id="sameDayNotice">
+      <span class="same-day-icon">&#x26A1;</span>
+      <span>Order in the next <strong id="noticeCountdown" style="color:var(--orange)">--:--:--</strong> for same-day delivery!</span>
     </div>
-
     <div class="product-grid" id="productGrid">
 
       <div class="product-card">
-        <div class="product-img"><img src="classic-banana-bread.jpg" alt="Classic Vanilla Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-img"><img src="classic-banana-bread.jpg" alt="Classic Vanilla Banana Bread"></div>
         <div class="product-info">
           <h3>Classic Vanilla Banana Bread</h3>
           <p>Our original recipe with ripe bananas and a hint of vanilla. Moist, flavorful, and timeless.</p>
@@ -128,7 +125,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img"><img src="chocolate-chip.jpg" alt="Chocolate Chip Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-img"><img src="chocolate-chip.jpg" alt="Chocolate Chip Banana Bread"></div>
         <div class="product-info">
           <h3>Chocolate Chip Banana Bread</h3>
           <p>Loaded with premium dark chocolate chips. A decadent delicious twist on the classic.</p>
@@ -150,7 +147,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img"><img src="double chocolate.jpg" alt="Double Chocolate Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-img"><img src="double chocolate.jpg" alt="Double Chocolate Banana Bread"></div>
         <div class="product-info">
           <h3>Double Chocolate Banana Bread</h3>
           <p>Loaded with bittersweet chocolate and cocoa. A sophisticated twist on the classic.</p>
@@ -172,7 +169,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img"><img src="cashew.jpg" alt="Cashew/Peanut Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-img"><img src="cashew.jpg" alt="Cashew/Peanut Banana Bread"></div>
         <div class="product-info">
           <h3>Cashew/Peanut Banana Bread</h3>
           <p>Crunchy nuts add texture and richness. Perfect with your morning coffee.</p>
@@ -194,7 +191,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img"><img src="coconut.jpg" alt="Coconut Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-img"><img src="coconut.jpg" alt="Coconut Banana Bread"></div>
         <div class="product-info">
           <h3>Coconut Banana Bread</h3>
           <p>Tropical coconut flavor with a light, fluffy texture. A taste of paradise in every bite.</p>
@@ -216,7 +213,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img"><img src="oreos-bread.jpg" alt="Oreos Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-img"><img src="oreos-bread.jpg" alt="Oreos Banana Bread"></div>
         <div class="product-info">
           <h3>Oreos Banana Bread</h3>
           <p>Loaded with crushed Oreo cookies. A delicious cookies and cream twist on the classic.</p>
@@ -238,10 +235,10 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img"><img src="Almond banana bread.jpg" alt="Almond Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-img"><img src="Almond banana bread.jpg" alt="Almond Banana Bread"></div>
         <div class="product-info">
           <h3>Almond Banana Bread</h3>
-          <p>Packed with sliced almond slivers. Perfectly nutty and indulgent in every bite.</p>
+          <p>Packed with sliced almond slivers. Toasted and perfectly nutty in every bite.</p>
           <div class="price-size-container">
             <select class="size-select" onchange="updatePrice(this)">
               <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
@@ -260,7 +257,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img"><img src="nutella-banana-bread.jpg" alt="Nutella Banana Bread" onerror="this.parentElement.style.background='linear-gradient(135deg,var(--orange),var(--brown))'"></div>
+        <div class="product-img"><img src="nutella-banana-bread.jpg" alt="Nutella Banana Bread"></div>
         <div class="product-info">
           <h3>Nutella Banana Bread</h3>
           <p>Swirled with rich Nutella hazelnut spread. Indulgent, chocolatey perfection in every slice.</p>
@@ -944,7 +941,9 @@
       if (!flavors.length) { alert("Please select flavors first."); return; }
       const fullName = name + " (" + flavors.join(", ") + ")";
       const existing = cart.find(function(i) { return i.name === fullName; });
-      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:"fixed", price:price, quantity:qty}); }
+      if (existing) { existing.quantity += qty; } else { const gbImg = button.closest('.product-card').querySelector('.product-img img');
+      const gbImage = gbImg ? gbImg.getAttribute('src') : '';
+      cart.push({name:fullName, size:"fixed", price:price, quantity:qty, image:gbImage}); }
       updateCart();
       updateCartSidebar();
       card.querySelector(".qty-value").textContent = 1;
