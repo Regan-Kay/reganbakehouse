@@ -911,3 +911,45 @@ footer::before { content: ''; position: absolute; top: 0; left: 6%; right: 6%; h
   letter-spacing: 0.3px;
 }
 .same-day-icon { font-size: 16px; flex-shrink: 0; }
+
+/* ── TIME SLOT PICKER ── */
+.time-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+.time-option {
+  border: 1.5px solid rgba(201,168,76,0.2);
+  border-radius: 4px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--cream);
+}
+.time-option:hover { border-color: var(--orange); }
+.time-option.selected {
+  border-color: var(--orange);
+  background: rgba(200,114,74,0.08);
+}
+.time-slot-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.time-option.selected .time-slot-label { color: var(--brown); }
+.time-slot-range {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brown);
+  line-height: 1.3;
+}
+@media (max-width: 480px) {
+  .time-options { grid-template-columns: 1fr; }
+}
