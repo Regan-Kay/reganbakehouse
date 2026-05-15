@@ -634,6 +634,33 @@
           <label for="location">Delivery Location *</label>
           <select id="location" required onchange="updateDeliveryFee()">
             <option value="">-- Select Location --</option>
+            <optgroup label="Mainland (Close) &mdash; &#8358;1,500">
+              <option value="Yaba" data-fee="1500">Yaba</option>
+              <option value="Surulere" data-fee="1500">Surulere</option>
+              <option value="Ikeja" data-fee="1500">Ikeja</option>
+              <option value="Maryland" data-fee="1500">Maryland</option>
+              <option value="Ojota" data-fee="1500">Ojota</option>
+              <option value="Gbagada" data-fee="1500">Gbagada</option>
+            </optgroup>
+            <optgroup label="Mainland (Far) &mdash; &#8358;2,000">
+              <option value="Ikorodu" data-fee="2000">Ikorodu</option>
+              <option value="Agege" data-fee="2000">Agege</option>
+              <option value="Alimosho" data-fee="2000">Alimosho</option>
+              <option value="Ejigbo" data-fee="2000">Ejigbo</option>
+              <option value="Isolo" data-fee="2000">Isolo</option>
+              <option value="Oshodi" data-fee="2000">Oshodi</option>
+            </optgroup>
+            <optgroup label="Island &mdash; &#8358;2,500">
+              <option value="Victoria Island" data-fee="2500">Victoria Island</option>
+              <option value="Ikoyi" data-fee="2500">Ikoyi</option>
+              <option value="Lekki Phase 1" data-fee="2500">Lekki Phase 1</option>
+              <option value="Lekki Phase 2" data-fee="2500">Lekki Phase 2</option>
+              <option value="Ajah" data-fee="2500">Ajah</option>
+              <option value="Banana Island" data-fee="2500">Banana Island</option>
+            </optgroup>
+            <optgroup label="Pickup (Free)">
+              <option value="Pickup &mdash; Ibafo, Ogun State" data-fee="0">Pickup &mdash; Ibafo, Ogun State</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group"><label for="address">Detailed Address *</label><textarea id="address" rows="3" placeholder="Enter your full address (street, house number, landmark)" required></textarea></div>
@@ -642,6 +669,27 @@
           <div class="date-options" id="dateOptions"></div>
           <input type="hidden" id="deliveryDate" required>
         </div>
+
+        <div class="form-group">
+          <label>Preferred Delivery Time *</label>
+          <div class="time-options" id="timeOptions">
+            <div class="time-option selected" onclick="selectTime(this, '9:00 AM - 12:00 PM')">
+              <div class="time-slot-label">Morning</div>
+              <div class="time-slot-range">9:00 AM &ndash; 12:00 PM</div>
+            </div>
+            <div class="time-option" onclick="selectTime(this, '12:00 PM - 3:00 PM')">
+              <div class="time-slot-label">Afternoon</div>
+              <div class="time-slot-range">12:00 PM &ndash; 3:00 PM</div>
+            </div>
+            <div class="time-option" onclick="selectTime(this, '3:00 PM - 6:00 PM')">
+              <div class="time-slot-label">Evening</div>
+              <div class="time-slot-range">3:00 PM &ndash; 6:00 PM</div>
+            </div>
+          </div>
+          <input type="hidden" id="deliveryTime" value="9:00 AM - 12:00 PM" required>
+          <p id="timeHint" style="font-family:'Josefin Sans',sans-serif;font-size:11px;color:var(--muted);margin-top:8px;letter-spacing:0.3px;">&#10003; We'll do our best to deliver within your chosen window.</p>
+        </div>
+
         <div class="form-group"><label for="notes">Special Instructions (Optional)</label><textarea id="notes" rows="3" placeholder="Any special delivery instructions?"></textarea></div>
         <button type="submit" class="submit-btn" id="submitBtn" disabled>Proceed to Payment</button>
       </form>
@@ -1131,6 +1179,25 @@
       document.querySelectorAll('.date-option').forEach(function(d) { d.classList.remove('selected'); });
       el.classList.add('selected');
       document.getElementById('deliveryDate').value = dateStr;
+      var now = new Date();
+      var lagos = new Date(now.getTime() + now.getTimezoneOffset()*60000 + 3600000);
+      var today = lagos.toISOString().split('T')[0];
+      var hint = document.getElementById('timeHint');
+      if (hint) {
+        if (dateStr === today && lagos.getHours() >= 14) {
+          hint.innerHTML = '&#9888; Same-day window closed &mdash; we'll deliver tomorrow in your chosen slot.';
+          hint.style.color = 'var(--orange)';
+        } else {
+          hint.innerHTML = '&#10003; We'll do our best to deliver within your chosen window.';
+          hint.style.color = 'var(--muted)';
+        }
+      }
+    }
+
+    function selectTime(el, timeStr) {
+      document.querySelectorAll('.time-option').forEach(function(t) { t.classList.remove('selected'); });
+      el.classList.add('selected');
+      document.getElementById('deliveryTime').value = timeStr;
     }
     buildDatePicker();
 
@@ -1157,11 +1224,11 @@
         .then(function(r){console.log("[EmailJS] Business:",r.status);}).catch(function(e){console.error(e);});
     }
     function logToGoogleSheets(od, ref) {
-      fetch(GOOGLE_SHEET_WEBHOOK,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({token:WEBHOOK_SECRET,timestamp:new Date().toLocaleString("en-NG",{timeZone:"Africa/Lagos"}),payment_ref:ref,customer_name:od.name,customer_email:od.email,customer_phone:od.phone,delivery_location:od.location,delivery_address:od.address,delivery_date:od.deliveryDate||"Not specified",order_items:od.orderItemsText,subtotal:od.subtotal,delivery_fee:od.deliveryFeeAmount,total:od.total,notes:od.notes||"None",status:"Paid",source:"Website"})})
+      fetch(GOOGLE_SHEET_WEBHOOK,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({token:WEBHOOK_SECRET,timestamp:new Date().toLocaleString("en-NG",{timeZone:"Africa/Lagos"}),payment_ref:ref,customer_name:od.name,customer_email:od.email,customer_phone:od.phone,delivery_location:od.location,delivery_address:od.address,delivery_date:od.deliveryDate||"Not specified",delivery_time:od.deliveryTime||"Not specified",order_items:od.orderItemsText,subtotal:od.subtotal,delivery_fee:od.deliveryFeeAmount,total:od.total,notes:od.notes||"None",status:"Paid",source:"Website"})})
         .then(function(r){return r.json();}).then(function(d){console.log("[Sheets]",d);}).catch(function(e){console.error(e);});
     }
     function sendWhatsAppNotification(od, ref) {
-      const msg = "Regan's Bakehouse - NEW PAID ORDER\n\nPayment Ref: " + ref + "\n\nCustomer: " + od.name + "\nEmail: " + od.email + "\nPhone: " + od.phone + "\nLocation: " + od.location + "\nAddress: " + od.address + "\nDelivery Date: " + (od.deliveryDate||"Not specified") + "\n\nORDER:\n" + od.orderItemsText + "\n\nSubtotal: N" + od.subtotal + "\nDelivery: N" + od.deliveryFeeAmount + "\nTOTAL PAID: N" + od.total + "\n\nNotes: " + (od.notes||"None");
+      const msg = "Regan's Bakehouse - NEW PAID ORDER\n\nPayment Ref: " + ref + "\n\nCustomer: " + od.name + "\nEmail: " + od.email + "\nPhone: " + od.phone + "\nLocation: " + od.location + "\nAddress: " + od.address + "\nDelivery Date: " + (od.deliveryDate||"Not specified") + "\nDelivery Time: " + (od.deliveryTime||"Not specified") + "\n\nORDER:\n" + od.orderItemsText + "\n\nSubtotal: N" + od.subtotal + "\nDelivery: N" + od.deliveryFeeAmount + "\nTOTAL PAID: N" + od.total + "\n\nNotes: " + (od.notes||"None");
       window.open("https://wa.me/" + BUSINESS_PHONE + "?text=" + encodeURIComponent(msg), "_blank");
     }
 
