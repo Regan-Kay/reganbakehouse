@@ -120,7 +120,7 @@
             <span class="qty-value">1</span>
             <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
-          <button class="add-to-order" onclick="addToCart(this,'Classic Vanilla Banana Bread','classic-banana-bread.jpg')">Add to Cart</button>
+          <button class="add-to-order" data-name="Classic Vanilla Banana Bread" data-image="classic-banana-bread.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -142,7 +142,7 @@
             <span class="qty-value">1</span>
             <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
-          <button class="add-to-order" onclick="addToCart(this,'Chocolate Chip Banana Bread','chocolate-chip.jpg')">Add to Cart</button>
+          <button class="add-to-order" data-name="Chocolate Chip Banana Bread" data-image="chocolate-chip.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -164,7 +164,7 @@
             <span class="qty-value">1</span>
             <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
-          <button class="add-to-order" onclick="addToCart(this,'Double Chocolate Banana Bread','double chocolate.jpg')">Add to Cart</button>
+          <button class="add-to-order" data-name="Double Chocolate Banana Bread" data-image="double chocolate.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -186,7 +186,7 @@
             <span class="qty-value">1</span>
             <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
-          <button class="add-to-order" onclick="addToCart(this,'Cashew/Peanut Banana Bread','cashew.jpg')">Add to Cart</button>
+          <button class="add-to-order" data-name="Cashew/Peanut Banana Bread" data-image="cashew.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -208,7 +208,7 @@
             <span class="qty-value">1</span>
             <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
-          <button class="add-to-order" onclick="addToCart(this,'Coconut Banana Bread','coconut.jpg')">Add to Cart</button>
+          <button class="add-to-order" data-name="Coconut Banana Bread" data-image="coconut.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -230,7 +230,7 @@
             <span class="qty-value">1</span>
             <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
-          <button class="add-to-order" onclick="addToCart(this,'Oreos Banana Bread','oreos-bread.jpg')">Add to Cart</button>
+          <button class="add-to-order" data-name="Oreos Banana Bread" data-image="oreos-bread.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -252,7 +252,7 @@
             <span class="qty-value">1</span>
             <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
-          <button class="add-to-order" onclick="addToCart(this,'Almond Banana Bread','Almond banana bread.jpg')">Add to Cart</button>
+          <button class="add-to-order" data-name="Almond Banana Bread" data-image="Almond banana bread.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -274,7 +274,7 @@
             <span class="qty-value">1</span>
             <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
-          <button class="add-to-order" onclick="addToCart(this,'Nutella Banana Bread','nutella-banana-bread.jpg')">Add to Cart</button>
+          <button class="add-to-order" data-name="Nutella Banana Bread" data-image="nutella-banana-bread.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -614,6 +614,24 @@
   <!-- Order Form -->
   <section class="order-form-section" id="order">
     <h2 class="section-title">Place Your Order</h2>
+    <!-- 3-Step Progress Bar -->
+    <div class="order-steps">
+      <div class="order-step active" id="stepInd1">
+        <div class="step-circle">1</div>
+        <div class="step-label">Add Items</div>
+      </div>
+      <div class="order-step-line" id="stepLine1"></div>
+      <div class="order-step" id="stepInd2">
+        <div class="step-circle">2</div>
+        <div class="step-label">Your Details</div>
+      </div>
+      <div class="order-step-line" id="stepLine2"></div>
+      <div class="order-step" id="stepInd3">
+        <div class="step-circle">3</div>
+        <div class="step-label">Payment</div>
+      </div>
+    </div>
+
     <div class="form-container">
       <div class="cart-summary" id="cartSummary" style="display:none">
         <h3 style="color:var(--brown);margin-bottom:1rem;font-family:'Cormorant Garamond',serif;font-size:1.5rem">Your Order</h3>
@@ -666,7 +684,17 @@
         <div class="form-group"><label for="address">Detailed Address *</label><textarea id="address" rows="3" placeholder="Enter your full address (street, house number, landmark)" required></textarea></div>
         <div class="form-group date-picker-group">
           <label>Preferred Delivery Date *</label>
-          <div class="date-options" id="dateOptions"></div>
+          <div class="date-picker-tabs">
+            <button type="button" class="date-tab active" id="tabQuick" onclick="switchDateTab('quick')">Quick Select</button>
+            <button type="button" class="date-tab" id="tabCalendar" onclick="switchDateTab('calendar')">Choose a Date</button>
+          </div>
+          <div id="quickDatePanel">
+            <div class="date-options" id="dateOptions"></div>
+          </div>
+          <div id="calendarDatePanel" style="display:none">
+            <input type="date" id="calendarDate" class="calendar-input" onchange="onCalendarChange(this.value)">
+            <p style="font-family:'Josefin Sans',sans-serif;font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:0.3px;">&#10003; Sundays unavailable. Orders placed after 2:00 PM will be delivered the next day.</p>
+          </div>
           <input type="hidden" id="deliveryDate" required>
         </div>
 
@@ -963,7 +991,9 @@
     }
 
     // ── CART ──
-    function addToCart(button, productName, productImage) {
+    function addToCart(button) {
+      const productName = button.getAttribute('data-name');
+      const productImage = button.getAttribute('data-image') || '';
       const productInfo = button.closest(".product-info");
       const sizeSelect = productInfo.querySelector(".size-select");
       const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
@@ -972,9 +1002,8 @@
       const price = parseInt(selectedOption.getAttribute("data-price"));
       const qty = parseInt(productInfo.querySelector(".qty-value").textContent);
       const fullName = productName + " (" + sizeText + ")";
-      const img = productImage || '';
       const existing = cart.find(function(i) { return i.name === fullName; });
-      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:size, price:price, quantity:qty, image:img}); }
+      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:size, price:price, quantity:qty, image:productImage}); }
       updateCart();
       updateCartSidebar();
       productInfo.querySelector(".qty-value").textContent = 1;
@@ -1052,6 +1081,22 @@
         document.getElementById("submitBtn").disabled = true;
         document.getElementById("deliveryFeeDisplay").style.display = "none";
       }
+      updateOrderSteps();
+    }
+
+    function updateOrderSteps() {
+      var hasItems = cart.length > 0;
+      var s1 = document.getElementById('stepInd1');
+      var s2 = document.getElementById('stepInd2');
+      var s3 = document.getElementById('stepInd3');
+      var l1 = document.getElementById('stepLine1');
+      var l2 = document.getElementById('stepLine2');
+      if (!s1) return;
+      s1.classList.toggle('active', true);
+      s1.classList.toggle('done', hasItems);
+      s2.classList.toggle('active', hasItems);
+      l1.classList.toggle('active', hasItems);
+      // Step 3 activates when form is being submitted
     }
 
     // ── CART SIDEBAR ──
@@ -1150,6 +1195,34 @@
     setInterval(updateCountdown, 1000);
 
     // ── DATE PICKER ──
+    function switchDateTab(tab) {
+      document.getElementById('tabQuick').classList.toggle('active', tab === 'quick');
+      document.getElementById('tabCalendar').classList.toggle('active', tab === 'calendar');
+      document.getElementById('quickDatePanel').style.display = tab === 'quick' ? 'block' : 'none';
+      document.getElementById('calendarDatePanel').style.display = tab === 'calendar' ? 'block' : 'none';
+      if (tab === 'calendar') {
+        var cal = document.getElementById('calendarDate');
+        var now = new Date();
+        var min = new Date(now);
+        min.setDate(min.getDate() + (now.getHours() >= 14 ? 1 : 0));
+        cal.min = min.toISOString().split('T')[0];
+        if (!cal.value) { cal.value = min.toISOString().split('T')[0]; onCalendarChange(cal.value); }
+      }
+    }
+
+    function onCalendarChange(val) {
+      if (!val) return;
+      var d = new Date(val + 'T00:00:00');
+      if (d.getDay() === 0) {
+        alert("We don't deliver on Sundays. Please choose another date.");
+        document.getElementById('calendarDate').value = '';
+        document.getElementById('deliveryDate').value = '';
+        return;
+      }
+      document.getElementById('deliveryDate').value = val;
+      document.querySelectorAll('.date-option').forEach(function(el) { el.classList.remove('selected'); });
+    }
+
     function buildDatePicker() {
       const container = document.getElementById('dateOptions');
       if (!container) return;
@@ -1302,6 +1375,10 @@
       if (!location) { alert("Please select a delivery location!"); return; }
       const deliveryDate = document.getElementById("deliveryDate").value;
       if (!deliveryDate) { alert("Please select a delivery date!"); return; }
+      var s3 = document.getElementById('stepInd3');
+      var l2 = document.getElementById('stepLine2');
+      if (s3) { s3.classList.add('active'); }
+      if (l2) { l2.classList.add('active'); }
       document.getElementById("submitBtn").textContent = "Processing...";
       document.getElementById("submitBtn").disabled = true;
       const subtotal = cart.reduce(function(s,i) { return s + i.price * i.quantity; }, 0);
