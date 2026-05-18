@@ -953,3 +953,119 @@ footer::before { content: ''; position: absolute; top: 0; left: 6%; right: 6%; h
 @media (max-width: 480px) {
   .time-options { grid-template-columns: 1fr; }
 }
+
+/* ── ORDER STEPS ── */
+.order-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+.order-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.step-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(44,26,14,0.15);
+  background: var(--cream);
+  color: var(--muted);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.step-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(44,26,14,0.3);
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+.order-step.active .step-circle {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: white;
+}
+.order-step.active .step-label { color: var(--brown); }
+.order-step.done .step-circle {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: white;
+}
+.order-step.done .step-circle::after { content: '✓'; }
+.order-step.done .step-circle span { display: none; }
+.order-step-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(44,26,14,0.1);
+  margin: 0 8px;
+  margin-bottom: 24px;
+  transition: background 0.3s;
+}
+.order-step-line.active { background: var(--orange); }
+
+/* ── DATE PICKER TABS ── */
+.date-picker-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 12px;
+  border: 1.5px solid rgba(201,168,76,0.25);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.date-tab {
+  flex: 1;
+  padding: 9px 16px;
+  border: none;
+  background: var(--cream);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.date-tab:first-child { border-right: 1.5px solid rgba(201,168,76,0.25); }
+.date-tab.active { background: var(--orange); color: white; }
+.date-tab:hover:not(.active) { background: var(--light-bg); color: var(--brown); }
+
+/* ── CALENDAR INPUT ── */
+.calendar-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid rgba(201,168,76,0.25);
+  border-radius: 4px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  color: var(--brown);
+  background: var(--cream);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.calendar-input:focus { outline: none; border-color: var(--orange); }
+
+/* ── DATE HINT ── */
+.date-hint {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 480px) {
+  .order-steps { max-width: 100%; }
+  .step-label { font-size: 8px; letter-spacing: 1px; }
+}
