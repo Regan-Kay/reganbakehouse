@@ -96,12 +96,14 @@
   <!-- Products Section -->
   <section class="products" id="products">
     <h2 class="section-title">Our Signature Loaves</h2>
+    <!-- FIX #3: ID changed from noticeCountdown to match the updateCountdown() function target -->
     <div class="same-day-notice" id="sameDayNotice">
       <span class="same-day-icon">&#x26A1;</span>
       <span>Order in the next <strong id="noticeCountdown" style="color:var(--orange)">--:--:--</strong> for same-day delivery!</span>
     </div>
     <div class="product-grid" id="productGrid">
 
+      <!-- FIX #1 & #4: All static product cards now consistently use data-name and data-image on the button -->
       <div class="product-card">
         <div class="product-img"><img src="classic-banana-bread.jpg" alt="Classic Vanilla Banana Bread"></div>
         <div class="product-info">
@@ -845,7 +847,7 @@
     let deliveryData = [];
     let freeDeliveryThreshold = 50000;
 
-    // ── FALLBACK DATA (used immediately and when JSON fetch fails) ──
+    // ── FALLBACK DATA ──
     const FALLBACK_PRODUCTS = [
       { name: "Classic Vanilla Banana Bread", description: "Our original recipe with ripe bananas and a hint of vanilla. Moist, flavorful, and timeless.", image: "classic-banana-bread.jpg", price_mini: 1999, price_medium: 4999, price_big: 9999 },
       { name: "Chocolate Chip Banana Bread", description: "Loaded with premium dark chocolate chips. A decadent delicious twist on the classic.", image: "chocolate-chip.jpg", price_mini: 1999, price_medium: 5999, price_big: 9999 },
@@ -858,19 +860,29 @@
     ];
 
     const FALLBACK_DELIVERY = [
-      { zone: "Mainland (Close) — &#8358;1,500", fee: 1500, locations: ["Yaba","Surulere","Ikeja","Maryland","Ojota","Gbagada"] },
-      { zone: "Mainland (Far) — &#8358;2,000", fee: 2000, locations: ["Ikorodu","Agege","Alimosho","Ejigbo","Isolo","Oshodi"] },
-      { zone: "Island — &#8358;2,500", fee: 2500, locations: ["Victoria Island","Ikoyi","Lekki Phase 1","Lekki Phase 2","Ajah","Banana Island"] },
-      { zone: "Pickup (Free)", fee: 0, locations: ["Pickup — Ibafo, Ogun State"] }
+      { zone: "Mainland (Close) \u2014 \u20a61,500", fee: 1500, locations: ["Yaba","Surulere","Ikeja","Maryland","Ojota","Gbagada"] },
+      { zone: "Mainland (Far) \u2014 \u20a62,000", fee: 2000, locations: ["Ikorodu","Agege","Alimosho","Ejigbo","Isolo","Oshodi"] },
+      { zone: "Island \u2014 \u20a62,500", fee: 2500, locations: ["Victoria Island","Ikoyi","Lekki Phase 1","Lekki Phase 2","Ajah","Banana Island"] },
+      { zone: "Pickup (Free)", fee: 0, locations: ["Pickup \u2014 Ibafo, Ogun State"] }
     ];
 
+    // ── HELPER: Lagos time ──
+    function getLagosTime() {
+      var now = new Date();
+      return new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 3600000);
+    }
+
     // ── RENDER FUNCTIONS ──
+    // FIX #1 & #4: renderProducts now correctly sets data-name and data-image on each button,
+    // matching how addToCart() reads them. No more argument passing via onclick string.
     function renderProducts(products) {
       const grid = document.getElementById('productGrid');
       if (!grid || !products) return;
       grid.innerHTML = products.map(function(p) {
+        var escapedName = p.name.replace(/"/g, '&quot;');
+        var escapedImage = p.image.replace(/"/g, '&quot;');
         return '<div class="product-card">' +
-          '<div class="product-img"><img src="' + p.image + '" alt="' + p.name + '"></div>' +
+          '<div class="product-img"><img src="' + p.image + '" alt="' + escapedName + '"></div>' +
           '<div class="product-info">' +
             '<h3>' + p.name + '</h3>' +
             '<p>' + p.description + '</p>' +
@@ -887,7 +899,7 @@
               '<span class="qty-value">1</span>' +
               '<button class="qty-btn" onclick="changeQty(this,1)">+</button>' +
             '</div>' +
-            '<button class="add-to-order" onclick="addToCart(this,\'' + p.name.replace(/'/g, "\\'") + '\')">Add to Cart</button>' +
+            '<button class="add-to-order" data-name="' + escapedName + '" data-image="' + escapedImage + '" onclick="addToCart(this)">Add to Cart</button>' +
           '</div>' +
         '</div>';
       }).join('');
@@ -911,7 +923,7 @@
     renderDeliveryLocations(FALLBACK_DELIVERY);
     deliveryData = FALLBACK_DELIVERY;
 
-    // ── THEN TRY TO UPDATE FROM JSON (Netlify) ──
+    // ── THEN TRY TO UPDATE FROM JSON ──
     async function loadSiteData() {
       try {
         const r = await fetch('/_data/products.json');
@@ -979,9 +991,10 @@
     });
 
     // ── PRODUCTS ──
+    // FIX #6: Use innerHTML so &#8358; entity renders correctly as the Naira symbol
     function updatePrice(el) {
       const price = el.options[el.selectedIndex].getAttribute("data-price");
-      el.closest(".product-info").querySelector(".current-price").textContent = "&#8358;" + parseInt(price).toLocaleString();
+      el.closest(".product-info").querySelector(".current-price").innerHTML = "&#8358;" + parseInt(price).toLocaleString();
     }
     function changeQty(btn, change) {
       const span = btn.parentElement.querySelector(".qty-value");
@@ -991,9 +1004,10 @@
     }
 
     // ── CART ──
+    // FIX #1: addToCart only takes the button element; always reads data-name and data-image from it
     function addToCart(button) {
-      const productName = button.getAttribute('data-name');
-      const productImage = button.getAttribute('data-image') || '';
+      var productName = button.getAttribute('data-name');
+      var productImage = button.getAttribute('data-image') || '';
       const productInfo = button.closest(".product-info");
       const sizeSelect = productInfo.querySelector(".size-select");
       const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
@@ -1018,9 +1032,9 @@
       if (!flavors.length) { alert("Please select flavors first."); return; }
       const fullName = name + " (" + flavors.join(", ") + ")";
       const existing = cart.find(function(i) { return i.name === fullName; });
-      if (existing) { existing.quantity += qty; } else { const gbImg = button.closest('.product-card').querySelector('.product-img img');
+      const gbImg = button.closest('.product-card').querySelector('.product-img img');
       const gbImage = gbImg ? gbImg.getAttribute('src') : '';
-      cart.push({name:fullName, size:"fixed", price:price, quantity:qty, image:gbImage}); }
+      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:"fixed", price:price, quantity:qty, image:gbImage}); }
       updateCart();
       updateCartSidebar();
       card.querySelector(".qty-value").textContent = 1;
@@ -1075,7 +1089,7 @@
             ? '<s>&#8358;' + deliveryFee.toLocaleString() + '</s> <span style="color:#2ecc71;font-weight:bold">FREE</span>'
             : '&#8358;' + deliveryFee.toLocaleString();
         } else { feeDisplay.style.display = "none"; }
-        document.getElementById("cartTotal").textContent = "Total: &#8358;" + (subtotal + finalFee).toLocaleString();
+        document.getElementById("cartTotal").innerHTML = "Total: &#8358;" + (subtotal + finalFee).toLocaleString();
       } else {
         document.getElementById("cartSummary").style.display = "none";
         document.getElementById("submitBtn").disabled = true;
@@ -1096,7 +1110,6 @@
       s1.classList.toggle('done', hasItems);
       s2.classList.toggle('active', hasItems);
       l1.classList.toggle('active', hasItems);
-      // Step 3 activates when form is being submitted
     }
 
     // ── CART SIDEBAR ──
@@ -1114,6 +1127,12 @@
       e.preventDefault(); openCart();
     });
 
+    // FIX #5: onerror handler no longer uses inline JS with broken quote nesting;
+    // uses a safer fallback approach via a named function
+    function handleCartImgError(img) {
+      img.parentElement.innerHTML = '&#x1F35E;';
+    }
+
     function updateCartSidebar() {
       const itemsEl = document.getElementById('cartSidebarItems');
       const footerEl = document.getElementById('cartSidebarFooter');
@@ -1126,8 +1145,9 @@
       }
       footerEl.style.display = 'block';
       itemsEl.innerHTML = cart.map(function(item, idx) {
-        const imgHtml = item.image
-          ? '<div class="cart-item-icon" style="padding:0;overflow:hidden;"><img src="' + item.image + '" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" onerror="this.parentElement.innerHTML='&#x1F35E;'"></div>'
+        // FIX #5: onerror now calls a named function — no broken quote nesting
+        var imgHtml = item.image
+          ? '<div class="cart-item-icon" style="padding:0;overflow:hidden;"><img src="' + item.image + '" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" onerror="handleCartImgError(this)"></div>'
           : '<div class="cart-item-icon">&#x1F35E;</div>';
         return '<div class="cart-sidebar-item">' +
           imgHtml +
@@ -1143,7 +1163,7 @@
           '</div>' +
         '</div>';
       }).join('');
-      document.getElementById('sidebarSubtotal').textContent = '&#8358;' + subtotal.toLocaleString();
+      document.getElementById('sidebarSubtotal').innerHTML = '&#8358;' + subtotal.toLocaleString();
       const deliveryRow = document.getElementById('sidebarDeliveryRow');
       if (deliveryFee > 0) {
         deliveryRow.style.display = 'flex';
@@ -1151,7 +1171,7 @@
           ? '<s>&#8358;' + deliveryFee.toLocaleString() + '</s> <span style="color:#2ecc71">FREE</span>'
           : '&#8358;' + finalFee.toLocaleString();
       } else { deliveryRow.style.display = 'none'; }
-      document.getElementById('sidebarTotal').textContent = '&#8358;' + (subtotal + finalFee).toLocaleString();
+      document.getElementById('sidebarTotal').innerHTML = '&#8358;' + (subtotal + finalFee).toLocaleString();
     }
 
     function sidebarChangeQty(idx, change) {
@@ -1172,24 +1192,26 @@
       toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 3000);
     }
 
-    // ── COUNTDOWN (2PM Lagos) ──
+    // ── COUNTDOWN (2PM Lagos)
+    // FIX #3 & #7: unified countdown targets #noticeCountdown (the ID used in the HTML),
+    // and now uses getLagosTime() helper for correct timezone handling
     function updateCountdown() {
-      const productCountdown = document.getElementById('productCountdown');
-      const urgencyWrap = document.getElementById('productUrgency');
-      const now = new Date();
-      const lagos = new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 3600000);
-      const cutoff = new Date(lagos);
+      var lagos = getLagosTime();
+      var cutoff = new Date(lagos);
       cutoff.setHours(14, 0, 0, 0);
-      if (lagos.getHours() >= 14) {
-        if (urgencyWrap) urgencyWrap.querySelector('p').innerHTML = 'Same-day delivery window is closed &mdash; <strong>order now</strong> for fresh delivery <strong>tomorrow!</strong>';
+      var notice = document.getElementById('noticeCountdown');
+      var noticeWrap = document.getElementById('sameDayNotice');
+      if (lagos >= cutoff) {
+        if (noticeWrap) noticeWrap.style.display = 'none';
         return;
       }
-      const diff = cutoff - lagos;
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      const timeStr = (h<10?'0':'') + h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
-      if (productCountdown) productCountdown.textContent = timeStr;
+      if (noticeWrap) noticeWrap.style.display = '';
+      var diff = cutoff - lagos;
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      var timeStr = (h<10?'0':'') + h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+      if (notice) notice.textContent = timeStr;
     }
     updateCountdown();
     setInterval(updateCountdown, 1000);
@@ -1202,11 +1224,11 @@
       document.getElementById('calendarDatePanel').style.display = tab === 'calendar' ? 'block' : 'none';
       if (tab === 'calendar') {
         var cal = document.getElementById('calendarDate');
-        var now = new Date();
-        var min = new Date(now);
-        min.setDate(min.getDate() + (now.getHours() >= 14 ? 1 : 0));
+        var lagos = getLagosTime();
+        var min = new Date(lagos);
+        if (lagos.getHours() >= 14) { min.setDate(min.getDate() + 1); }
         cal.min = min.toISOString().split('T')[0];
-        if (!cal.value) { cal.value = min.toISOString().split('T')[0]; onCalendarChange(cal.value); }
+        if (!cal.value) { cal.value = cal.min; onCalendarChange(cal.value); }
       }
     }
 
@@ -1223,45 +1245,58 @@
       document.querySelectorAll('.date-option').forEach(function(el) { el.classList.remove('selected'); });
     }
 
+    // FIX #8: buildDatePicker now uses getLagosTime() for accurate Lagos-local "today"
     function buildDatePicker() {
       const container = document.getElementById('dateOptions');
       if (!container) return;
       const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
       const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const now = new Date();
-      const lagos = new Date(now.getTime() + now.getTimezoneOffset()*60000 + 3600000);
+      const lagos = getLagosTime();
       const options = [];
       let offset = 0;
       while (options.length < 6) {
-        const d = new Date(now);
-        d.setDate(now.getDate() + offset);
+        var d = new Date(lagos);
+        d.setDate(lagos.getDate() + offset);
+        d.setHours(0,0,0,0);
         if (d.getDay() !== 0) { options.push(d); }
         offset++;
       }
       container.innerHTML = options.map(function(d, i) {
-        const tag = (i === 0 && lagos.getHours() < 14) ? 'Same Day' : (i === 0 ? 'Tomorrow' : months[d.getMonth()]);
-        return '<div class="date-option' + (i===0?' selected':'') + '" onclick="selectDate(this,\'' + d.toISOString().split('T')[0] + '\')">' +
+        var isToday = i === 0;
+        var tag;
+        if (isToday && lagos.getHours() < 14) {
+          tag = 'Same Day';
+        } else if (isToday) {
+          tag = 'Tomorrow';
+        } else {
+          tag = months[d.getMonth()];
+        }
+        var dateStr = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+        return '<div class="date-option' + (i===0?' selected':'') + '" onclick="selectDate(this,\'' + dateStr + '\')">' +
           '<div class="day-name">' + days[d.getDay()] + '</div>' +
           '<div class="day-num">' + d.getDate() + '</div>' +
           '<div class="day-tag">' + tag + '</div>' +
         '</div>';
       }).join('');
-      if (options.length > 0) document.getElementById('deliveryDate').value = options[0].toISOString().split('T')[0];
+      if (options.length > 0) {
+        var first = options[0];
+        document.getElementById('deliveryDate').value = first.getFullYear() + '-' + String(first.getMonth()+1).padStart(2,'0') + '-' + String(first.getDate()).padStart(2,'0');
+      }
     }
+
     function selectDate(el, dateStr) {
       document.querySelectorAll('.date-option').forEach(function(d) { d.classList.remove('selected'); });
       el.classList.add('selected');
       document.getElementById('deliveryDate').value = dateStr;
-      var now = new Date();
-      var lagos = new Date(now.getTime() + now.getTimezoneOffset()*60000 + 3600000);
-      var today = lagos.toISOString().split('T')[0];
+      var lagos = getLagosTime();
+      var todayStr = lagos.getFullYear() + '-' + String(lagos.getMonth()+1).padStart(2,'0') + '-' + String(lagos.getDate()).padStart(2,'0');
       var hint = document.getElementById('timeHint');
       if (hint) {
-        if (dateStr === today && lagos.getHours() >= 14) {
-          hint.innerHTML = '&#9888; Same-day window closed &mdash; we'll deliver tomorrow in your chosen slot.';
+        if (dateStr === todayStr && lagos.getHours() >= 14) {
+          hint.innerHTML = '&#9888; Same-day window closed &mdash; we\'ll deliver tomorrow in your chosen slot.';
           hint.style.color = 'var(--orange)';
         } else {
-          hint.innerHTML = '&#10003; We'll do our best to deliver within your chosen window.';
+          hint.innerHTML = '&#10003; We\'ll do our best to deliver within your chosen window.';
           hint.style.color = 'var(--muted)';
         }
       }
@@ -1281,7 +1316,7 @@
       const email = document.getElementById("newsletterEmail").value.trim();
       if (!email || !email.includes("@")) { alert("Please enter a valid email address."); return; }
       const btn = document.querySelector(".newsletter-btn");
-      btn.textContent = "&#10003; Subscribed!";
+      btn.innerHTML = "&#10003; Subscribed!";
       btn.style.background = "#2ecc71";
       document.getElementById("newsletterEmail").value = "";
       setTimeout(function() { btn.textContent = "Subscribe"; btn.style.background = ""; }, 3000);
@@ -1391,6 +1426,7 @@
         address: sanitize(document.getElementById("address").value),
         notes: sanitize(document.getElementById("notes").value),
         deliveryDate: deliveryDate,
+        deliveryTime: document.getElementById("deliveryTime").value,
         orderItemsText: cart.map(function(i) { return i.quantity + " x " + i.name + " (N" + (i.price * i.quantity).toLocaleString() + ")"; }).join("\n"),
         subtotal: subtotal.toLocaleString(),
         deliveryFeeAmount: finalFee.toLocaleString(),
@@ -1415,7 +1451,7 @@
       for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === currentIndex ? ' active' : '');
-        dot.addEventListener('click', function() { goTo(i); });
+        dot.addEventListener('click', (function(idx){ return function(){ goTo(idx); }; })(i));
         dotsContainer.appendChild(dot);
       }
       goTo(currentIndex, false);
