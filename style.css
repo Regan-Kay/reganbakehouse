@@ -155,28 +155,20 @@ section { padding: 4rem 5%; width: 100%; margin: 0 auto; }
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 .size-select { padding: 0.6rem; border: 1.5px solid rgba(201,168,76,0.3); border-radius: 4px; font-family: 'Josefin Sans', sans-serif; font-size: 12px; color: var(--brown); font-weight: 600; cursor: pointer; background: var(--cream); transition: border-color 0.3s; letter-spacing: 0.5px; width: 100%; }
 .size-select:hover, .size-select:focus { border-color: var(--orange); outline: none; }
-
-/* ── PRICE + QTY ROW — inline layout ── */
-.price-qty-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 1rem;
-}
 .current-price {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.8rem;
   color: var(--orange);
   font-weight: 600;
+  text-align: center;
   line-height: 1;
 }
 
-/* ── QUANTITY CONTROL — pill stepper ── */
+/* ── QUANTITY CONTROL — pill stepper (used by gift boxes, selected before adding) ── */
 .quantity-control {
   display: inline-flex;
   align-items: center;
@@ -185,8 +177,7 @@ section { padding: 4rem 5%; width: 100%; margin: 0 auto; }
   overflow: hidden;
   background: var(--cream);
   height: 40px;
-  margin-bottom: 0;
-  flex-shrink: 0;
+  margin-bottom: 1rem;
 }
 .qty-btn {
   width: 40px; height: 40px;
@@ -209,6 +200,48 @@ section { padding: 4rem 5%; width: 100%; margin: 0 auto; }
 
 .add-to-order { width: 100%; background: var(--orange); color: #fff; border: none; padding: 0.9rem; border-radius: 2px; cursor: pointer; font-family: 'Josefin Sans', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; transition: background 0.3s; }
 .add-to-order:hover { background: #b5623c; }
+
+/* ── CART ACTION — Add to Cart morphs into a −/qty/+ stepper on click (Jumia-style) ── */
+.cart-action { width: 100%; }
+.qty-stepper {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border: 1.5px solid var(--orange);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.qty-stepper-btn {
+  flex: 0 0 46px;
+  padding: 0.9rem 0;
+  border: none;
+  background: var(--orange);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  font-family: 'Josefin Sans', sans-serif;
+}
+.qty-stepper-btn:hover { background: #b5623c; }
+.qty-stepper-btn:active { background: #934a2c; }
+.qty-stepper-value {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 0;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--brown);
+  background: var(--cream);
+}
 
 /* ── GIFT BOX FLAVORS ── */
 .gift-box-flavor-container { margin: 1rem 0; }
@@ -531,7 +564,6 @@ footer::before { content: ''; position: absolute; top: 0; left: 6%; right: 6%; h
   .urgency-bar { padding: 8px 4%; }
   .urgency-bar p { font-size: 10px; }
   .toast { right: 16px; bottom: 80px; }
-  .price-qty-row { flex-wrap: wrap; }
 }
 @media (max-width: 480px) {
   .order-steps { max-width: 100%; }
