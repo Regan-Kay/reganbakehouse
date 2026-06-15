@@ -110,23 +110,16 @@
           <h3>Classic Vanilla Banana Bread</h3>
           <p>Our original recipe with ripe bananas and a hint of vanilla. Moist, flavorful, and timeless.</p>
           <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
+            <select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">
               <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
               <option value="medium" data-price="4999" selected>Medium &mdash; &#8358;4,999</option>
               <option value="big" data-price="9999">Big &mdash; &#8358;9,999</option>
             </select>
-            
-          </div>
-          
-          <div class="price-qty-row">
             <div class="current-price">&#8358;4,999</div>
-            <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
+          <div class="cart-action" data-name="Classic Vanilla Banana Bread" data-image="classic-banana-bread.jpg">
+            <button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>
           </div>
-          <button class="add-to-order" data-name="Classic Vanilla Banana Bread" data-image="classic-banana-bread.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -136,23 +129,16 @@
           <h3>Chocolate Chip Banana Bread</h3>
           <p>Loaded with premium dark chocolate chips. A decadent delicious twist on the classic.</p>
           <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
+            <select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">
               <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
               <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
               <option value="big" data-price="9999">Big &mdash; &#8358;9,999</option>
             </select>
-            
-          </div>
-          
-          <div class="price-qty-row">
             <div class="current-price">&#8358;5,999</div>
-            <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
+          <div class="cart-action" data-name="Chocolate Chip Banana Bread" data-image="chocolate-chip.jpg">
+            <button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>
           </div>
-          <button class="add-to-order" data-name="Chocolate Chip Banana Bread" data-image="chocolate-chip.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -162,23 +148,16 @@
           <h3>Double Chocolate Banana Bread</h3>
           <p>Loaded with bittersweet chocolate and cocoa. A sophisticated twist on the classic.</p>
           <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
+            <select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">
               <option value="mini" data-price="2500">Mini &mdash; &#8358;2,500</option>
               <option value="medium" data-price="6999" selected>Medium &mdash; &#8358;6,999</option>
               <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
             </select>
-            
-          </div>
-          
-          <div class="price-qty-row">
             <div class="current-price">&#8358;6,999</div>
-            <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
+          <div class="cart-action" data-name="Double Chocolate Banana Bread" data-image="double chocolate.jpg">
+            <button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>
           </div>
-          <button class="add-to-order" data-name="Double Chocolate Banana Bread" data-image="double chocolate.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -188,23 +167,16 @@
           <h3>Cashew/Peanut Banana Bread</h3>
           <p>Crunchy nuts add texture and richness. Perfect with your morning coffee.</p>
           <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
+            <select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">
               <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
               <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
               <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
             </select>
-            
-          </div>
-          
-          <div class="price-qty-row">
             <div class="current-price">&#8358;5,999</div>
-            <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
+          <div class="cart-action" data-name="Cashew/Peanut Banana Bread" data-image="cashew.jpg">
+            <button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>
           </div>
-          <button class="add-to-order" data-name="Cashew/Peanut Banana Bread" data-image="cashew.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -214,23 +186,16 @@
           <h3>Coconut Banana Bread</h3>
           <p>Tropical coconut flavor with a light, fluffy texture. A taste of paradise in every bite.</p>
           <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
+            <select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">
               <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
               <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
               <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
             </select>
-            
-          </div>
-          
-          <div class="price-qty-row">
             <div class="current-price">&#8358;5,999</div>
-            <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
+          <div class="cart-action" data-name="Coconut Banana Bread" data-image="coconut.jpg">
+            <button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>
           </div>
-          <button class="add-to-order" data-name="Coconut Banana Bread" data-image="coconut.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -240,23 +205,16 @@
           <h3>Oreos Banana Bread</h3>
           <p>Loaded with crushed Oreo cookies. A delicious cookies and cream twist on the classic.</p>
           <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
+            <select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">
               <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
               <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
               <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
             </select>
-            
-          </div>
-          
-          <div class="price-qty-row">
             <div class="current-price">&#8358;5,999</div>
-            <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
+          <div class="cart-action" data-name="Oreos Banana Bread" data-image="oreos-bread.jpg">
+            <button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>
           </div>
-          <button class="add-to-order" data-name="Oreos Banana Bread" data-image="oreos-bread.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -266,23 +224,16 @@
           <h3>Almond Banana Bread</h3>
           <p>Packed with sliced almond slivers. Toasted and perfectly nutty in every bite.</p>
           <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
+            <select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">
               <option value="mini" data-price="1999">Mini &mdash; &#8358;1,999</option>
               <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
               <option value="big" data-price="10999">Big &mdash; &#8358;10,999</option>
             </select>
-            
-          </div>
-          
-          <div class="price-qty-row">
             <div class="current-price">&#8358;5,999</div>
-            <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
+          <div class="cart-action" data-name="Almond Banana Bread" data-image="Almond banana bread.jpg">
+            <button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>
           </div>
-          <button class="add-to-order" data-name="Almond Banana Bread" data-image="Almond banana bread.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -292,23 +243,16 @@
           <h3>Nutella Banana Bread</h3>
           <p>Swirled with rich Nutella hazelnut spread. Indulgent, chocolatey perfection in every slice.</p>
           <div class="price-size-container">
-            <select class="size-select" onchange="updatePrice(this)">
+            <select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">
               <option value="mini" data-price="2500">Mini &mdash; &#8358;2,500</option>
               <option value="medium" data-price="5999" selected>Medium &mdash; &#8358;5,999</option>
               <option value="big" data-price="11999">Big &mdash; &#8358;11,999</option>
             </select>
-            
-          </div>
-          
-          <div class="price-qty-row">
             <div class="current-price">&#8358;5,999</div>
-            <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
           </div>
+          <div class="cart-action" data-name="Nutella Banana Bread" data-image="nutella-banana-bread.jpg">
+            <button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>
           </div>
-          <button class="add-to-order" data-name="Nutella Banana Bread" data-image="nutella-banana-bread.jpg" onclick="addToCart(this)">Add to Cart</button>
         </div>
       </div>
 
@@ -919,21 +863,16 @@
             '<h3>' + p.name + '</h3>' +
             '<p>' + p.description + '</p>' +
             '<div class="price-size-container">' +
-              '<select class="size-select" onchange="updatePrice(this)">' +
+              '<select class="size-select" onchange="updatePrice(this); refreshCardAction(this)">' +
                 '<option value="mini" data-price="' + p.price_mini + '">Mini &mdash; &#8358;' + p.price_mini.toLocaleString() + '</option>' +
                 '<option value="medium" data-price="' + p.price_medium + '" selected>Medium &mdash; &#8358;' + p.price_medium.toLocaleString() + '</option>' +
                 '<option value="big" data-price="' + p.price_big + '">Big &mdash; &#8358;' + p.price_big.toLocaleString() + '</option>' +
               '</select>' +
-            '</div>' +
-            '<div class="price-qty-row">' +
               '<div class="current-price">&#8358;' + p.price_medium.toLocaleString() + '</div>' +
-              '<div class="quantity-control">' +
-                '<button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>' +
-                '<span class="qty-value">1</span>' +
-                '<button class="qty-btn" onclick="changeQty(this,1)">+</button>' +
-              '</div>' +
             '</div>' +
-            '<button class="add-to-order" data-name="' + escapedName + '" data-image="' + escapedImage + '" onclick="addToCart(this)">Add to Cart</button>' +
+            '<div class="cart-action" data-name="' + escapedName + '" data-image="' + escapedImage + '">' +
+              '<button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>' +
+            '</div>' +
           '</div>' +
         '</div>';
       }).join('');
@@ -1037,26 +976,100 @@
       span.textContent = qty;
     }
 
+    // ── CART ACTION (Add to Cart button <-> qty stepper, Jumia-style) ──
+    function getFullName(name, size) {
+      const sizeText = size.charAt(0).toUpperCase() + size.slice(1);
+      return name + " (" + sizeText + ")";
+    }
+
+    // Renders either the "Add to Cart" button or the −/qty/+ stepper inside a .cart-action container,
+    // depending on whether this product+size is currently in the cart.
+    function renderCartActionMarkup(container, size) {
+      const name = container.getAttribute('data-name');
+      const fullName = getFullName(name, size);
+      const item = cart.find(function(i) { return i.name === fullName; });
+      if (item && item.quantity > 0) {
+        container.innerHTML = '<div class="qty-stepper">' +
+          '<button class="qty-stepper-btn" onclick="decrementCartItem(this)" aria-label="Decrease quantity">&#8722;</button>' +
+          '<span class="qty-stepper-value">' + item.quantity + '</span>' +
+          '<button class="qty-stepper-btn" onclick="incrementCartItem(this)" aria-label="Increase quantity">+</button>' +
+        '</div>';
+      } else {
+        container.innerHTML = '<button class="add-to-order" onclick="addToCart(this)">Add to Cart</button>';
+      }
+    }
+
+    // Re-renders every product card's cart-action area to match the current cart state.
+    // Called whenever the cart changes (add, increment, decrement, remove, sidebar edits, reset).
+    function refreshAllCartActions() {
+      document.querySelectorAll('.cart-action').forEach(function(container) {
+        const productInfo = container.closest('.product-info');
+        const sizeSelect = productInfo ? productInfo.querySelector('.size-select') : null;
+        if (!sizeSelect) return;
+        renderCartActionMarkup(container, sizeSelect.value);
+      });
+    }
+
+    // Called when the size <select> changes — shows the correct state (button or stepper) for the new size.
+    function refreshCardAction(selectEl) {
+      const productInfo = selectEl.closest('.product-info');
+      const container = productInfo.querySelector('.cart-action');
+      if (!container) return;
+      renderCartActionMarkup(container, selectEl.value);
+    }
+
     // ── CART ──
-    // FIX #1: addToCart only takes the button element; always reads data-name and data-image from it
+    // First click on "Add to Cart": adds 1 to the cart, then the button morphs into a −/1/+ stepper.
     function addToCart(button) {
-      var productName = button.getAttribute('data-name');
-      var productImage = button.getAttribute('data-image') || '';
-      const productInfo = button.closest(".product-info");
+      const container = button.closest('.cart-action');
+      const productInfo = button.closest('.product-info');
       const sizeSelect = productInfo.querySelector(".size-select");
       const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
       const size = selectedOption.value;
-      const sizeText = size.charAt(0).toUpperCase() + size.slice(1);
       const price = parseInt(selectedOption.getAttribute("data-price"));
-      const qty = parseInt(productInfo.querySelector(".qty-value").textContent);
-      const fullName = productName + " (" + sizeText + ")";
+      const name = container.getAttribute('data-name');
+      const image = container.getAttribute('data-image') || '';
+      const fullName = getFullName(name, size);
       const existing = cart.find(function(i) { return i.name === fullName; });
-      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:size, price:price, quantity:qty, image:productImage}); }
+      if (existing) { existing.quantity += 1; } else { cart.push({name:fullName, size:size, price:price, quantity:1, image:image}); }
       updateCart();
       updateCartSidebar();
-      productInfo.querySelector(".qty-value").textContent = 1;
-      showToast(productName + " added to cart!");
+      showToast(name + " added to cart!");
       openCart();
+    }
+
+    // "+" on the stepper: increments quantity for this product/size.
+    function incrementCartItem(button) {
+      const container = button.closest('.cart-action');
+      const productInfo = button.closest('.product-info');
+      const sizeSelect = productInfo.querySelector(".size-select");
+      const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      const size = selectedOption.value;
+      const price = parseInt(selectedOption.getAttribute("data-price"));
+      const name = container.getAttribute('data-name');
+      const image = container.getAttribute('data-image') || '';
+      const fullName = getFullName(name, size);
+      const item = cart.find(function(i) { return i.name === fullName; });
+      if (item) { item.quantity += 1; } else { cart.push({name:fullName, size:size, price:price, quantity:1, image:image}); }
+      updateCart();
+      updateCartSidebar();
+    }
+
+    // "−" on the stepper: decrements quantity; reverts to "Add to Cart" once it hits 0.
+    function decrementCartItem(button) {
+      const container = button.closest('.cart-action');
+      const productInfo = button.closest('.product-info');
+      const sizeSelect = productInfo.querySelector(".size-select");
+      const size = sizeSelect.value;
+      const name = container.getAttribute('data-name');
+      const fullName = getFullName(name, size);
+      const idx = cart.findIndex(function(i) { return i.name === fullName; });
+      if (idx > -1) {
+        cart[idx].quantity -= 1;
+        if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+      }
+      updateCart();
+      updateCartSidebar();
     }
 
     function addSimpleGiftBox(button, name, boxId, price) {
@@ -1130,6 +1143,7 @@
         document.getElementById("deliveryFeeDisplay").style.display = "none";
       }
       updateOrderSteps();
+      refreshAllCartActions();
     }
 
     function updateOrderSteps() {
