@@ -285,12 +285,9 @@
             </div>
             <p class="flavor-counter" id="counter-midi4">Selected: 0/4</p>
           </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          <div class="cart-action" id="ca-midi4" data-box="midi4" data-name="Midi Box of 4" data-price="8000">
+            <button class="add-to-order" id="btn-midi4" onclick="addSimpleGiftBox(this)" disabled style="opacity:0.5;cursor:not-allowed">Add to Cart</button>
           </div>
-          <button class="add-to-order" id="btn-midi4" onclick="addSimpleGiftBox(this,'Midi Box of 4','midi4',8000)" disabled style="opacity:0.5">Add to Cart</button>
         </div>
       </div>
 
@@ -314,12 +311,9 @@
             </div>
             <p class="flavor-counter" id="counter-midi6">Selected: 0/6</p>
           </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          <div class="cart-action" id="ca-midi6" data-box="midi6" data-name="Midi Box of 6" data-price="9999">
+            <button class="add-to-order" id="btn-midi6" onclick="addSimpleGiftBox(this)" disabled style="opacity:0.5;cursor:not-allowed">Add to Cart</button>
           </div>
-          <button class="add-to-order" id="btn-midi6" onclick="addSimpleGiftBox(this,'Midi Box of 6','midi6',9999)" disabled style="opacity:0.5">Add to Cart</button>
         </div>
       </div>
 
@@ -343,12 +337,9 @@
             </div>
             <p class="flavor-counter" id="counter-midi8">Selected: 0/8</p>
           </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          <div class="cart-action" id="ca-midi8" data-box="midi8" data-name="Midi Box of 8" data-price="15000">
+            <button class="add-to-order" id="btn-midi8" onclick="addSimpleGiftBox(this)" disabled style="opacity:0.5;cursor:not-allowed">Add to Cart</button>
           </div>
-          <button class="add-to-order" id="btn-midi8" onclick="addSimpleGiftBox(this,'Midi Box of 8','midi8',15000)" disabled style="opacity:0.5">Add to Cart</button>
         </div>
       </div>
 
@@ -372,12 +363,9 @@
             </div>
             <p class="flavor-counter" id="counter-big2">Selected: 0/2</p>
           </div>
-          <div class="quantity-control">
-            <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
-            <span class="qty-value">1</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          <div class="cart-action" id="ca-big2" data-box="big2" data-name="Big Box of 2" data-price="25000">
+            <button class="add-to-order" id="btn-big2" onclick="addSimpleGiftBox(this)" disabled style="opacity:0.5;cursor:not-allowed">Add to Cart</button>
           </div>
-          <button class="add-to-order" id="btn-big2" onclick="addSimpleGiftBox(this,'Big Box of 2','big2',25000)" disabled style="opacity:0.5">Add to Cart</button>
         </div>
       </div>
 
@@ -932,12 +920,16 @@
       const checks = document.querySelectorAll('.gift-flavor-check[data-box="' + boxId + '"]');
       const checked = Array.from(checks).filter(function(c) { return c.checked; });
       const counter = document.getElementById("counter-" + boxId);
-      const button = document.getElementById("btn-" + boxId);
-      if (!counter || !button) return;
+      const button  = document.getElementById("btn-" + boxId);
+      if (!counter) return;
       if (checked.length > limit) { checked[checked.length-1].checked = false; return; }
       counter.textContent = "Selected: " + checked.length + "/" + limit;
-      button.disabled = checked.length !== limit;
-      button.style.opacity = checked.length === limit ? "1" : "0.5";
+      if (button) {
+        const ready = checked.length === limit;
+        button.disabled = !ready;
+        button.style.opacity = ready ? "1" : "0.5";
+        button.style.cursor  = ready ? "pointer" : "not-allowed";
+      }
     }
 
     function sanitize(str) {
@@ -1003,6 +995,27 @@
     // Called whenever the cart changes (add, increment, decrement, remove, sidebar edits, reset).
     function refreshAllCartActions() {
       document.querySelectorAll('.cart-action').forEach(function(container) {
+        const boxId = container.getAttribute('data-box');
+        if (boxId) {
+          // Gift box cart-action — only show stepper if it has a stored fullname (i.e. was added)
+          const fullName = container.getAttribute('data-fullname');
+          if (fullName) {
+            const item = cart.find(function(i) { return i.name === fullName; });
+            if (item && item.quantity > 0) {
+              container.innerHTML = '<div class="qty-stepper">' +
+                '<button class="qty-stepper-btn" onclick="decrementGiftItem(this)" aria-label="Decrease">&#8722;</button>' +
+                '<span class="qty-stepper-value">' + item.quantity + '</span>' +
+                '<button class="qty-stepper-btn" onclick="incrementGiftItem(this)" aria-label="Increase">+</button>' +
+              '</div>';
+            } else {
+              // Item was removed — revert to Add to Cart button (disabled until flavors picked again)
+              container.removeAttribute('data-fullname');
+              container.innerHTML = '<button class="add-to-order" id="btn-' + boxId + '" onclick="addSimpleGiftBox(this)" disabled style="opacity:0.5;cursor:not-allowed">Add to Cart</button>';
+            }
+          }
+          return; // gift boxes managed separately
+        }
+        // Regular product card
         const productInfo = container.closest('.product-info');
         const sizeSelect = productInfo ? productInfo.querySelector('.size-select') : null;
         if (!sizeSelect) return;
@@ -1072,29 +1085,55 @@
       updateCartSidebar();
     }
 
-    function addSimpleGiftBox(button, name, boxId, price) {
-      const card = button.closest(".product-card");
-      const qty = parseInt(card.querySelector(".qty-value").textContent);
+    function addSimpleGiftBox(button) {
+      const container = button.closest('.cart-action');
+      const boxId = container.getAttribute('data-box');
+      const name  = container.getAttribute('data-name');
+      const price = parseInt(container.getAttribute('data-price'));
+      const card  = button.closest('.product-card');
       const flavors = Array.from(document.querySelectorAll('.gift-flavor-check[data-box="' + boxId + '"]:checked')).map(function(cb) { return cb.value; });
       if (!flavors.length) { alert("Please select flavors first."); return; }
       const fullName = name + " (" + flavors.join(", ") + ")";
-      const existing = cart.find(function(i) { return i.name === fullName; });
-      const gbImg = button.closest('.product-card').querySelector('.product-img img');
+      const gbImg = card.querySelector('.product-img img');
       const gbImage = gbImg ? gbImg.getAttribute('src') : '';
-      if (existing) { existing.quantity += qty; } else { cart.push({name:fullName, size:"fixed", price:price, quantity:qty, image:gbImage}); }
-      updateCart();
-      updateCartSidebar();
-      card.querySelector(".qty-value").textContent = 1;
+      const existing = cart.find(function(i) { return i.name === fullName; });
+      if (existing) { existing.quantity += 1; } else { cart.push({name:fullName, size:"fixed", price:price, quantity:1, image:gbImage}); }
+      // Store fullname on container so stepper knows which item to track
+      container.setAttribute('data-fullname', fullName);
+      // Reset flavors & counter
       flavors.forEach(function(flavor) {
         const cb = document.querySelector('.gift-flavor-check[data-box="' + boxId + '"][value="' + flavor + '"]');
         if (cb) cb.checked = false;
       });
       const counter = document.getElementById("counter-" + boxId);
-      const addBtn = document.getElementById("btn-" + boxId);
       if (counter) counter.textContent = "Selected: 0/" + boxRules[boxId];
-      if (addBtn) { addBtn.disabled = true; addBtn.style.opacity = "0.5"; }
+      updateCart();
+      updateCartSidebar();
       showToast(name + " added to cart!");
       openCart();
+    }
+
+    // Increments a gift box item already in the cart (called from its stepper)
+    function incrementGiftItem(button) {
+      const container = button.closest('.cart-action');
+      const fullName = container.getAttribute('data-fullname');
+      const item = cart.find(function(i) { return i.name === fullName; });
+      if (item) { item.quantity += 1; }
+      updateCart();
+      updateCartSidebar();
+    }
+
+    // Decrements a gift box item; reverts stepper to Add to Cart button when qty hits 0
+    function decrementGiftItem(button) {
+      const container = button.closest('.cart-action');
+      const fullName = container.getAttribute('data-fullname');
+      const idx = cart.findIndex(function(i) { return i.name === fullName; });
+      if (idx > -1) {
+        cart[idx].quantity -= 1;
+        if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+      }
+      updateCart();
+      updateCartSidebar();
     }
 
     function removeFromCart(index) {
