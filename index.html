@@ -96,14 +96,12 @@
   <!-- Products Section -->
   <section class="products" id="products">
     <h2 class="section-title">Our Signature Loaves</h2>
-    <!-- FIX #3: ID changed from noticeCountdown to match the updateCountdown() function target -->
     <div class="same-day-notice" id="sameDayNotice">
       <span class="same-day-icon">&#x26A1;</span>
-      <span>Order in the next <strong id="noticeCountdown" style="color:var(--orange)">--:--:--</strong> for same-day delivery!</span>
+      <span>Order in the next <strong id="noticeCountdown" style="color:var(--orange)">--:--:--</strong> for same-day delivery <em>(subject to availability)</em>!</span>
     </div>
     <div class="product-grid" id="productGrid">
 
-      <!-- FIX #1 & #4: All static product cards now consistently use data-name and data-image on the button -->
       <div class="product-card">
         <div class="product-img"><img src="classic-banana-bread.jpg" alt="Classic Vanilla Banana Bread"></div>
         <div class="product-info">
@@ -405,7 +403,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/></svg>
         </div>
         <h3>Delivery Time</h3>
-        <p>Orders delivered within <strong>24&ndash;48 hours</strong>. Same-day delivery for orders placed before <strong>2:00 PM</strong>, subject to availability.</p>
+        <p>Orders delivered within <strong>24 hours</strong>. Same-day delivery for orders placed before <strong>2:00 PM</strong>, subject to availability.</p>
       </div>
       <div class="delivery-card">
         <div class="delivery-icon-wrap">
@@ -545,7 +543,7 @@
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)"><span>How does delivery work?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><p>Delivered within <strong>24&ndash;48 hours</strong> after payment. Same-day delivery for orders before <strong>2:00 PM</strong>. Fees from &#8358;1,500&ndash;&#8358;2,500. Orders above &#8358;50,000 get <strong>free delivery!</strong></p></div>
+          <div class="faq-answer"><p>Delivered within <strong>24 hours</strong> after payment. Same-day delivery for orders before <strong>2:00 PM</strong>, subject to availability. Fees from &#8358;1,500&ndash;&#8358;2,500. Orders above &#8358;50,000 get <strong>free delivery!</strong></p></div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)"><span>Can I pick up my order instead of delivery?</span><svg class="faq-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -837,8 +835,6 @@
     }
 
     // ── RENDER FUNCTIONS ──
-    // FIX #1 & #4: renderProducts now correctly sets data-name and data-image on each button,
-    // matching how addToCart() reads them. No more argument passing via onclick string.
     function renderProducts(products) {
       const grid = document.getElementById('productGrid');
       if (!grid || !products) return;
@@ -956,7 +952,6 @@
     });
 
     // ── PRODUCTS ──
-    // FIX #6: Use innerHTML so &#8358; entity renders correctly as the Naira symbol
     function updatePrice(el) {
       const price = el.options[el.selectedIndex].getAttribute("data-price");
       el.closest(".product-info").querySelector(".current-price").innerHTML = "&#8358;" + parseInt(price).toLocaleString();
@@ -968,14 +963,12 @@
       span.textContent = qty;
     }
 
-    // ── CART ACTION (Add to Cart button <-> qty stepper, Jumia-style) ──
+    // ── CART ACTION ──
     function getFullName(name, size) {
       const sizeText = size.charAt(0).toUpperCase() + size.slice(1);
       return name + " (" + sizeText + ")";
     }
 
-    // Renders either the "Add to Cart" button or the −/qty/+ stepper inside a .cart-action container,
-    // depending on whether this product+size is currently in the cart.
     function renderCartActionMarkup(container, size) {
       const name = container.getAttribute('data-name');
       const fullName = getFullName(name, size);
@@ -991,13 +984,10 @@
       }
     }
 
-    // Re-renders every product card's cart-action area to match the current cart state.
-    // Called whenever the cart changes (add, increment, decrement, remove, sidebar edits, reset).
     function refreshAllCartActions() {
       document.querySelectorAll('.cart-action').forEach(function(container) {
         const boxId = container.getAttribute('data-box');
         if (boxId) {
-          // Gift box cart-action — only show stepper if it has a stored fullname (i.e. was added)
           const fullName = container.getAttribute('data-fullname');
           if (fullName) {
             const item = cart.find(function(i) { return i.name === fullName; });
@@ -1008,14 +998,12 @@
                 '<button class="qty-stepper-btn" onclick="incrementGiftItem(this)" aria-label="Increase">+</button>' +
               '</div>';
             } else {
-              // Item was removed — revert to Add to Cart button (disabled until flavors picked again)
               container.removeAttribute('data-fullname');
               container.innerHTML = '<button class="add-to-order" id="btn-' + boxId + '" onclick="addSimpleGiftBox(this)" disabled style="opacity:0.5;cursor:not-allowed">Add to Cart</button>';
             }
           }
-          return; // gift boxes managed separately
+          return;
         }
-        // Regular product card
         const productInfo = container.closest('.product-info');
         const sizeSelect = productInfo ? productInfo.querySelector('.size-select') : null;
         if (!sizeSelect) return;
@@ -1023,7 +1011,6 @@
       });
     }
 
-    // Called when the size <select> changes — shows the correct state (button or stepper) for the new size.
     function refreshCardAction(selectEl) {
       const productInfo = selectEl.closest('.product-info');
       const container = productInfo.querySelector('.cart-action');
@@ -1032,7 +1019,6 @@
     }
 
     // ── CART ──
-    // First click on "Add to Cart": adds 1 to the cart, then the button morphs into a −/1/+ stepper.
     function addToCart(button) {
       const container = button.closest('.cart-action');
       const productInfo = button.closest('.product-info');
@@ -1051,7 +1037,6 @@
       openCart();
     }
 
-    // "+" on the stepper: increments quantity for this product/size.
     function incrementCartItem(button) {
       const container = button.closest('.cart-action');
       const productInfo = button.closest('.product-info');
@@ -1068,7 +1053,6 @@
       updateCartSidebar();
     }
 
-    // "−" on the stepper: decrements quantity; reverts to "Add to Cart" once it hits 0.
     function decrementCartItem(button) {
       const container = button.closest('.cart-action');
       const productInfo = button.closest('.product-info');
@@ -1098,9 +1082,7 @@
       const gbImage = gbImg ? gbImg.getAttribute('src') : '';
       const existing = cart.find(function(i) { return i.name === fullName; });
       if (existing) { existing.quantity += 1; } else { cart.push({name:fullName, size:"fixed", price:price, quantity:1, image:gbImage}); }
-      // Store fullname on container so stepper knows which item to track
       container.setAttribute('data-fullname', fullName);
-      // Reset flavors & counter
       flavors.forEach(function(flavor) {
         const cb = document.querySelector('.gift-flavor-check[data-box="' + boxId + '"][value="' + flavor + '"]');
         if (cb) cb.checked = false;
@@ -1113,7 +1095,6 @@
       openCart();
     }
 
-    // Increments a gift box item already in the cart (called from its stepper)
     function incrementGiftItem(button) {
       const container = button.closest('.cart-action');
       const fullName = container.getAttribute('data-fullname');
@@ -1123,7 +1104,6 @@
       updateCartSidebar();
     }
 
-    // Decrements a gift box item; reverts stepper to Add to Cart button when qty hits 0
     function decrementGiftItem(button) {
       const container = button.closest('.cart-action');
       const fullName = container.getAttribute('data-fullname');
@@ -1214,8 +1194,6 @@
       e.preventDefault(); openCart();
     });
 
-    // FIX #5: onerror handler no longer uses inline JS with broken quote nesting;
-    // uses a safer fallback approach via a named function
     function handleCartImgError(img) {
       img.parentElement.innerHTML = '&#x1F35E;';
     }
@@ -1232,7 +1210,6 @@
       }
       footerEl.style.display = 'block';
       itemsEl.innerHTML = cart.map(function(item, idx) {
-        // FIX #5: onerror now calls a named function — no broken quote nesting
         var imgHtml = item.image
           ? '<div class="cart-item-icon" style="padding:0;overflow:hidden;"><img src="' + item.image + '" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" onerror="handleCartImgError(this)"></div>'
           : '<div class="cart-item-icon">&#x1F35E;</div>';
@@ -1279,9 +1256,7 @@
       toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 3000);
     }
 
-    // ── COUNTDOWN (2PM Lagos)
-    // FIX #3 & #7: unified countdown targets #noticeCountdown (the ID used in the HTML),
-    // and now uses getLagosTime() helper for correct timezone handling
+    // ── COUNTDOWN (2PM Lagos) ──
     function updateCountdown() {
       var lagos = getLagosTime();
       var cutoff = new Date(lagos);
@@ -1332,7 +1307,6 @@
       document.querySelectorAll('.date-option').forEach(function(el) { el.classList.remove('selected'); });
     }
 
-    // FIX #8: buildDatePicker now uses getLagosTime() for accurate Lagos-local "today"
     function buildDatePicker() {
       const container = document.getElementById('dateOptions');
       if (!container) return;
